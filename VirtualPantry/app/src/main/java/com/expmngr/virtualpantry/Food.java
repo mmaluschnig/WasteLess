@@ -3,9 +3,12 @@ package com.expmngr.virtualpantry;
 public class Food {
     private int id;
     private String name;
-    private Integer quantity;
+    private float quantity;
     private String category;
+    private String location;
+    private String date_added;
     private float time_till_expiry;
+
 
     public int getId() {
         return id;
@@ -13,6 +16,22 @@ public class Food {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDate_added() {
+        return date_added;
+    }
+
+    public void setDate_added(String date_added) {
+        this.date_added = date_added;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getName() {
@@ -23,11 +42,11 @@ public class Food {
         this.name = name;
     }
 
-    public Integer getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
