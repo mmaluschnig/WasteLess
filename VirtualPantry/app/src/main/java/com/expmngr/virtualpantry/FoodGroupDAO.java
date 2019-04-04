@@ -10,6 +10,7 @@ import androidx.room.Update;
 
 @Dao
 public interface FoodGroupDAO {
+
     @Insert
      void addFood(Food food);
 

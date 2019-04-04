@@ -10,6 +10,7 @@ import androidx.room.Update;
 
 @Dao
 public interface FoodTemplatesDAO {
+
     @Insert
      void addFood(Food food);
 
