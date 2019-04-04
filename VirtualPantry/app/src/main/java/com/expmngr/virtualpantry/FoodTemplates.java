@@ -1,9 +1,18 @@
 package com.expmngr.virtualpantry;
 
 public class FoodTemplates {
+    private int id;
     private String longName;
     private String shortName;
-    private String category;
+    private Integer category;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLongName() {
         return longName;
@@ -21,11 +30,11 @@ public class FoodTemplates {
         this.shortName = shortName;
     }
 
-    public String getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 }

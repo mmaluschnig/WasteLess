@@ -3,7 +3,7 @@ package com.expmngr.virtualpantry;
 public class Food {
     private int id;
     private String name;
-    private int quantity;
+    private Integer quantity;
     private String category;
     private float time_till_expiry;
 
@@ -23,11 +23,11 @@ public class Food {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
