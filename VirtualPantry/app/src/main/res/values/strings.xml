@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VirtualPantry</string>
+    <string name="title_activity_food_dbtest">FoodDBtest</string>
 </resources>
