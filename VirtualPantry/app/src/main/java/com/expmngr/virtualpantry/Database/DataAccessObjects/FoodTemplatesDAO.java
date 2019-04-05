@@ -1,4 +1,6 @@
-package com.expmngr.virtualpantry;
+package com.expmngr.virtualpantry.Database.DataAccessObjects;
+
+import com.expmngr.virtualpantry.Database.Entities.FoodTemplates;
 
 import java.util.List;
 
@@ -6,7 +8,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 @Dao
 public interface FoodTemplatesDAO {

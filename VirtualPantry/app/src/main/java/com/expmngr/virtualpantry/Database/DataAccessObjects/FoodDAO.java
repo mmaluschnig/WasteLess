@@ -1,4 +1,6 @@
-package com.expmngr.virtualpantry;
+package com.expmngr.virtualpantry.Database.DataAccessObjects;
+
+import com.expmngr.virtualpantry.Database.Entities.Food;
 
 import java.util.List;
 import androidx.room.Dao;
