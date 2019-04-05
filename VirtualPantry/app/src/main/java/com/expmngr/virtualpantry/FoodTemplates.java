@@ -1,6 +1,11 @@
 package com.expmngr.virtualpantry;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class FoodTemplates {
+    @PrimaryKey
     private int id;
     private String longName;
     private String shortName;

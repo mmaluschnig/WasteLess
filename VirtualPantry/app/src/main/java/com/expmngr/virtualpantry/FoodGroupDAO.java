@@ -12,15 +12,12 @@ import androidx.room.Update;
 public interface FoodGroupDAO {
 
     @Insert
-     void addFood(Food food);
+     void addFoodGroup(FoodGroup group);
 
-    @Query("select * from Food order by time_till_expiry ASC")
-     List<Food> getFood();
+    @Query("select * from FoodGroup")
+    List<FoodGroup> getFoodGroup();
 
     @Delete
-     void deleteFood(Food food);
-
-    @Update
-     void updateFood(Food food);
+     void deleteFoodGroup(FoodGroup group);
 
 }

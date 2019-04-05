@@ -1,6 +1,11 @@
 package com.expmngr.virtualpantry;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class FoodGroup {
+    @PrimaryKey
     private int id;
     private Integer cat_num;
     private String cat_desc;
