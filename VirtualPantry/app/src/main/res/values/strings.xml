@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">VirtualPantry</string>
     <string name="title_activity_food_dbtest">FoodDBtest</string>
+    <string name="input_menu_add_manually">Add Manual Item</string>
+    <string name="input_menu_scan_receipt">Scan Receipt</string>
+    <string name="input_menu_scan_barcode">Scan Barcode</string>
+    <string name="input_menu_import_items">Import Items</string>
+    <string name="placeholder_menu_add_item">Add Item</string>
+    <string name="placeholder_menu_view_pantry">View Pantry</string>
+    <string name="placeholder_menu_view_settings">Settings</string>
 </resources>

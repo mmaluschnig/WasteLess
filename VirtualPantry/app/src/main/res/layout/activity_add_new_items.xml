@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewItems">
+    tools:context=".AppScreens.AddNewItems">
 
     <Button
         android:id="@+id/manualAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Manual Item"
+        android:text="@string/input_menu_add_manually"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="129dp" />
 
     <Button
-        android:id="@+id/scanReciptButton"
+        android:id="@+id/scanReceiptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan Recipt"
+        android:text="@string/input_menu_scan_receipt"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="205dp" />
 
@@ -26,7 +26,7 @@
         android:id="@+id/scanBarcodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan Barcode"
+        android:text="@string/input_menu_scan_barcode"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="277dp" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/importButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Import Items"
+        android:text="@String/input_menu_import_items"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="368dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,10 @@
-package com.expmngr.virtualpantry;
+package com.expmngr.virtualpantry.AppScreens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.expmngr.virtualpantry.R;
 
 public class AddNewItems extends AppCompatActivity {
 
