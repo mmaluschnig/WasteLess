@@ -14,7 +14,7 @@ public class Food {
     private String category;
     private String location;
     private String date_added;
-    private float time_till_expiry;
+    private Integer time_till_expiry;
 
 
     public int getId() {
@@ -65,11 +65,11 @@ public class Food {
         this.category = category;
     }
 
-    public float getTime_till_expiry() {
+    public Integer getTime_till_expiry() {
         return time_till_expiry;
     }
 
-    public void setTime_till_expiry(float time_till_expiry) {
+    public void setTime_till_expiry(Integer time_till_expiry) {
         this.time_till_expiry = time_till_expiry;
     }
 }
