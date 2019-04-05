@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class FoodTemplates {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String longName;
     private String shortName;
