@@ -1,4 +1,4 @@
-package com.expmngr.virtualpantry;
+package com.expmngr.virtualpantry.Database.Entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Food {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private float quantity;
