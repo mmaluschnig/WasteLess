@@ -19,6 +19,7 @@ public class test extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),test1.class);
+                startActivity(intent);
 
             }
         });
