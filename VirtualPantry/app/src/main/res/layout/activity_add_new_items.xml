@@ -10,31 +10,55 @@
         android:id="@+id/manualAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="129dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/input_menu_add_manually"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="129dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/scanReceiptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/input_menu_scan_receipt"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="205dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manualAddButton" />
 
     <Button
         android:id="@+id/scanBarcodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/input_menu_scan_barcode"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="277dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scanReceiptButton" />
 
     <Button
         android:id="@+id/importButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@String/input_menu_import_items"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="368dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/input_menu_import_items"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scanBarcodeButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

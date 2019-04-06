@@ -7,7 +7,7 @@
     tools:context=".AppScreens.MainMenuPlaceholder">
 
     <Button
-        android:id="@+id/addItem"
+        android:id="@+id/addItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
@@ -17,13 +17,13 @@
         android:layout_marginRight="161dp"
         android:layout_marginBottom="28dp"
         android:text="@string/placeholder_menu_add_item"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/viewPantryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/viewPantryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
@@ -33,13 +33,13 @@
         android:layout_marginRight="135dp"
         android:layout_marginBottom="33dp"
         android:text="@string/placeholder_menu_view_pantry"
-        app:layout_constraintBottom_toTopOf="@+id/viewSettings"
+        app:layout_constraintBottom_toTopOf="@+id/viewSettingsButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItem" />
+        app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
 
     <Button
-        android:id="@+id/viewSettings"
+        android:id="@+id/viewSettingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="172dp"
@@ -52,5 +52,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/viewPantryButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
