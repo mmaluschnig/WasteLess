@@ -40,16 +40,24 @@ public class AddItemManually extends AppCompatActivity {
         addfoodManuallyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Food newFood = new Food();
                 newFood.setName(foodNameText.getText().toString());
                 newFood.setCategory(foodCategorytext.getText().toString());
-                newFood.setQuantity(Integer.parseInt(foodQuantityText.getText().toString()));
+                newFood.setQuantity(Float.parseFloat(foodQuantityText.getText().toString()));
                 newFood.setLocation(foodLocationSpinner.getSelectedItem().toString());
                 newFood.setDate_added(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
                 newFood.setTime_till_expiry(Integer.parseInt(foodTimeTillExpiryText.getText().toString()));
-
-                MainMenuPlaceholder.database.foodDAO().addFood(newFood);
-                Toast.makeText(AddItemManually.this, "Successful add", Toast.LENGTH_SHORT).show();
+                try {
+                    MainMenuPlaceholder.database.foodDAO().addFood(newFood);
+                }finally {
+                    foodNameText.setText("");
+                    foodCategorytext.setText("");
+                    foodQuantityText.setText("");
+                    foodTimeTillExpiryText.setText("");
+                    foodLocationSpinner.setSelection(0);
+                    Toast.makeText(AddItemManually.this, "Added: " + newFood.getName(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
