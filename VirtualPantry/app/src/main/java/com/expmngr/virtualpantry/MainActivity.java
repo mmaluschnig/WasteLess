@@ -28,5 +28,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button readCSV = (Button) findViewById(R.id.csvTestButton);
+        readCSV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), readCSVFiles.class));
+            }
+        });
     }
 }
