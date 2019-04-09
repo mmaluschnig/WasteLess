@@ -9,7 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test1"></activity>
+        <activity android:name=".AppScreens.AddItems.ScanBarcode"></activity>
+        <activity android:name=".AppScreens.AddItems.ScanReceipt" />
+        <activity android:name=".AppScreens.AddItems.AddItemManually" />
+        <activity android:name=".AppScreens.EditItem" />
+        <activity android:name=".AppScreens.ViewPantry" />
+        <activity android:name=".AppScreens.Settings" />
+        <activity android:name=".AppScreens.MainMenuPlaceholder" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AppScreens.AddNewItems" />
+        <activity android:name=".test1" />
         <activity android:name=".test" />
         <activity android:name=".InputMenu" />
         <activity android:name=".MainActivity">
