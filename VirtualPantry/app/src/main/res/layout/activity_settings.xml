@@ -10,7 +10,7 @@
         android:id="@+id/placeholderSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Where Settings will go, drag for notification rate?"
+        android:text="Where Settings will go, drag for notification rate?, date format"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="201dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

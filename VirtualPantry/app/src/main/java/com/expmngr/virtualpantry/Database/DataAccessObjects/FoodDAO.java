@@ -15,8 +15,11 @@ public interface FoodDAO {
     @Insert
      void addFood(Food food);
 
-    @Query("select * from Food order by time_till_expiry ASC")
+    @Query("select * from Food order by expiryDate ASC")
      List<Food> getFood();
+
+    @Query("DELETE FROM Food")
+    void deleteAll();
 
     @Delete
      void deleteFood(Food food);

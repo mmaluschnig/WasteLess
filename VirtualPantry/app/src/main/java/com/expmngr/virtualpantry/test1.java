@@ -28,9 +28,9 @@ public class test1 extends AppCompatActivity {
             int id = f.getId();
             String name = f.getName();
             float quantity = f.getQuantity();
-            Integer time2exp = f.getTime_till_expiry();
+            //Integer time2exp = f.getTime_till_expiry();
 
-            info = info + "\n ID : " + id + "\n Name : " + name + "\n Quantity : " + quantity + "\n Expires in: " + time2exp + " hours\n";
+            info = info + "\n ID : " + id + "\n Name : " + name + "\n Quantity : " + quantity + "\n Expires in: " + "placeholder Date" + " hours\n";
         }
         txtInfo.setText(info);
     }

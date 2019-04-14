@@ -29,9 +29,9 @@ public class ViewPantry extends AppCompatActivity {
             int id = f.getId();
             String name = f.getName();
             float quantity = f.getQuantity();
-            Integer time2exp = f.getTime_till_expiry();
+            String expDate = f.getExpiryDate();
 
-            info = info + "\n ID : " + id + "\n Name : " + name + "\n Quantity : " + quantity + "\n Expires in: " + time2exp + " hours\n";
+            info = info + "\n ID : " + id + "\n Name : " + name + "\n Quantity : " + quantity + "\n Expires on: " + expDate + " \n";
         }
         pantryItemsTextView.setText(info);
     }

@@ -47,7 +47,7 @@ public class AddItemManually extends AppCompatActivity {
                 newFood.setQuantity(Float.parseFloat(foodQuantityText.getText().toString()));
                 newFood.setLocation(foodLocationSpinner.getSelectedItem().toString());
                 newFood.setDate_added(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-                newFood.setTime_till_expiry(Integer.parseInt(foodTimeTillExpiryText.getText().toString()));
+                newFood.setExpiryDate(foodTimeTillExpiryText.getText().toString());
                 try {
                     MainMenuPlaceholder.database.foodDAO().addFood(newFood);
                 }finally {
@@ -61,6 +61,14 @@ public class AddItemManually extends AppCompatActivity {
             }
         });
 
+        Button deletaAllButton = (Button) findViewById(R.id.deleteAllButton);
+        deletaAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainMenuPlaceholder.database.foodDAO().deleteAll();
+                Toast.makeText(AddItemManually.this, "Deleted All", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
