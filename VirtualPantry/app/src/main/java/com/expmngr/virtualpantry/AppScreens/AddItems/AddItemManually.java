@@ -46,8 +46,8 @@ public class AddItemManually extends AppCompatActivity {
                 newFood.setCategory(foodCategorytext.getText().toString());
                 newFood.setQuantity(Float.parseFloat(foodQuantityText.getText().toString()));
                 newFood.setLocation(foodLocationSpinner.getSelectedItem().toString());
-                newFood.setDate_added(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-                newFood.setExpiryDate(foodTimeTillExpiryText.getText().toString());
+                newFood.setDate_added(new SimpleDateFormat("dd/MM/yyyy HH").format(new Date()));
+                newFood.setExpiryDate(foodTimeTillExpiryText.getText().toString() + " 00");
                 try {
                     MainMenuPlaceholder.database.foodDAO().addFood(newFood);
                 }finally {
