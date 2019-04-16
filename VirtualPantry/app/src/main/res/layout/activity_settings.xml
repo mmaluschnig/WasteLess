@@ -13,4 +13,20 @@
         android:text="Where Settings will go, drag for notification rate?, date format"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="201dp" />
+
+    <CheckBox
+        android:id="@+id/addExpiredFoodToShoppingList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Expired Food to Shopping List"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <Button
+        android:id="@+id/settingsOpenFeedbackPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="267dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
