@@ -43,7 +43,7 @@ public class test extends AppCompatActivity {
                 Food newFood = new Food();
                 newFood.setName(nameInput.getText().toString());
                 newFood.setQuantity(Integer.parseInt(quantityInput.getText().toString()));
-                newFood.setTime_till_expiry(new Integer("10"));
+                //newFood.setTime_till_expiry(new Integer("10"));
 
                 MainActivity.database.foodDAO().addFood(newFood);
                 Toast.makeText(test.this, "Successful add", Toast.LENGTH_SHORT).show();
