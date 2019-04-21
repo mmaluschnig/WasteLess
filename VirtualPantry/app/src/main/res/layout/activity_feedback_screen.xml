@@ -17,11 +17,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
+        android:hint="@string/feedback_screen_enter_feedback_here"
         android:inputType="textMultiLine"
-        android:text="Enter feedback here:"
+        android:text="@string/feedback_screen_enter_feedback_here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/submitFeedback"
@@ -32,7 +34,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Submit"
+        android:text="@string/feedback_screen_submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toEndOf="@+id/cancelFeedback"
@@ -46,7 +48,7 @@
         android:layout_marginLeft="36dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="8dp"
-        android:text="Cancel"
+        android:text="@string/feedback_screen_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feedbackText"
