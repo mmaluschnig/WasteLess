@@ -11,6 +11,8 @@
     <string name="feedback_screen_cancel">Cancel</string>
     <string name="feedback_screen_submit">Submit</string>
     <string name="feedback_screen_enter_feedback_here">Enter feedback here:</string>
+    <string name="settings_add_expired_food_to_shopping_list_checkbox">Add Expired Food to Shopping List</string>
+    <string name="settings_feedback">Feedback</string>
 
     <string-array name="food_locations">
         <item>Pantry</item>

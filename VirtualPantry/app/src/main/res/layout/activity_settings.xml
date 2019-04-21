@@ -29,7 +29,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Add Expired Food to Shopping List"
+        android:text="@string/settings_add_expired_food_to_shopping_list_checkbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeholderSettings" />
@@ -43,7 +43,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Feedback"
+        android:text="@string/settings_feedback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addExpiredFoodToShoppingList" />
