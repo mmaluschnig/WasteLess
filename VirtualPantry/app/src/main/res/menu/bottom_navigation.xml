@@ -4,17 +4,20 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="@color/colorMenu"
         android:title="Home"/>
 
     <item
         android:id="@+id/nav_add"
         android:icon="@drawable/ic_playlist_add_black_24dp"
+        android:iconTint="@color/colorMenu"
         android:title="Add Item"/>
 
 
     <item
         android:id="@+id/nav_view"
         android:icon="@drawable/ic_shopping_basket_black_24dp"
+        android:iconTint="@color/colorMenu"
         android:title="View Pantry"/>
 
 
