@@ -38,6 +38,7 @@ public class ViewPantry extends AppCompatActivity {
 
             int timeTillExp;
             int howOld;
+            String loc = f.getLocation();
             try {
                 timeTillExp = getTimeBetween(expDate);
                 howOld = getAge(f.getDate_added());

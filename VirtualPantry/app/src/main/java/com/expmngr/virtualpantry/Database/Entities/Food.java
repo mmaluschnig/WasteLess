@@ -16,6 +16,7 @@ public class Food {
     private String location;
     private String date_added;
     private String expiryDate;
+    private Boolean status;
 
 
     public int getId() {
@@ -73,4 +74,8 @@ public class Food {
     public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
+
+    public Boolean getStatus(){return status;}
+
+    public void setStatus(Boolean status){this.status = status;}
 }
