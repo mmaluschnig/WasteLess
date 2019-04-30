@@ -48,7 +48,7 @@ public class ViewPantry extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            info = info + "\nID : " + id + "\nName : " + name + "\nQuantity : " + quantity + "\nExpires on: " + expDate.substring(0,10) + " (" + timeTillExp + " hours)\nAdded: " + addedDate.substring(0,10) + " (" + howOld + " hours old)\n";
+            info = info + "\nID : " + id + "\nName : " + name + "\nLocation" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate.substring(0,10) + " (" + timeTillExp + " hours)\nAdded: " + addedDate.substring(0,10) + " (" + howOld + " hours old)\n";
         }
         pantryItemsTextView.setText(info);
     }
