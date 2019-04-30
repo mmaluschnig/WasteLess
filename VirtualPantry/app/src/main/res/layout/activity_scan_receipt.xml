@@ -18,4 +18,11 @@
         app:menu="@menu/bottom_navigation"
         tools:layout_editor_absoluteX="0dp" />
 
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="356dp"
+        android:layout_height="493dp"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="20dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
