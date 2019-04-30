@@ -17,10 +17,13 @@ import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.Line;
+import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ScanReceipt extends AppCompatActivity {
     SurfaceView mCameraView;
@@ -135,12 +138,15 @@ public class ScanReceipt extends AppCompatActivity {
                                 Integer centerY = 0;
                                 for(int i=0;i<items.size();i++){
                                     TextBlock item = items.valueAt(i);
-                                    centerY = item.getBoundingBox().centerY();
+                                    List<Line> lines = (List<Line>) item.getComponents();
+                                    for (int j=0;j<lines.size();j++){
+                                        Line line = lines.get(j);
+                                        centerY = line.getBoundingBox().centerY();
 
-                                    stringBuilder.append(item.getValue() + "\t\t\t :,: \t\t\t" + centerY.toString());
-                                    stringBuilder.append("\n\n");
-
-
+                                        stringBuilder.append( centerY.toString() + ":\t>>>" + line.getValue());
+                                        stringBuilder.append("\n");
+                                    }
+                                    stringBuilder.append("\n");
                                 }
                                 System.out.println(stringBuilder.toString());
                                 mTextView.setText(stringBuilder.toString());
