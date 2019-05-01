@@ -1,7 +1,6 @@
 package com.expmngr.virtualpantry.Database.Entities;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
