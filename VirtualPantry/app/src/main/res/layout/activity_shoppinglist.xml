@@ -7,7 +7,7 @@
     tools:context=".AppScreens.ViewPantry">
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/shoppingListScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pantryItemsTextView"
+                android:id="@+id/shoppingListTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />

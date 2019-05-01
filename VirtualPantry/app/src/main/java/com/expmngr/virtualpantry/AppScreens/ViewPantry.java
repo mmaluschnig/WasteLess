@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.expmngr.virtualpantry.Database.Entities.ExpiredFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -26,6 +28,7 @@ public class ViewPantry extends AppCompatActivity {
         pantryItemsTextView = (TextView) findViewById(R.id.pantryItemsTextView);
 
         List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
+        List<Food> expiredfood = new ArrayList<>();
 
         String info = "";
 
@@ -53,7 +56,15 @@ public class ViewPantry extends AppCompatActivity {
                 }
 
                 MainMenuPlaceholder.database.foodDAO().updateFood(f);
+                if(hasExpired==true){
+                    expiredfood.add(f);
+                }
+
                 
+
+
+
+
             } catch (ParseException e) {
                 timeTillExp = 0;
                 howOld = 0;
@@ -62,7 +73,10 @@ public class ViewPantry extends AppCompatActivity {
 
             info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate + " (" + timeTillExp + " hours)\nAdded: " + addedDate + " (" + howOld + " hours old)\n " + "has Expired: " + hasExpired ;
         }
+
+
         pantryItemsTextView.setText(info);
+
     }
 
     private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {

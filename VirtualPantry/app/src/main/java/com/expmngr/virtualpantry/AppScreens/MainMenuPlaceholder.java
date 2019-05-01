@@ -50,13 +50,14 @@ public class MainMenuPlaceholder extends AppCompatActivity {
             }
         });
 
-        Button shoppingListButton = (Button) findViewById(R.id.viewShoppingListButton);
-        shoppingListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
-            }
-        });
+      Button viewShoppingListButton = (Button) findViewById(R.id.viewShoppingList);
+      viewShoppingListButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+          }
+      });
+
 
     }
 }
