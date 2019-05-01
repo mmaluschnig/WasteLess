@@ -15,22 +15,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.Element;
 import com.google.android.gms.vision.text.Line;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ScanReceipt extends AppCompatActivity {
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
+
+    Set<String> potentialFoods;
+    Set<String> foundFoods;
 
     Button pauseButton;
     private boolean isCameraOn;
@@ -65,6 +73,9 @@ public class ScanReceipt extends AppCompatActivity {
                 }
             }
         });
+
+        potentialFoods = new HashSet<>();
+        foundFoods = new HashSet<>();
 
         startCameraSource();
 
@@ -163,26 +174,74 @@ public class ScanReceipt extends AppCompatActivity {
                             @Override
                             public void run() {
                                 StringBuilder stringBuilder = new StringBuilder();
+
                                 Integer centerY = 0;
                                 for(int i=0;i<items.size();i++){
                                     TextBlock item = items.valueAt(i);
                                     List<Line> lines = (List<Line>) item.getComponents();
                                     for (int j=0;j<lines.size();j++){
                                         Line line = lines.get(j);
-                                        centerY = line.getBoundingBox().centerY();
+                                        if(!containsDigit(line.getValue())) {
+                                            //search database for line
+                                            potentialFoods.add(line.getValue());
 
-                                        stringBuilder.append( centerY.toString() + ":\t>>>" + line.getValue());
-                                        stringBuilder.append("\n");
+//                                            stringBuilder.append(centerY.toString() + ":\t>>>" + line.getValue());
+//                                            stringBuilder.append("\n");
+                                        }
+                                        List<Element> elements = (List<Element>) line.getComponents();
+                                        for(int k=0;k<elements.size();k++) {
+                                            Element element = elements.get(k);
+                                            centerY = element.getBoundingBox().centerY();
+
+                                            if(!containsDigit(element.getValue())) {
+                                                //search database for line
+                                                potentialFoods.add(element.getValue());
+//                                                stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
+//                                                stringBuilder.append("\n");
+                                            }
+
+//                                            stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
+//                                            stringBuilder.append("\n");
+                                        }
+//                                        stringBuilder.append("\n");
                                     }
-                                    stringBuilder.append("\n");
+//                                    stringBuilder.append("\n");
                                 }
-                                System.out.println(stringBuilder.toString());
-                                mTextView.setText(stringBuilder.toString());
+                                //check potential foods against the database
+                                for(String s : potentialFoods){
+                                    List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(s);
+                                    if(found.size() > 0) {
+                                        System.out.println(s);
+                                        foundFoods.add(s);
+                                    }
+                                }
+
+//                                System.out.println(stringBuilder.toString());
+                                System.out.println(potentialFoods.toString());
+                                System.out.println("Found: " + foundFoods.toString());
+                                String str = "Found " + foundFoods.size() + " foods";
+                                mTextView.setText(str);
+                                System.out.println(str);
+
                             }
                         });
                     }
                 }
             });
         }
+    }
+
+    public final boolean containsDigit(String s) {
+        boolean containsDigit = false;
+
+        if (s != null && !s.isEmpty()) {
+            for (char c : s.toCharArray()) {
+                if (containsDigit = !Character.isLetter(c)) {
+                    break;
+                }
+            }
+        }
+
+        return containsDigit;
     }
 }
