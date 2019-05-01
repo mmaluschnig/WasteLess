@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "c765239b6fc1948fc3921ce672d048c1",
+    "identityHash": "b58d622433f6d722a0323139f53d17c0",
     "entities": [
       {
         "tableName": "Food",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `quantity` REAL NOT NULL, `category` TEXT, `location` TEXT, `date_added` TEXT, `expiryDate` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `quantity` REAL NOT NULL, `category` TEXT, `location` TEXT, `date_added` TEXT, `expiryDate` TEXT, `isExpired` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -48,6 +48,12 @@
             "fieldPath": "expiryDate",
             "columnName": "expiryDate",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isExpired",
+            "columnName": "isExpired",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -134,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c765239b6fc1948fc3921ce672d048c1\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b58d622433f6d722a0323139f53d17c0\")"
     ]
   }
 }

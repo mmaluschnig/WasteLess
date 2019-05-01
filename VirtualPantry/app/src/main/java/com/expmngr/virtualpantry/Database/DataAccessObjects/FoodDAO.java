@@ -27,4 +27,6 @@ public interface FoodDAO {
     @Update
      void updateFood(Food food);
 
+    @Query("select * from Food where isExpired = 1")
+    List<Food> getExpiredFood();
 }
