@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        database = Room.databaseBuilder(getApplicationContext(),FoodDatabase.class,"fooddb").allowMainThreadQueries().build();
+        database = Room.databaseBuilder(getApplicationContext(),FoodDatabase.class,"fooddb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         Button inputMenu = (Button) findViewById(R.id.inputMenu);
         inputMenu.setOnClickListener(new View.OnClickListener() {
@@ -36,5 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), readCSVFiles.class));
             }
         });
+
+
     }
 }
