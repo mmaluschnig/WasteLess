@@ -183,7 +183,7 @@ public class ScanReceipt extends AppCompatActivity {
                                         Line line = lines.get(j);
                                         if(!containsDigit(line.getValue())) {
                                             //search database for line
-                                            potentialFoods.add(line.getValue());
+                                            potentialFoods.add(line.getValue().toLowerCase());
 
 //                                            stringBuilder.append(centerY.toString() + ":\t>>>" + line.getValue());
 //                                            stringBuilder.append("\n");
@@ -195,7 +195,7 @@ public class ScanReceipt extends AppCompatActivity {
 
                                             if(!containsDigit(element.getValue())) {
                                                 //search database for line
-                                                potentialFoods.add(element.getValue());
+                                                potentialFoods.add(element.getValue().toLowerCase());
 //                                                stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
 //                                                stringBuilder.append("\n");
                                             }
