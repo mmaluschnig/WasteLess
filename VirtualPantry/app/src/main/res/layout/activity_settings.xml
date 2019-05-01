@@ -10,35 +10,41 @@
         android:id="@+id/placeholderSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Where Settings will go, drag for notification rate?, date format"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="201dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/addExpiredFoodToShoppingList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Expired Food to Shopping List"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="220dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/settings_add_expired_food_to_shopping_list_checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeholderSettings" />
 
     <Button
         android:id="@+id/settingsOpenFeedbackPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feedback"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="267dp" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="8dp"
-        android:background="#0090FF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_navigation"
-        tools:layout_editor_absoluteX="0dp" />
-
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/settings_feedback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addExpiredFoodToShoppingList" />
 </androidx.constraintlayout.widget.ConstraintLayout>
