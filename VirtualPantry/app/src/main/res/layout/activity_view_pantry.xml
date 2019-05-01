@@ -70,4 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <include layout="@layout/layout_bottom_navigation_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
