@@ -62,7 +62,7 @@ public class ViewPantry extends AppCompatActivity {
     }
     private int getTimeBetween(String stringDate2) throws ParseException {
         Date date2 = new SimpleDateFormat("dd/MM/yyyy HH").parse(stringDate2);
-        int difference = (int)Math.abs((date2.getTime() - new Date().getTime()) / 1000 / 60 / 60 );
+        int difference = (int)(date2.getTime() - new Date().getTime()) / 1000 / 60 / 60 ;
 
         return difference;
     }
