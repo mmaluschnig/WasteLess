@@ -11,6 +11,8 @@ import com.expmngr.virtualpantry.AppScreens.AddItems.AddItemManually;
 import com.expmngr.virtualpantry.AppScreens.AddItems.ScanBarcode;
 import com.expmngr.virtualpantry.AppScreens.AddItems.ScanReceipt;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class AddNewItems extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class AddNewItems extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_items);
 
         setUpButtons();
+        setupBottomNavigationView();
     }
 
     private void setUpButtons(){
@@ -59,5 +62,10 @@ public class AddNewItems extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setupBottomNavigationView(){
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
     }
 }

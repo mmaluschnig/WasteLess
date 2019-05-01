@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +24,8 @@ public class ViewPantry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pantry);
+
+        setupBottomNavigationView();
 
         pantryItemsTextView = (TextView) findViewById(R.id.pantryItemsTextView);
 
@@ -85,4 +89,10 @@ public class ViewPantry extends AppCompatActivity {
 
         return difference;
     }
+
+    private void setupBottomNavigationView(){
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+    }
+
 }

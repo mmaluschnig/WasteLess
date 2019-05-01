@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.expmngr.virtualpantry.Database.FoodDatabase;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity {
     public static FoodDatabase database;
@@ -39,4 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import com.expmngr.virtualpantry.Database.FoodDatabase;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainMenuPlaceholder extends AppCompatActivity {
     public static FoodDatabase database;
@@ -22,6 +24,7 @@ public class MainMenuPlaceholder extends AppCompatActivity {
         database = Room.databaseBuilder(getApplicationContext(), FoodDatabase.class,"fooddb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         setUpButtons();
+        setupBottomNavigationView();
 
     }
 
@@ -58,5 +61,10 @@ public class MainMenuPlaceholder extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setupBottomNavigationView(){
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
     }
 }
