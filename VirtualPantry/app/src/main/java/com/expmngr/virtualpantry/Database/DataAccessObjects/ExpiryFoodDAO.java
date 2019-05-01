@@ -14,6 +14,9 @@ public interface ExpiryFoodDAO {
     @Insert
     void addExpFood(ExpiryFood food);
 
+    @Insert
+    void addAllexpFood(ExpiryFood... foods);
+
     @Query("select * from ExpiryFood")
     List<ExpiryFood> getAllExpFood();
 
