@@ -11,6 +11,8 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.MainActivity;
@@ -30,6 +32,9 @@ public class ScanReceipt extends AppCompatActivity {
     TextView mTextView;
     CameraSource mCameraSource;
 
+    Button pauseButton;
+    private boolean isCameraOn;
+
     private static final int requestPermissionID = 101;
 
     @Override
@@ -40,7 +45,29 @@ public class ScanReceipt extends AppCompatActivity {
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
 
+        pauseButton = (Button) findViewById(R.id.pauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCameraOn = !isCameraOn;
+                if(isCameraOn){
+                    mCameraSource.stop();
+                    pauseButton.setText("Resume");
+                }else{
+                    try {
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                            mCameraSource.start(mCameraView.getHolder());
+                            pauseButton.setText("Pause");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         startCameraSource();
+
     }
 
     @Override
@@ -57,6 +84,7 @@ public class ScanReceipt extends AppCompatActivity {
                     return;
                 }
                 mCameraSource.start(mCameraView.getHolder());
+                isCameraOn = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -77,7 +105,7 @@ public class ScanReceipt extends AppCompatActivity {
                     .setFacing(CameraSource.CAMERA_FACING_BACK)
                     .setRequestedPreviewSize(1280, 1024)
                     .setAutoFocusEnabled(true)
-                    .setRequestedFps(2.0f)
+                    .setRequestedFps(5.0f)
                     .build();
 
             /**
