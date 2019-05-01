@@ -17,6 +17,9 @@ public interface ExpiryFoodDAO {
     @Insert
     void addAllexpFood(ExpiryFood... foods);
 
+    @Query("select * from ExpiryFood where name like :name")
+    List<ExpiryFood> findByName(String name);
+
     @Query("select * from ExpiryFood")
     List<ExpiryFood> getAllExpFood();
 
