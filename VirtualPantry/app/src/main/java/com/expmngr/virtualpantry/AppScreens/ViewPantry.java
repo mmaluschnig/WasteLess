@@ -3,6 +3,8 @@ package com.expmngr.virtualpantry.AppScreens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
@@ -19,6 +21,7 @@ import java.util.TimeZone;
 
 public class ViewPantry extends AppCompatActivity {
     TextView pantryItemsTextView;
+    private static final int ACTIVITY_NUM = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,9 @@ public class ViewPantry extends AppCompatActivity {
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(ViewPantry.this, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 
 }
