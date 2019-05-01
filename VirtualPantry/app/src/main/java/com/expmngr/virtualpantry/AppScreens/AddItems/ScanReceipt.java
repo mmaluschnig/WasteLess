@@ -9,18 +9,23 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
 
+import com.expmngr.virtualpantry.AppScreens.Settings;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.Line;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +34,7 @@ public class ScanReceipt extends AppCompatActivity {
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
+    private static final int ACTIVITY_NUM = 1;
 
     private static final int requestPermissionID = 101;
 
@@ -41,6 +47,7 @@ public class ScanReceipt extends AppCompatActivity {
         mTextView = findViewById(R.id.text_view);
 
         startCameraSource();
+        setupBottomNavigationView();
     }
 
     @Override
@@ -156,5 +163,14 @@ public class ScanReceipt extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void setupBottomNavigationView() {
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(ScanReceipt.this, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 }
