@@ -53,6 +53,9 @@ public class ViewPantry extends AppCompatActivity {
                     f.setIsExpired(false);
                     hasExpired = f.getIsExpired();
                 }
+
+                MainMenuPlaceholder.database.foodDAO().updateFood(f);
+                
             } catch (ParseException e) {
                 timeTillExp = 0;
                 howOld = 0;

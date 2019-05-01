@@ -11,25 +11,58 @@
         android:id="@+id/feedbackText"
         android:layout_width="205dp"
         android:layout_height="177dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
+        android:hint="@string/feedback_screen_enter_feedback_here"
         android:inputType="textMultiLine"
-        android:text="Enter feedback here:"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="163dp" />
+        android:text="@string/feedback_screen_enter_feedback_here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/submitFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="457dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/feedback_screen_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toEndOf="@+id/cancelFeedback"
+        app:layout_constraintTop_toBottomOf="@+id/feedbackText" />
 
     <Button
         android:id="@+id/cancelFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="457dp" />
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/feedback_screen_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedbackText"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:background="#0090FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_navigation"
+        tools:layout_editor_absoluteX="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
