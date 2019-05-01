@@ -16,6 +16,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/pantry"
         android:textSize="22sp"
+        android:background="@drawable/button_layout"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,6 +30,8 @@
         android:layout_marginRight="11dp"
         android:text="@string/freezer"
         android:textSize="22sp"
+        android:background="@drawable/button_layout"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,6 +46,8 @@
         android:layout_marginRight="11dp"
         android:text="@string/fridge"
         android:textSize="22sp"
+        android:background="@drawable/button_layout"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toStartOf="@+id/button8"
         app:layout_constraintStart_toEndOf="@+id/button4"
         app:layout_constraintTop_toTopOf="parent" />
