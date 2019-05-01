@@ -35,6 +35,7 @@ public class ViewPantry extends AppCompatActivity {
             float quantity = f.getQuantity();
             String expDate = f.getExpiryDate();
             String addedDate = f.getDate_added();
+            Boolean hasExpired=true;
 
             int timeTillExp;
             int howOld;
@@ -42,13 +43,21 @@ public class ViewPantry extends AppCompatActivity {
             try {
                 timeTillExp = getTimeBetween(expDate);
                 howOld = getAge(f.getDate_added());
+                if(timeTillExp < 0){
+                    f.setIsExpired(true);
+                    hasExpired = f.getIsExpired();
+                }
+                else {
+                    f.setIsExpired(false);
+                    hasExpired = f.getIsExpired();
+                }
             } catch (ParseException e) {
                 timeTillExp = 0;
                 howOld = 0;
                 e.printStackTrace();
             }
 
-            info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate.substring(0,10) + " (" + timeTillExp + " hours)\nAdded: " + addedDate.substring(0,10) + " (" + howOld + " hours old)\n";
+            info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate.substring(0,10) + " (" + timeTillExp + " hours)\nAdded: " + addedDate.substring(0,10) + " (" + howOld + " hours old)\n " + "has Expired: " + hasExpired ;
         }
         pantryItemsTextView.setText(info);
     }
