@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppScreens.AddItems.FeedbackScreen"></activity>
+        <activity android:name=".AppScreens.ShoppingList"></activity>
+        <activity android:name=".AppScreens.AddItems.FeedbackScreen" />
         <activity android:name=".readCSVFiles" />
         <activity android:name=".AppScreens.AddItems.ScanBarcode" />
         <activity android:name=".AppScreens.AddItems.ScanReceipt" />

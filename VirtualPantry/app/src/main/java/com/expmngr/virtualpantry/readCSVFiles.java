@@ -3,6 +3,10 @@ package com.expmngr.virtualpantry;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
+import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,15 +15,71 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class readCSVFiles extends AppCompatActivity {
+    TextView displayText;
 
+    //columns of csv file
+    final int NAME = 0;
+    final int STATUS = 1;
+    final int PANTRY = 2;
+    final int FRIDGE = 3;
+    final int FREEZER = 4;
+    final int GROUP = 6;//intentional skip 4-6
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_csvfiles);
 
+        displayText = (TextView) findViewById(R.id.csvTextView);
+
+        //add test food
+//        ExpiryFood testFood = new ExpiryFood();
+//        testFood.setName("Test");
+//        testFood.setStatus("");
+//        testFood.setPantryExpiry("1 pantry");
+//        testFood.setFridgeExpiry("1 fridge");
+//        testFood.setFreezerExpiry("1 freezer");
+//        MainActivity.database.expiryFoodDAO().addExpFood(testFood);
+
+        MainActivity.database.expiryFoodDAO().deleteAll();
+
+
         ArrayList<String[]> myValues = csvToArray();
+        List<ExpiryFood> expFoods = new ArrayList<>();
+        for(String[] line : myValues){
+            for(String s : line){
+                System.out.print(s +";");
+            }
+            ExpiryFood newFood = new ExpiryFood();
+            newFood.setName(line[NAME]);
+            newFood.setStatus(line[STATUS]);
+            newFood.setPantryExpiry(line[PANTRY]);
+            newFood.setFridgeExpiry(line[FRIDGE]);
+            newFood.setFreezerExpiry(line[FREEZER]);
+            //newFood.setCat_num(Integer.parseInt(line[GROUP]));
+            MainActivity.database.expiryFoodDAO().addExpFood(newFood);
+
+            System.out.println();
+        }
+
+        //display food in expdate entity
+        List<ExpiryFood> expFood = MainActivity.database.expiryFoodDAO().getAllExpFood();
+        String info = "";
+
+        for(ExpiryFood f : expFood) {
+            int id = f.getId();
+            String name = f.getName();
+            String status = f.getStatus();
+            String pantry = f.getPantryExpiry();
+            String fridge = f.getFridgeExpiry();
+            String freezer = f.getFreezerExpiry();
+
+            info = info + "\nID : " + id + "\nName : " + name + "\nStatus :" + status+ "\nPantry : " + pantry + "\nFridge : " + fridge + "\nFreezer: " + freezer + "\n";
+        }
+        displayText.setText(info);
+
     }
 
     private ArrayList<String[]> csvToArray(){

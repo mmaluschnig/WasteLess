@@ -1,7 +1,6 @@
 package com.expmngr.virtualpantry.Database.Entities;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
@@ -16,6 +15,7 @@ public class Food {
     private String location;
     private String date_added;
     private String expiryDate;
+    private Boolean isExpired;
 
 
     public int getId() {
@@ -73,4 +73,8 @@ public class Food {
     public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
+
+    public Boolean getIsExpired(){return isExpired;}
+
+    public void setIsExpired(Boolean expired){this.isExpired = expired;}
 }
