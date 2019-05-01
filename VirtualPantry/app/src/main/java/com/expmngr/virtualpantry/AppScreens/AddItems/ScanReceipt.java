@@ -236,7 +236,7 @@ public class ScanReceipt extends AppCompatActivity {
 
         if (s != null && !s.isEmpty()) {
             for (char c : s.toCharArray()) {
-                if (containsDigit = !Character.isLetter(c)) {
+                if (containsDigit = Character.isDigit(c)) {
                     break;
                 }
             }
