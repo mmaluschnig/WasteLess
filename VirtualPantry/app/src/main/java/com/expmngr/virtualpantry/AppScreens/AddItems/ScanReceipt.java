@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,9 +47,9 @@ public class ScanReceipt extends AppCompatActivity {
 
     Set<String> potentialFoods;
     Set<String> foundFoods;
+    Set<String> blackList; //improves efficiency by remembering words that are not in the database
 
-    Button pauseButton;
-    private boolean isCameraOn;
+    Button doneButton;
 
     private static final int requestPermissionID = 101;
 
@@ -57,31 +59,23 @@ public class ScanReceipt extends AppCompatActivity {
         setContentView(R.layout.activity_scan_receipt);
 
         mCameraView = findViewById(R.id.surfaceView);
-        mTextView = findViewById(R.id.text_view);
+        mTextView = findViewById(R.id.foodFoundTextView);
 
-        pauseButton = (Button) findViewById(R.id.pauseButton);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCameraOn = !isCameraOn;
-                if(isCameraOn){
-                    mCameraSource.stop();
-                    pauseButton.setText("Resume");
-                }else{
-                    try {
-                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                            mCameraSource.start(mCameraView.getHolder());
-                            pauseButton.setText("Pause");
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                Intent i = new Intent(ScanReceipt.this, ConfirmScanFoods.class);
+                ArrayList<String> temp = new ArrayList<String>();
+                temp.addAll(foundFoods);
+                i.putExtra("found_foods", temp);
+                startActivity(i);
             }
         });
 
         potentialFoods = new HashSet<>();
         foundFoods = new HashSet<>();
+        blackList = new HashSet<>();
 
         startCameraSource();
         setupBottomNavigationView();
@@ -102,7 +96,6 @@ public class ScanReceipt extends AppCompatActivity {
                     return;
                 }
                 mCameraSource.start(mCameraView.getHolder());
-                isCameraOn = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -216,10 +209,14 @@ public class ScanReceipt extends AppCompatActivity {
                                 }
                                 //check potential foods against the database
                                 for(String s : potentialFoods){
-                                    List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(s);
-                                    if(found.size() > 0) {
-                                        System.out.println(s);
-                                        foundFoods.add(s);
+                                    if(!blackList.contains(s)) {
+                                        List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(s);
+
+                                        if (found.size() > 0) {
+                                            foundFoods.add(s);
+                                        }else{
+                                            blackList.add(s);
+                                        }
                                     }
                                 }
 
