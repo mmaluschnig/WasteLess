@@ -46,7 +46,8 @@ public class readCSVFiles extends AppCompatActivity {
         MainActivity.database.expiryFoodDAO().deleteAll();
 
 
-        ArrayList<String[]> myValues = csvToArray();
+        ArrayList<String[]> myValues = csvToArrayBetter();
+        System.out.println(Arrays.deepToString(myValues.toArray()));
         List<ExpiryFood> expFoods = new ArrayList<>();
         for(String[] line : myValues){
             for(String s : line){
@@ -82,7 +83,32 @@ public class readCSVFiles extends AppCompatActivity {
 
     }
 
-    private ArrayList<String[]> csvToArray(){
+    private ArrayList<String[]> csvToArrayBetter() {
+
+        InputStream is = getResources().openRawResource(R.raw.expiry_times);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+
+        String line = "";
+        ArrayList<String[]> lines = new ArrayList<>();
+
+        try {
+            //row titles
+            line = reader.readLine();
+
+            line = reader.readLine();
+            while(line != null) {
+                lines.add(line.split(","));
+                line = reader.readLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+
+    private ArrayList<String[]> csvWithQuotesToArray(){
 
         InputStream is = getResources().openRawResource(R.raw.expiry_times);
 

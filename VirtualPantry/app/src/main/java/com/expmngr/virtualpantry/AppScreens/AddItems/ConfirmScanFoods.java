@@ -36,7 +36,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
                 List<ExpiryFood> foundFood = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + s + "%");
                 foodOptions.put(s, foundFood);
 
-                String foodInfo = "Scanned: " + s + ", Found:\n";
+                String foodInfo = "Scanned: " + s + ", Found:\n----------------------------------\n";
                 for (ExpiryFood f : foundFood) {
                     foodInfo += "Name:\t\t\t\t" + f.getName() +
                             "\nCategory:\t\t" + f.getCat_num() +
