@@ -10,15 +10,21 @@ import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConfirmScanFoods extends AppCompatActivity {
     TextView confirmFoodTextView;
+
+    private Map<String,List<ExpiryFood>> foodOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_scan_foods);
+
+        foodOptions = new HashMap<String, List<ExpiryFood>>();
 
         confirmFoodTextView = (TextView) findViewById(R.id.confirmFoodTextView);
 
@@ -27,9 +33,10 @@ public class ConfirmScanFoods extends AppCompatActivity {
         String totalFoodInfo = "";
         if(foundWords.size() > 0) {
             for (String s : foundWords) {
-                List<ExpiryFood> foundFood = MainMenuPlaceholder.database.expiryFoodDAO().findByName(s);
+                List<ExpiryFood> foundFood = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + s + "%");
+                foodOptions.put(s, foundFood);
 
-                String foodInfo = "";
+                String foodInfo = "Scanned: " + s + ", Found:\n";
                 for (ExpiryFood f : foundFood) {
                     foodInfo += "Name:\t\t\t\t" + f.getName() +
                             "\nCategory:\t\t" + f.getCat_num() +
@@ -38,7 +45,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
                             "\nFridge:\t\t\t\t" + f.getFridgeExpiry() +
                             "\nFreezer:\t\t\t" + f.getFreezerExpiry() + "\n\n";
                 }
-                totalFoodInfo += foodInfo;
+                totalFoodInfo += foodInfo + "\n";
             }
         }else{
             totalFoodInfo = "Sorry, no food was found. Try scanning again!";

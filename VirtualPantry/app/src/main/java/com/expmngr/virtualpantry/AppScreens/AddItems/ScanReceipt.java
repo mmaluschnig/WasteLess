@@ -210,7 +210,7 @@ public class ScanReceipt extends AppCompatActivity {
                                 //check potential foods against the database
                                 for(String s : potentialFoods){
                                     if(!blackList.contains(s)) {
-                                        List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(s);
+                                        List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + s + "%");
 
                                         if (found.size() > 0) {
                                             foundFoods.add(s);
