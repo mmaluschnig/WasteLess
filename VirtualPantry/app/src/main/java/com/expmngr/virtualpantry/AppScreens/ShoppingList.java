@@ -1,21 +1,21 @@
 package com.expmngr.virtualpantry.AppScreens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.expmngr.virtualpantry.Database.Entities.ExpiredFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class ShoppingList extends AppCompatActivity {
     TextView shoppingListTextView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,69 +23,28 @@ public class ShoppingList extends AppCompatActivity {
         setContentView(R.layout.activity_shoppinglist);
 
         shoppingListTextView = (TextView) findViewById(R.id.shoppingListTextView);
+        List<Food> allfood = MainMenuPlaceholder.database.foodDAO().getFood();
 
-        List<ExpiredFood> expiredfood = MainMenuPlaceholder.database.expiredFoodDAO().getExpiredFood();
+        List<Food> expiredfood = new ArrayList<>();
 
         String info = "";
 
-        for(ExpiredFood f : expiredfood){
-            int id = f.getId();
-            String name = f.getName();
-            float quantity = f.getQuantity();
+        for(Food f: allfood){
+
+            int id=f.getId();
+            String name=f.getName();
+            Boolean hasExpired = f.getIsExpired();
             String expDate = f.getExpiryDate();
             String addedDate = f.getDate_added();
-            Boolean hasExpired=true;
 
-            int timeTillExp;
-            int howOld;
-            String loc = f.getLocation();
-            try {
-                timeTillExp = getTimeBetween(expDate);
-                howOld = getAge(f.getDate_added());
-                if(timeTillExp < 0){
-                    f.setIsExpired(true);
-                    hasExpired = f.getIsExpired();
-                }
-                else {
-                    f.setIsExpired(false);
-                    hasExpired = f.getIsExpired();
-                }
-
-                ;
-
-            } catch (ParseException e) {
-                timeTillExp = 0;
-                howOld = 0;
-                e.printStackTrace();
+            if(hasExpired==true){
+                expiredfood.add(f);
             }
-            if(hasExpired == true) {
-                info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc + "\nQuantity : " + quantity + "\nExpires on: " + expDate + " (" + timeTillExp + " hours)\nAdded: " + addedDate + " (" + howOld + " hours old)\n " + "has Expired: " + hasExpired;
-            }
-        }
 
-
+            info = info + name +"\n\n";
         shoppingListTextView.setText(info);
 
     }
 
-    private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {
-        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(stringDate1);
-        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(stringDate2);
-        int difference = (int)((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
+}}
 
-        return difference;
-    }
-    private int getTimeBetween(String stringDate2) throws ParseException {
-        Date date2 = new SimpleDateFormat("dd/MM/yyyy HH").parse(stringDate2);
-        int difference = (int)(date2.getTime() - new Date().getTime()) / 1000 / 60 / 60 ;
-
-        return difference;
-    }
-
-    private int getAge(String stringDate) throws ParseException {
-        Date date2 = new SimpleDateFormat("dd/MM/yyyy HH").parse(stringDate);
-        int difference = (int)((new Date().getTime() - date2.getTime()) / 1000 / 60 / 60 );
-
-        return difference;
-    }
-}

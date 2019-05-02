@@ -1,23 +1,19 @@
 package com.expmngr.virtualpantry.AppScreens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.expmngr.virtualpantry.Database.Entities.ExpiredFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
-import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ViewPantry extends AppCompatActivity {
     TextView pantryItemsTextView;
@@ -30,7 +26,7 @@ public class ViewPantry extends AppCompatActivity {
         pantryItemsTextView = (TextView) findViewById(R.id.itemsTextView);
 
         List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
-        List<Food> expiredfood = new ArrayList<>();
+
 
         String info = "";
 
@@ -58,9 +54,6 @@ public class ViewPantry extends AppCompatActivity {
                 }
 
                 MainMenuPlaceholder.database.foodDAO().updateFood(f);
-                if(hasExpired==true){
-                    expiredfood.add(f);
-                }
 
                 
 
@@ -120,10 +113,11 @@ public class ViewPantry extends AppCompatActivity {
                         howOld = 0;
                         e.printStackTrace();
                     }
-
+                    MainMenuPlaceholder.database.foodDAO().updateFood(f);
                     info = info + name + " Expires on: " + expDate + " " + loc + "\n\n";
                 }
                 pantryItemsTextView.setText(info);
+
             }
         });
 
