@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +22,13 @@ public class ShoppingList extends AppCompatActivity {
         setContentView(R.layout.activity_shoppinglist);
 
         shoppingListTextView = (TextView) findViewById(R.id.shoppingListTextView);
-        List<Food> allfood = MainMenuPlaceholder.database.foodDAO().getFood();
 
-        List<Food> expiredfood = new ArrayList<>();
+
+        List<Food> expiredfood = MainMenuPlaceholder.database.foodDAO().getExpiredFood();
 
         String info = "";
 
-        for(Food f: allfood){
+        for(Food f: expiredfood){
 
             int id=f.getId();
             String name=f.getName();
@@ -37,14 +36,15 @@ public class ShoppingList extends AppCompatActivity {
             String expDate = f.getExpiryDate();
             String addedDate = f.getDate_added();
 
-            if(hasExpired==true){
-                expiredfood.add(f);
-            }
 
-            info = info + name +"\n\n";
+
+            info += name +"\n\n";
+            //String test = "this is a test\n\n\n\nwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\n\nwwwwwwwwwww";
+            System.out.println("here");
+
+
+        }
         shoppingListTextView.setText(info);
-
     }
-
-}}
+}
 

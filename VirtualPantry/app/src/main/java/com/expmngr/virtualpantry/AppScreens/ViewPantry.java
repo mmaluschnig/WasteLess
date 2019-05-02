@@ -114,7 +114,7 @@ public class ViewPantry extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     MainMenuPlaceholder.database.foodDAO().updateFood(f);
-                    info = info + name + " Expires on: " + expDate + " " + loc + "\n\n";
+                    info = info + name + " \nExpires on: " + expDate + "\n " + loc + "\nisExpired:" + f.getIsExpired() + hasExpired +"\nTimetillexp" + timeTillExp + "\n\n";
                 }
                 pantryItemsTextView.setText(info);
 
@@ -158,6 +158,7 @@ public class ViewPantry extends AppCompatActivity {
                         howOld = 0;
                         e.printStackTrace();
                     }
+                    MainMenuPlaceholder.database.foodDAO().updateFood(f);
 
                     info = info + name + " Expires on: " + expDate + " " + loc + "\n\n";
                 }
@@ -202,8 +203,9 @@ public class ViewPantry extends AppCompatActivity {
                         howOld = 0;
                         e.printStackTrace();
                     }
+                    MainMenuPlaceholder.database.foodDAO().updateFood(f);
 
-                    info = info + name + " Expires on: " + expDate + " " + loc + "\n\n";
+                    info = info + name + " \nExpires on: " + expDate + "\n " + loc + "\nisExpired:" + f.getIsExpired() + "\n\n";
                 }
                 pantryItemsTextView.setText(info);
             }
