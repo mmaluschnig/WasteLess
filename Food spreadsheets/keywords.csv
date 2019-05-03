@@ -6,7 +6,6 @@ asparagus,,END
 avocados,avocado,END
 baby,,END
 bacon,,END
-bags,bag,END
 baked,,END
 baking,,END
 bananas,banana,END
@@ -247,12 +246,10 @@ salad,salads,END
 salads,salad,END
 salami,,END
 salmon,salmons,END
-salted,,END
 sauce,sauces,END
 sausage,sausages,END
 scallops,scallop,END
 seafood,,END
-semi,,END
 semisweet,,END
 shelf,,END
 shell,shells,END
@@ -285,7 +282,6 @@ stuffing,,END
 substitute,,END
 sugar,sugars,END
 summer,,END
-sweet,,END
 sweetener,,END
 swiss,,END
 syrup,syrups,END
@@ -300,8 +296,6 @@ turnips,turnip,END
 tv,,END
 unbaked,,END
 uncooked,,END
-unopened,,END
-unsalted,,END
 unshelled,,END
 unsweetened,,END
 vacuum,,END
@@ -325,3 +319,5 @@ winter,,END
 yeast,yeasts,END
 yogurt,yogurts,END
 yolks,yolk,END
+mushrooms,mushroon,END
+mushrooms,mushroons,END

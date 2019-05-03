@@ -47,6 +47,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ScanReceipt extends AppCompatActivity {
+    //Words to remove ->> drink?, brown, sour
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
