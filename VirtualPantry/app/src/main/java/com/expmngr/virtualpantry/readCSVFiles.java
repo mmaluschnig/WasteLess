@@ -15,9 +15,13 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class readCSVFiles extends AppCompatActivity {
+    Map<String,String> keywordDict;
+
     TextView displayText;
 
     //columns of csv file
@@ -34,19 +38,35 @@ public class readCSVFiles extends AppCompatActivity {
 
         displayText = (TextView) findViewById(R.id.csvTextView);
 
-        //add test food
-//        ExpiryFood testFood = new ExpiryFood();
-//        testFood.setName("Test");
-//        testFood.setStatus("");
-//        testFood.setPantryExpiry("1 pantry");
-//        testFood.setFridgeExpiry("1 fridge");
-//        testFood.setFreezerExpiry("1 freezer");
-//        MainActivity.database.expiryFoodDAO().addExpFood(testFood);
-
         MainActivity.database.expiryFoodDAO().deleteAll();
 
+        addExpiryTimes();
+        addKeywords();
+        displayExpiryFood();
 
-        ArrayList<String[]> myValues = csvToArrayBetter();
+
+    }
+
+    private void displayExpiryFood(){
+        //display food in expdate entity
+        List<ExpiryFood> expFood = MainActivity.database.expiryFoodDAO().getAllExpFood();
+        String info = "";
+
+        for(ExpiryFood f : expFood) {
+            int id = f.getId();
+            String name = f.getName();
+            String status = f.getStatus();
+            String pantry = f.getPantryExpiry();
+            String fridge = f.getFridgeExpiry();
+            String freezer = f.getFreezerExpiry();
+
+            info = info + "\nID : " + id + "\nName : " + name + "\nStatus :" + status+ "\nPantry : " + pantry + "\nFridge : " + fridge + "\nFreezer: " + freezer + "\n";
+        }
+        displayText.setText(info);
+    }
+
+    private void addExpiryTimes(){
+        ArrayList<String[]> myValues = csvToArrayBetter(R.raw.expiry_times);
         System.out.println(Arrays.deepToString(myValues.toArray()));
         List<ExpiryFood> expFoods = new ArrayList<>();
         for(String[] line : myValues){
@@ -64,28 +84,31 @@ public class readCSVFiles extends AppCompatActivity {
 
             System.out.println();
         }
-
-        //display food in expdate entity
-        List<ExpiryFood> expFood = MainActivity.database.expiryFoodDAO().getAllExpFood();
-        String info = "";
-
-        for(ExpiryFood f : expFood) {
-            int id = f.getId();
-            String name = f.getName();
-            String status = f.getStatus();
-            String pantry = f.getPantryExpiry();
-            String fridge = f.getFridgeExpiry();
-            String freezer = f.getFreezerExpiry();
-
-            info = info + "\nID : " + id + "\nName : " + name + "\nStatus :" + status+ "\nPantry : " + pantry + "\nFridge : " + fridge + "\nFreezer: " + freezer + "\n";
-        }
-        displayText.setText(info);
-
     }
 
-    private ArrayList<String[]> csvToArrayBetter() {
+    private void addKeywords(){
+        ArrayList<String[]> myValues = csvToArrayBetter(R.raw.keywords);
+        System.out.println(Arrays.deepToString(myValues.toArray()));
 
-        InputStream is = getResources().openRawResource(R.raw.expiry_times);
+        keywordDict = new HashMap<>();
+
+        for(String[] line : myValues){
+            //every word in the expiry times needs a key pointing to itself
+            keywordDict.put(line[0],line[0]);
+
+            if(!line[1].equals("")){
+                //words that are similar to a word in expiry times point to that word
+                keywordDict.put(line[1],line[0]);
+            }
+        }
+
+        System.out.println(keywordDict.toString());
+    }
+
+
+    private ArrayList<String[]> csvToArrayBetter(int resource) {
+
+        InputStream is = getResources().openRawResource(resource);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
