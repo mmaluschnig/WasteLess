@@ -33,10 +33,17 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ScanReceipt extends AppCompatActivity {
@@ -48,6 +55,7 @@ public class ScanReceipt extends AppCompatActivity {
     Set<String> potentialFoods;
     Set<String> foundFoods;
     Set<String> blackList; //improves efficiency by remembering words that are not in the database
+    Map<String, String> keywordDict;
 
     Button doneButton;
 
@@ -77,9 +85,54 @@ public class ScanReceipt extends AppCompatActivity {
         foundFoods = new HashSet<>();
         blackList = new HashSet<>();
 
+        addKeywords();
+
         startCameraSource();
         setupBottomNavigationView();
 
+    }
+
+    private void addKeywords(){
+        ArrayList<String[]> myValues = csvToArrayBetter(R.raw.keywords);
+        System.out.println(Arrays.deepToString(myValues.toArray()));
+
+        keywordDict = new HashMap<>();
+
+        for(String[] line : myValues){
+            //every word in the expiry times needs a key pointing to itself
+            keywordDict.put(line[0],line[0]);
+
+            if(!line[1].equals("")){
+                //words that are similar to a word in expiry times point to that word
+                keywordDict.put(line[1],line[0]);
+            }
+        }
+
+        System.out.println(keywordDict.toString());
+    }
+
+    public ArrayList<String[]> csvToArrayBetter(int resource) {
+
+        InputStream is = getResources().openRawResource(resource);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+
+        String line = "";
+        ArrayList<String[]> lines = new ArrayList<>();
+
+        try {
+            //row titles
+            line = reader.readLine();
+
+            line = reader.readLine();
+            while(line != null) {
+                lines.add(line.split(","));
+                line = reader.readLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return lines;
     }
 
     @Override
@@ -181,21 +234,30 @@ public class ScanReceipt extends AppCompatActivity {
                                     List<Line> lines = (List<Line>) item.getComponents();
                                     for (int j=0;j<lines.size();j++){
                                         Line line = lines.get(j);
+                                        //Start By Checking Lines for digits, digits != food
+                                        List<Element> elements;
                                         if(!containsDigit(line.getValue())) {
-                                            //search database for line
-                                            potentialFoods.add(line.getValue().toLowerCase());
+                                             elements = (List<Element>) line.getComponents();
+                                            //check if any of the components of the line are keywords
+                                            boolean containsKeyword = false;
+                                            for(Element e : elements){
+                                                if(keywordDict.get(e.getValue().toLowerCase()) != null) containsKeyword = true;
+                                            }
+                                            if(containsKeyword) {
+                                                potentialFoods.add(line.getValue().toLowerCase());
+                                            }
 
-//                                            stringBuilder.append(centerY.toString() + ":\t>>>" + line.getValue());
-//                                            stringBuilder.append("\n");
                                         }
-                                        List<Element> elements = (List<Element>) line.getComponents();
+                                        elements = (List<Element>) line.getComponents();
                                         for(int k=0;k<elements.size();k++) {
                                             Element element = elements.get(k);
                                             centerY = element.getBoundingBox().centerY();
 
                                             if(!containsDigit(element.getValue())) {
-                                                //search database for line
-                                                potentialFoods.add(element.getValue().toLowerCase());
+                                                //search database for element
+                                                if(keywordDict.get(element.getValue().toLowerCase()) != null) {
+                                                    potentialFoods.add(element.getValue().toLowerCase());
+                                                }
 //                                                stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
 //                                                stringBuilder.append("\n");
                                             }
@@ -203,6 +265,7 @@ public class ScanReceipt extends AppCompatActivity {
 //                                            stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
 //                                            stringBuilder.append("\n");
                                         }
+
 //                                        stringBuilder.append("\n");
                                     }
 //                                    stringBuilder.append("\n");
