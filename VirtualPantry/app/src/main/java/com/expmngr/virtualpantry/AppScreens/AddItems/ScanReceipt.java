@@ -236,31 +236,28 @@ public class ScanReceipt extends AppCompatActivity {
                                         Line line = lines.get(j);
                                         //Start By Checking Lines for digits, digits != food
                                         List<Element> elements;
-                                        if(!containsDigit(line.getValue())) {
                                              elements = (List<Element>) line.getComponents();
                                             //check if any of the components of the line are keywords
                                             boolean containsKeyword = false;
                                             for(Element e : elements){
-                                                if(keywordDict.get(e.getValue().toLowerCase()) != null) containsKeyword = true;
+                                                if(keywordDict.get(e.getValue().toLowerCase().replaceAll("\\d","")) != null) containsKeyword = true;
                                             }
                                             if(containsKeyword) {
-                                                potentialFoods.add(line.getValue().toLowerCase());
+                                                potentialFoods.add(line.getValue().toLowerCase().replaceAll("\\d",""));
                                             }
 
-                                        }
                                         elements = (List<Element>) line.getComponents();
                                         for(int k=0;k<elements.size();k++) {
                                             Element element = elements.get(k);
                                             centerY = element.getBoundingBox().centerY();
+                                            String checkFood = element.getValue().toLowerCase().replaceAll("\\d","");
 
-                                            if(!containsDigit(element.getValue())) {
                                                 //search database for element
-                                                if(keywordDict.get(element.getValue().toLowerCase()) != null) {
-                                                    potentialFoods.add(element.getValue().toLowerCase());
+                                                if(keywordDict.get(checkFood) != null) {
+                                                    potentialFoods.add(checkFood);
                                                 }
 //                                                stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
 //                                                stringBuilder.append("\n");
-                                            }
 
 //                                            stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
 //                                            stringBuilder.append("\n");
