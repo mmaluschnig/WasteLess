@@ -11,6 +11,7 @@ import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_scan_foods);
 
         foodOptions = new HashMap<String, List<ExpiryFood>>();
-        blackList = new HashSet<>();
+        blackList = new HashSet<>(Arrays.asList("eat"));
 
         confirmFoodTextView = (TextView) findViewById(R.id.confirmFoodTextView);
 
@@ -44,7 +45,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
                     for(String value : ScanReceipt.keywordDict.get(s)){
                         found.addAll(MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + value + "%"));
                     }
-
+                    //TODO remove duplicate foods here (or find out why theyre being duplicated)
                     if (found.size() > 0) {
                         //one of our potential foods was a keyword!
                         foodOptions.put(s, found);
