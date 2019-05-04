@@ -54,8 +54,6 @@ public class ScanReceipt extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
 
     Set<String> potentialFoods;
-    Set<String> foundFoods;
-    Set<String> blackList; //improves efficiency by remembering words that are not in the database
     public static Map<String, String> keywordDict;
 
     Button doneButton;
@@ -76,15 +74,13 @@ public class ScanReceipt extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(ScanReceipt.this, ConfirmScanFoods.class);
                 ArrayList<String> temp = new ArrayList<String>();
-                temp.addAll(foundFoods);
+                temp.addAll(potentialFoods);
                 i.putExtra("found_foods", temp);
                 startActivity(i);
             }
         });
 
         potentialFoods = new HashSet<>();
-        foundFoods = new HashSet<>();
-        blackList = new HashSet<>();
 
         addKeywords();
 
@@ -216,83 +212,51 @@ public class ScanReceipt extends AppCompatActivity {
                 }
 
                 /**
-                 * Detect all the text from camera using TextBlock and the values into a stringBuilder
-                 * which will then be set to the textView.
+                 * Detect all the text from camera using TextBlock.
                  * */
                 @Override
                 public void receiveDetections(Detector.Detections<TextBlock> detections) {
                     final SparseArray<TextBlock> items = detections.getDetectedItems();
                     if (items.size() != 0 ){
-
                         mTextView.post(new Runnable() {
                             @Override
                             public void run() {
-                                StringBuilder stringBuilder = new StringBuilder();
+                                findFoodInTextBlocks(items);
 
-                                Integer centerY = 0;
-                                for(int i=0;i<items.size();i++){
-                                    TextBlock item = items.valueAt(i);
-                                    List<Line> lines = (List<Line>) item.getComponents();
-                                    for (int j=0;j<lines.size();j++){
-                                        Line line = lines.get(j);
-                                        //Start By Checking Lines for digits, digits != food
-                                        List<Element> elements;
-                                             elements = (List<Element>) line.getComponents();
-                                            //check if any of the components of the line are keywords
-                                            boolean containsKeyword = false;
-                                            for(Element e : elements){
-                                                if(keywordDict.get(e.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","")) != null) containsKeyword = true;
-                                            }
-                                            if(containsKeyword) {
-                                                potentialFoods.add(line.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]",""));
-                                            }
-
-                                        elements = (List<Element>) line.getComponents();
-                                        for(int k=0;k<elements.size();k++) {
-                                            Element element = elements.get(k);
-                                            centerY = element.getBoundingBox().centerY();
-                                            String checkFood = element.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","");
-
-                                                //search database for element
-                                                if(keywordDict.get(checkFood) != null) {
-                                                    potentialFoods.add(checkFood);
-                                                }
-//                                                stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
-//                                                stringBuilder.append("\n");
-
-//                                            stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
-//                                            stringBuilder.append("\n");
-                                        }
-
-//                                        stringBuilder.append("\n");
-                                    }
-//                                    stringBuilder.append("\n");
-                                }
-                                //check potential foods against the database
-                                for(String s : potentialFoods){
-                                    if(!blackList.contains(s)) {
-                                        List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + keywordDict.get(s) + "%");
-
-                                        if (found.size() > 0) {
-                                            foundFoods.add(s);
-                                        }else{
-                                            blackList.add(s);
-                                        }
-                                    }
-                                }
-
-//                                System.out.println(stringBuilder.toString());
                                 System.out.println(potentialFoods.toString());
-                                System.out.println("Found: " + foundFoods.toString());
-                                String str = "Found " + foundFoods.size() + " foods";
+                                String str = "Found " + potentialFoods.size() + " foods";
                                 mTextView.setText(str);
                                 System.out.println(str);
-
                             }
                         });
                     }
                 }
             });
+        }
+    }
+
+    private void findFoodInTextBlocks(SparseArray<TextBlock> items){
+        for(int i=0;i<items.size();i++){
+            TextBlock item = items.valueAt(i);
+            List<Line> lines = (List<Line>) item.getComponents();
+            for (int j=0;j<lines.size();j++){
+                Line line = lines.get(j);
+                //>>>Lines                          //a line may be added if it perfectly matches an entry in the database
+                String checkFood = line.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","");
+                List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(checkFood);
+                if(found.size() > 0) {
+                    potentialFoods.add(checkFood);
+                }else{
+                    //>>>Elements                           //check if any of the components of the line are keywords
+                    List<Element> elements = (List<Element>) line.getComponents();
+                    for (Element e : elements) {
+                        checkFood = e.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]", "");
+                        if (keywordDict.get(checkFood) != null) {
+                            potentialFoods.add(checkFood);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -303,19 +267,5 @@ public class ScanReceipt extends AppCompatActivity {
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
-    }
-
-    public final boolean containsDigit(String s) {
-        boolean containsDigit = false;
-
-        if (s != null && !s.isEmpty()) {
-            for (char c : s.toCharArray()) {
-                if (containsDigit = Character.isDigit(c)) {
-                    break;
-                }
-            }
-        }
-
-        return containsDigit;
     }
 }
