@@ -33,7 +33,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
         String totalFoodInfo = "";
         if(foundWords.size() > 0) {
             for (String s : foundWords) {
-                List<ExpiryFood> foundFood = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + s + "%");
+                List<ExpiryFood> foundFood = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + ScanReceipt.keywordDict.get(s) + "%");
                 foodOptions.put(s, foundFood);
 
                 String foodInfo = "Scanned: " + s + ", Found:\n----------------------------------\n";

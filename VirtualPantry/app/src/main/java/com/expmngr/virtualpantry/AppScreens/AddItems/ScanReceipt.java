@@ -56,7 +56,7 @@ public class ScanReceipt extends AppCompatActivity {
     Set<String> potentialFoods;
     Set<String> foundFoods;
     Set<String> blackList; //improves efficiency by remembering words that are not in the database
-    Map<String, String> keywordDict;
+    public static Map<String, String> keywordDict;
 
     Button doneButton;
 
@@ -241,17 +241,17 @@ public class ScanReceipt extends AppCompatActivity {
                                             //check if any of the components of the line are keywords
                                             boolean containsKeyword = false;
                                             for(Element e : elements){
-                                                if(keywordDict.get(e.getValue().toLowerCase().replaceAll("\\d","")) != null) containsKeyword = true;
+                                                if(keywordDict.get(e.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","")) != null) containsKeyword = true;
                                             }
                                             if(containsKeyword) {
-                                                potentialFoods.add(line.getValue().toLowerCase().replaceAll("\\d",""));
+                                                potentialFoods.add(line.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]",""));
                                             }
 
                                         elements = (List<Element>) line.getComponents();
                                         for(int k=0;k<elements.size();k++) {
                                             Element element = elements.get(k);
                                             centerY = element.getBoundingBox().centerY();
-                                            String checkFood = element.getValue().toLowerCase().replaceAll("\\d","");
+                                            String checkFood = element.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","");
 
                                                 //search database for element
                                                 if(keywordDict.get(checkFood) != null) {
@@ -271,7 +271,7 @@ public class ScanReceipt extends AppCompatActivity {
                                 //check potential foods against the database
                                 for(String s : potentialFoods){
                                     if(!blackList.contains(s)) {
-                                        List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + s + "%");
+                                        List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + keywordDict.get(s) + "%");
 
                                         if (found.size() > 0) {
                                             foundFoods.add(s);
