@@ -10,6 +10,7 @@ import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +40,10 @@ public class ConfirmScanFoods extends AppCompatActivity {
             //check potential foods against the database
             for(String s : foundWords){
                 if(!blackList.contains(s)) {
-                    List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + ScanReceipt.keywordDict.get(s) + "%");
+                    List<ExpiryFood> found = new ArrayList<>();
+                    for(String value : ScanReceipt.keywordDict.get(s)){
+                        found.addAll(MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + value + "%"));
+                    }
 
                     if (found.size() > 0) {
                         //one of our potential foods was a keyword!

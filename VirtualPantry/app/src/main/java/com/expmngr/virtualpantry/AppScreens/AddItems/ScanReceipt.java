@@ -54,7 +54,7 @@ public class ScanReceipt extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
 
     Set<String> potentialFoods;
-    public static Map<String, String> keywordDict;
+    public static Map<String, ArrayList<String>> keywordDict;
 
     Button doneButton;
 
@@ -97,11 +97,26 @@ public class ScanReceipt extends AppCompatActivity {
 
         for(String[] line : myValues){
             //every word in the expiry times needs a key pointing to itself
-            keywordDict.put(line[0],line[0]);
+            ArrayList<String> tempList;
+            if(keywordDict.get(line[0]) == null) {
+                tempList = new ArrayList<>();
+                tempList.add(line[0]);
+                keywordDict.put(line[0], tempList);
+            }else{
+                tempList = keywordDict.get(line[0]);
+                tempList.add(line[0]);
+            }
 
             if(!line[1].equals("")){
                 //words that are similar to a word in expiry times point to that word
-                keywordDict.put(line[1],line[0]);
+                if(keywordDict.get(line[1]) == null) {
+                    tempList = new ArrayList<>();
+                    tempList.add(line[0]);
+                    keywordDict.put(line[1], tempList);
+                }else{
+                    tempList = keywordDict.get(line[1]);
+                    tempList.add(line[0]);
+                }
             }
         }
 
@@ -253,6 +268,7 @@ public class ScanReceipt extends AppCompatActivity {
                         checkFood = e.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]", "");
                         if (keywordDict.get(checkFood) != null) {
                             potentialFoods.add(checkFood);
+
                         }
                     }
                 }
