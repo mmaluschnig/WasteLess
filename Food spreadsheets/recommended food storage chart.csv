@@ -1,271 +1,277 @@
 Food,,Pantry,Refrigerator,Freezer,,group
-,,(Room Temperature),(1oC to 4oC),(less than 0oC),,
-Bread and Cereal Products,,,,,,
 Baked quick breads,,4-5 days,1-2 weeks,2-3 months,,1800
 Bread,,5-7 days,1-2 weeks,2-3 months,,1800
 Bread crumbs and croutons,,6 months,,,,1800
-"Bread rolls, unbaked",,,2-3 weeks,1 month,,1800
-"Cereals, ready-to-eat",Unopened,1 year,,,,800
-"Cereals, ready-to-eat",Opened,2-3 months,,,,800
-"Cereals, ready-to-cook",,6 months,,,,800
-Corn meal,,1 year,18 months,2 years,,
-Doughnuts,,4-5 days,,3 months,,
-"Flour, all-purpose, white",,6-8 months,1 year,1-2 years,,
-"Flour, whole wheat",,,6-8 months,1-2 years,,
-Pasta,,2 years,,,,
-Pies and pastries,,,3 days,4-6 months,,
-"Pies and pastries, baked",,,,1-2 months,,
-"Pies and pastries, cream filled",,,2-3 days,3 months,,
-Pizza,,,3-4 days,1-2 months,,
-"Rice, brown",,6 months,,,,
-"Rice, white",,1 year,6-7 days,6 months,,
-"Tacos, enchiladas, and burritos (frozen)",,,2 weeks,1 year,,
-Waffles,,,4-5 days,1 month,,
-Packaged Foods and Mixes,,,,,,
-"Biscuit, brownie, and muffin mixes",,9 months,,,,
-"Cakes, prepared",,2-4 days,,2-3 months,,
-Cake mixes,,6-9 months,,,,
-Casserole mix,,9-12 months,,,,
-Chili powder,,6 months,,,,
-"Cookies, packaged",,2 months,,8-12 months,,
-"Crackers, pretzels",,3 months,,,,
-"Frosting, canned",,3 months,,,,
-"Frosting, mix",,8 months,,,,
-Fruit cake,,,2-3 months,1 year,,
-Hot roll mix,,18 months,,,,
-Instant breakfast products,,6 months,,,,
-Pancake and piecrust mix,,6 months,,,,
-Pancake waffle batter,,,1-2 days,3 months,,
-Toaster pastries,,3 months,,,,
-Sauce and gravy mixes,,6 months,,,,
-Soup mixes,,1 year,,,,
-,,,,,,
-"Spices, Herbs, Condiments, Extracts",,,,,,
-"Catsup, chili, and cocktail sauce",Unopened,1 year,,,,
-"Catsup, chili, and cocktail sauce",Opened,1 month,6 months,,,
-Herbs,,6 months,,1-2 years,,
-Herb/spice blends,Unopened,2 years,,1-2 years,,
-Herb/spice blends,Opened,1 year,,,,
-Mustard,,2 years,6-8 months,8-12 months,,
-"Spices, ground",,6 months,,1-2 years,,
-"Spices, whole",,1-2 years,,2-3 years,,
-Vanilla extract,Unopened,2 years,,,,
-Vanilla extract,Opened,1 year,,,,
-Other extracts,,1 year,,,,
-Other Food Staples,,,,,,
-Bacon bits,,4 months,,,,
-Baking powder,,18 months,,,,
-Baking soda,,2 years,,,,
-Bouillon products,,1 year,,,,
-Carbonated soft drinks (12 oz. cans),,6-9 months,,,,
-"Carbonated soft drinks, diet (12 oz. cans)",,3-4 months,,,,
-"Chocolate, premelted",,1 year,,,,
-Chocolate syrup,,2 years,6 months,,,
-"Chocolate, semisweet",,2 years,,,,
-"Chocolate, unsweetened",,18 months,,,,
-Cocoa mixes,,8 months,,,,
-"Coconut, shredded",Unopened,1 year,,,,
-"Coconut, shredded",Opened,6 months,8 months,1 year,,
-Coffee cans,Unopened,2 years,,,,
-Coffee cans,Opened,2 weeks,2 months,6 months,,
-"Coffee, instant",Unopened,6 months,,,,
-"Coffee, instant",Opened,2 weeks,,,,
-"Coffee, vacuum-packed",,1 year,,,,
-Coffee lighteners (dry),Unopened,9 months,,1 year,,
-Coffee lighteners (dry),Opened,6 months,,,,
-Cornstarch,,18 months,,2 years,,
-Gelatin,,18 months,,,,
-"Honey, jams, jellies, and syrup",,1 year,6-8 months,,,
-Marshmallows,,2-3 months,,,,
-Marshmallow cream,,3-4 months,,,,
-Mayonnaise,Unopened,2-3 months,12 months,,,
-Mayonnaise,Opened,,2 months,,,
-Molasses,,2 years,,,,
-"Nuts, shelled",,4 months,6 months,,,
-"Nuts, unshelled",,6 months,,,,
-"Nuts, salted",,,,6-8 months,,
-"Nuts, unsalted",,,,9-12 months,,
-"Oil, salad",,2 months,3 months,,,
-Parmesan grated cheese,Unopened,10 months,,,,
-Parmesan grated cheese,Opened,2 months,,,,
-Pasteurized process cheese spread,,3 months,3-4 weeks,4 months,,
-Peanut butter,Unopened,6-9 months,4-6 months,,,
-Peanut butter,Opened,2-3 months,,,,
-Popcorn,,1-2 years,2 years,2-3 years,,
-Pectin,,1 year,,,,
-"Salad dressings, bottled",,1 year,3 months,,,
-Soft drinks,,3 months,,,,
-Artificial sweetener,,2 years,,,,
-"Sugar, brown",,4 months,,,,
-"Sugar, confectioners",,18 months,,,,
-"Sugar, granulated",,2 years,,,,
-Tea bags,,18 months,,,,
-"Tea, instant",,2 years,,,,
-Vegetable oils,Unopened,6 months,,,,
-Vegetable oils,Opened,1-3 months,,,,
-Vegetable shortening,,3 months,6-9 months,,,
-Vinegar,Unopened,2 years,,,,
-Vinegar,Opened,1 year,,,,
-"Water, bottled",,1-2 years,,,,
-Whipped topping (dry),,1 year,,,,
-"Yeast, dry",,Pkg. exp. date,,,,
-Vegetables,,,,,,
-Asparagus,,,2-3 days,8 months,,
-Beets,,,2 weeks,,,
-Broccoli,,,3-5 days,,,
-Brussels sprouts,,,3-5 days,,,
-Cabbage,,,1 week,,,
-Carrots,,,2 weeks,,,
-Cauliflower,,,1 week,,,
-Celery,,,1 week,,,
-Corn (husks),,,1-2 days,8 months,,
-Cucumbers,,,1 week,,,
-Eggplant,,,1 week,,,
-Green beans,,,1-2 days,8 months,,
-Green peas,,,3-5 days,8 months,,
-Lettuce,,,1 week,,,
-Lima beans,,,3-5 days,8 months,,
-Mushrooms,,,2 days,,,
-Onions,,1 week,3-5 days,,,
-"Onion rings (precooked, frozen)",,,,1 year,,
-Peppers,,,1 week,,,
-"Pickles, canned",,1 year,1 month,,,
-Frozen potatoes,,,,8 month,,
-Sweet potatoes,,2-3 weeks,,,,
-White potatoes,,2-3 months,,,,
-Potato chips,,1 month,,,,
-Radishes,,,2 weeks,,,
-Rhubarb,,,3-5 days,,,
-Rutabagas,,1 week,,,,
-Snap beans,,,1 week,,,
-Spinach,,,5-7 days,8 months,,
-"Squash, Summer",,,3-5 days,,,
-"Squash, Winter",,1 week,,,,
-Tomatoes,,,1 week,,,
-Turnips,,,2 weeks,,,
-"Commercial baby food, jars",,1-2 years,2-3 days,,,
-Canned vegetables,,1 year,3-5 days,,,
-"Canned vegetables, pickled",,1 year,1-2 months,,,
-Dried vegetables,,6 months,,,,
-Frozen vegetables,,,,8 months,,
-Vegetable soup,,,3-4 days,3 months,,
-Fruits,,,,,,
-Apples,,Until ripe,1 month,,,
-Apricots,,Until ripe,5 days,,,
-Avocados,,Until ripe,5 days,,,
-Bananas,,Until ripe,5 days (fully ripe),,,
-Berries,,Until ripe,3 days,1 year,,
-Canned fruit,,1 year,2-4 days,,,
-Canned fruit juices,,1 year,3-5 days,,,
-Cherries,,Until ripe,3 days,,,
-Citrus fruit,,Until ripe,2 weeks,,,
-Dried fruit,,6 months,2-4 days,,,
-Frozen fruit,,,,1 year,,
-Fruit juice concentrate,,,6 days,1 year,,
-"Fruit pies, baked",,,2-3 days,8 months,,
-"Fruit, pre-cut, fresh",,Until ripe,2-4 days,1 year,,
-Grapes,,Until ripe,5 days,,,
-Melons,,Until ripe,5 days,,,
-Nectarines,,Until ripe,5 days,,,
-Peaches,,Until ripe,5 days,1 year,,
-Pears,,Until ripe,5 days,1 year,,
-Pineapple,,Until ripe,5-7 days,1 year,,
-Plums,,Until ripe,5 days,,,
-Dairy Products,,,,,,
-Butter,,,1-2 months,9 months,,
-Buttermilk,,,2 weeks,,,
-Cottage cheese,,,1 week,3 months,,
-Cream cheese,,,2 weeks,,,
-"Cream-light, heavy, half- and-half",,,3-4 days,1-4 months,,
-Eggnog commercial,,,3-5 days,6 months,,
-Margarine,,,4-5 months,12 months,,
-"Condensed, evaporated and dry milk",,12-23 months,8-20 days,,,
-Milk,,,8-20 days,3 months,,
-Ice cream and sherbet,,,,2 months,,
-"Hard natural cheese (e.g. cheddar, swiss)",Unopened,,3-6 months,6 months,,
-"Hard natural cheese (e.g. cheddar, swiss)",Opened,,3-4 weeks,,,
-Processed cheese,,,3-4 weeks,6-8 months,,
-Soft cheese (e.g. brie),,,1 week,6 months,,
-Pudding,Opened,,1-2 days,,,
-Snack dips,Opened,,1 week,,,
-Sour cream,,,2 weeks,,,
-"Non-dairy whipped cream, canned",,,3 months,,,
-"Real whipped cream, canned",,,3-4 weeks,,,
-Yogurt,,,2 weeks,1-2 months,,
-"Meats, Fish, Poultry, and Eggs",,,,,,
-Meats,,,,,,
-Fresh beef and bison steaks,,,3-5 days,6-9 months,,
-Fresh beef and bison roasts,,,3-5 days,9-12 months,,
-Fresh pork chops,,,3-5 days,4-6 months,,
-Fresh lamb chops,,,3-5 days,6-8 months,,
-Fresh veal,,,1-2 days,4-6 months,,
-"Fresh ground meat (e.g. beef, bison, veal, lamb)",,,1-2 days,3-4 months,,
-Cooked meat,,,2-3 days,2-3 months,,
-Canned meat,,1 year,3-4 days,3-4 months,,
-"Ham, whole",,,1 week,1-2 months,,
-"Ham, canned",,2 years,1 week,3-4 months,,
-"Ham, canned “keep refrigerated”",Unopened,,6-9 months,,,
-"Ham, canned “keep refrigerated”",Opened,,3-5 days,3-4 months,,
-"Shelf-stable unopened canned meat (e.g. chili, deviled ham, corn beef)",,1 year,1week,,,
-"Ham, cook before eating",,,1 week,,,
-"Ham, fully cooked",Unopened,,2 weeks,,,
-"Ham, fully cooked",Opened,,1 week,,,
-"Ham, dry-cured",,1 year,1 month,,,
-"Ham salad, store prepared or homemade",,,3-5 days,,,
-Bacon,Unopened,,2 weeks,1 month,,
-Bacon,Opened,,1 week,,,
-"Corned beef, uncooked",,,5-7 days,1-2 months,,
-Restructured (flaked) meat products,,,,9-12 months,,
-"Sausage, fresh",,,1-2 days,1-2 months,,
-"Smoked breakfast sausage links, patties",,,1 week,2 months,,
-"Sausage, smoked (e.g. Mettwurst)",,,1 week,1-2 months,,
-"Sausage, semi-dry (e.g. Summer sausage)",,,2-3 weeks,6 months,,
-"Sausage, dry smoked (e.g. Pepperoni, jerky, dry Salami)",,1 year,1 month,6 months,,
-"Frankfurters, bologna",Unopened,,2 weeks,1-2 months,,
-"Frankfurters, bologna",Opened,,3-7 days,,,
-Luncheon meat,Unopened,,2 weeks,1-2 months,,
-Luncheon meat,Opened,,3-7 days*,,,
-Meat gravies,,,1-2 days,2-3 months,,
-TV beef and pork dinners,,,,18 months#,,
-Meat based casseroles,,,3-4 days,4 months,,
-"Variety meats (giblets, tongue, liver, heart, etc.)",,,1-2 days,3-4 months,,
-Vinegar pickled meats (e.g. pickled pigs feet),,1 year,2 weeks,,,
-Fish,,,,,,
-Breaded fish,,,,4-6 months,,
-Canned fish,,1 year,1-2 days,,,
-Cooked fish or seafood,,,3-4 days,3 months,,
-"Lean fish (e.g. cod, flounder, haddock)",,,1-2 days,6-10 months,,
-"Fatty fish (e.g. bluefish, salmon, mackeral)",,,1-2 days,2-3 months,,
-Dry pickled fish,,,3-4 weeks,,,
-Smoked fish,,,2 weeks,4-5 weeks,,
-"Seafood-clams, crab, lobster in shell",,,2 days,3 months,,
-Seafood-oysters and scallops,,,4-5 days,3-4 months,,
-Seafood-shrimp,,,4-5 days,3 months,,
-Seafood-shucked clams,,,4-5 days,3 months,,
-"Tuna salad, store prepared or homemade",,,3-5 days,,,
-Poultry,,,,,,
-Chicken nuggets or patties,,,1-2 days,,,
-Chicken livers,,,1-2 days,3 months,,
-Chicken and Chicken TV dinners,,,,6 months,,
-Canned Chicken^,,2-5 years,3-4 days,4-6 weeks,,
-Cooked Chicken,,,2-3 days,4-6 months,,
-Fresh Chicken,,,1-2 days,1 year,,
-Canned Chicken,,,1 day,3 months,,
-"Chicken pies, stews, and gravies",,,1-2 days,6 months,,
-"Chicken salads, store prepared or homemade",,,3-5 days,,,
-"Chicken stuffing, cooked",,,3-4 days,1 month,,
-Eggs,,,,,,
-"Eggs, in shell",,,3-5 weeks,,,
-"Eggs, hard-boiled",,,1 week,,,
-"Eggs, pasteurized, liquid",Unopened,,10 days,1 year,,
-"Eggs, pasteurized, liquid",Opened,,3 days,,,
-Egg substitute,Unopened,,10 days,1 year,,
-Egg substitute,Opened,,3 days,,,
-Egg yolks (covered in water),,,2-4 days,1 year,,
-Egg whites,,,2-4 days,1 year,,
-Wild Game,,,,,,
-Frog legs,,,1 day,6-9 months,,
-Game birds,,,2 days,9 months,,
-"Small game (rabbit, squirrel, etc.)",,,2 days,9-12 months,,
-Venison ground meat,,,1-2 days,2-3 months,,
-Venison steaks and roasts,,,3-5 days,9-12 months,,
+Bread rolls - unbaked,,,2-3 weeks,1 month,,1800
+Cereals - ready-to-eat,Unopened,1 year,,,,800
+Cereals - ready-to-eat,Opened,2-3 months,,,,800
+Cereals - ready-to-cook,,6 months,,,,800
+Corn meal,,1 year,18 months,2 years,,0
+Doughnuts,,4-5 days,,3 months,,0
+Flour - all-purpose - white,,6-8 months,1 year,1-2 years,,0
+Flour - whole wheat,,,6-8 months,1-2 years,,0
+Pasta,,2 years,,,,0
+Pies and pastries,,,3 days,4-6 months,,0
+Pies and pastries - baked,,,,1-2 months,,0
+Pies and pastries - cream filled,,,2-3 days,3 months,,0
+Pizza,,,3-4 days,1-2 months,,0
+Rice - brown,,6 months,,,,0
+Rice - white,,1 year,6-7 days,6 months,,0
+Tacos,,,2 weeks,1 year,,0
+enchiladas,,,2 weeks,1 year,,0
+burritos (frozen),,,2 weeks,1 year,,0
+Waffles,,,4-5 days,1 month,,0
+Biscuit mixes,,9 months,,,,0
+brownie mixes,,9 months,,,,0
+muffin mixes,,9 months,,,,0
+Cakes - prepared,,2-4 days,,2-3 months,,0
+Cake mixes,,6-9 months,,,,0
+Casserole mix,,9-12 months,,,,0
+Chili powder,,6 months,,,,0
+Cookies - packaged,,2 months,,8-12 months,,0
+Crackers - pretzels,,3 months,,,,0
+Frosting - canned,,3 months,,,,0
+Frosting - mix,,8 months,,,,0
+Fruit cake,,,2-3 months,1 year,,0
+Hot roll mix,,18 months,,,,0
+Instant breakfast products,,6 months,,,,0
+Pancake and piecrust mix,,6 months,,,,0
+Pancake waffle batter,,,1-2 days,3 months,,0
+Toaster pastries,,3 months,,,,0
+Sauce and gravy mixes,,6 months,,,,0
+Soup mixes,,1 year,,,,0
+Catsup sauce,Unopened,1 year,,,,0
+Catsup sauce,Opened,1 month,6 months,,,0
+chili sauce,Unopened,1 year,,,,0
+chili sauce,Opened,1 month,6 months,,,0
+cocktail sauce,Unopened,1 year,,,,0
+cocktail sauce,Opened,1 month,6 months,,,0
+Herbs,,6 months,,1-2 years,,0
+Herb/spice blends,Unopened,2 years,,1-2 years,,0
+Herb/spice blends,Opened,1 year,,,,0
+Mustard,,2 years,6-8 months,8-12 months,,0
+Spices - ground,,6 months,,1-2 years,,0
+Spices - whole,,1-2 years,,2-3 years,,0
+Vanilla extract,Unopened,2 years,,,,0
+Vanilla extract,Opened,1 year,,,,0
+Other extracts,,1 year,,,,0
+Bacon bits,,4 months,,,,0
+Baking powder,,18 months,,,,0
+Baking soda,,2 years,,,,0
+Bouillon products,,1 year,,,,0
+Carbonated soft drinks (12 oz. cans),,6-9 months,,,,0
+Carbonated soft drinks - diet (12 oz. cans),,3-4 months,,,,0
+Chocolate - premelted,,1 year,,,,0
+Chocolate syrup,,2 years,6 months,,,0
+Chocolate - semisweet,,2 years,,,,0
+Chocolate - unsweetened,,18 months,,,,0
+Cocoa mixes,,8 months,,,,0
+Coconut - shredded,Unopened,1 year,,,,0
+Coconut - shredded,Opened,6 months,8 months,1 year,,0
+Coffee cans,Unopened,2 years,,,,0
+Coffee cans,Opened,2 weeks,2 months,6 months,,0
+Coffee - instant,Unopened,6 months,,,,0
+Coffee - instant,Opened,2 weeks,,,,0
+Coffee - vacuum-packed,,1 year,,,,0
+Coffee lighteners (dry),Unopened,9 months,,1 year,,0
+Coffee lighteners (dry),Opened,6 months,,,,0
+Cornstarch,,18 months,,2 years,,0
+Gelatin,,18 months,,,,0
+syrup,,1 year,6-8 months,,,0
+jellies,,1 year,6-8 months,,,0
+jams,,1 year,6-8 months,,,0
+Honey,,1 year,6-8 months,,,0
+Marshmallows,,2-3 months,,,,0
+Marshmallow cream,,3-4 months,,,,0
+Mayonnaise,Unopened,2-3 months,12 months,,,0
+Mayonnaise,Opened,,2 months,,,0
+Molasses,,2 years,,,,0
+Nuts - shelled,,4 months,6 months,,,0
+Nuts - unshelled,,6 months,,,,0
+Nuts - salted,,,,6-8 months,,0
+Nuts - unsalted,,,,9-12 months,,0
+Oil - salad,,2 months,3 months,,,0
+Parmesan grated cheese,Unopened,10 months,,,,0
+Parmesan grated cheese,Opened,2 months,,,,0
+Pasteurized process cheese spread,,3 months,3-4 weeks,4 months,,0
+Peanut butter,Unopened,6-9 months,4-6 months,,,0
+Peanut butter,Opened,2-3 months,,,,0
+Popcorn,,1-2 years,2 years,2-3 years,,0
+Pectin,,1 year,,,,0
+Salad dressings - bottled,,1 year,3 months,,,0
+Soft drinks,,3 months,,,,0
+Artificial sweetener,,2 years,,,,0
+Sugar - brown,,4 months,,,,0
+Sugar - confectioners,,18 months,,,,0
+Sugar - granulated,,2 years,,,,0
+Tea bags,,18 months,,,,0
+Tea - instant,,2 years,,,,0
+Vegetable oils,Unopened,6 months,,,,0
+Vegetable oils,Opened,1-3 months,,,,0
+Vegetable shortening,,3 months,6-9 months,,,0
+Vinegar,Unopened,2 years,,,,0
+Vinegar,Opened,1 year,,,,0
+Water - bottled,,1-2 years,,,,0
+Whipped topping (dry),,1 year,,,,0
+Yeast - dry,,Pkg. exp. date,,,,0
+Asparagus,,,2-3 days,8 months,,0
+Beets,,,2 weeks,,,0
+Broccoli,,,3-5 days,,,0
+Brussels sprouts,,,3-5 days,,,0
+Cabbage,,,1 week,,,0
+Carrots,,,2 weeks,,,0
+Cauliflower,,,1 week,,,0
+Celery,,,1 week,,,0
+Corn (husks),,,1-2 days,8 months,,0
+Cucumbers,,,1 week,,,0
+Eggplant,,,1 week,,,0
+Green beans,,,1-2 days,8 months,,0
+Green peas,,,3-5 days,8 months,,0
+Lettuce,,,1 week,,,0
+Lima beans,,,3-5 days,8 months,,0
+Mushrooms,,,2 days,,,0
+Onions,,1 week,3-5 days,,,0
+Onion rings (precooked),,,,1 year,,0
+Peppers,,,1 week,,,0
+Pickles - canned,,1 year,1 month,,,0
+Frozen potatoes,,,,8 month,,0
+Sweet potatoes,,2-3 weeks,,,,0
+White potatoes,,2-3 months,,,,0
+Potato chips,,1 month,,,,0
+Radishes,,,2 weeks,,,0
+Rhubarb,,,3-5 days,,,0
+Rutabagas,,1 week,,,,0
+Snap beans,,,1 week,,,0
+Spinach,,,5-7 days,8 months,,0
+Squash - Summer,,,3-5 days,,,0
+Squash - Winter,,1 week,,,,0
+Tomatoes,,,1 week,,,0
+Turnips,,,2 weeks,,,0
+Commercial baby food - jars,,1-2 years,2-3 days,,,0
+Canned vegetables,,1 year,3-5 days,,,0
+Canned vegetables - pickled,,1 year,1-2 months,,,0
+Dried vegetables,,6 months,,,,0
+Frozen vegetables,,,,8 months,,0
+Vegetable soup,,,3-4 days,3 months,,0
+Apples,,Until ripe,1 month,,,0
+Apricots,,Until ripe,5 days,,,0
+Avocados,,Until ripe,5 days,,,0
+Bananas,,Until ripe,5 days (fully ripe),,,0
+Berries,,Until ripe,3 days,1 year,,0
+Canned fruit,,1 year,2-4 days,,,0
+Canned fruit juices,,1 year,3-5 days,,,0
+Cherries,,Until ripe,3 days,,,0
+Citrus fruit (e.g. orange/lime/lemon),,Until ripe,2 weeks,,,0
+Dried fruit,,6 months,2-4 days,,,0
+Frozen fruit,,,,1 year,,0
+Fruit juice concentrate,,,6 days,1 year,,0
+Fruit pies - baked,,,2-3 days,8 months,,0
+Fruit - pre-cut - fresh,,Until ripe,2-4 days,1 year,,0
+Grapes,,Until ripe,5 days,,,0
+Melons,,Until ripe,5 days,,,0
+Nectarines,,Until ripe,5 days,,,0
+Peaches,,Until ripe,5 days,1 year,,0
+Pears,,Until ripe,5 days,1 year,,0
+Pineapple,,Until ripe,5-7 days,1 year,,0
+Plums,,Until ripe,5 days,,,0
+Butter,,,1-2 months,9 months,,0
+Buttermilk,,,2 weeks,,,0
+Cottage cheese,,,1 week,3 months,,0
+Cream cheese,,,2 weeks,,,0
+Cream-light,,,3-4 days,1-4 months,,0
+Cream-heavy,,,3-4 days,1-4 months,,0
+Cream-half- and-half,,,3-4 days,1-4 months,,0
+Eggnog commercial,,,3-5 days,6 months,,0
+Margarine,,,4-5 months,12 months,,0
+Condensed milk,,12-23 months,8-20 days,,,0
+evaporated milk,,12-23 months,8-20 days,,,0
+dry milk,,12-23 months,8-20 days,,,0
+Ice cream and sherbet,,,,2 months,,0
+Hard natural cheese (e.g. cheddar or swiss),Unopened,,3-6 months,6 months,,0
+Hard natural cheese (e.g. cheddar or swiss),Opened,,3-4 weeks,,,0
+Processed cheese,,,3-4 weeks,6-8 months,,0
+Soft cheese (e.g. brie),,,1 week,6 months,,0
+Pudding,Opened,,1-2 days,,,0
+Snack dips,Opened,,1 week,,,0
+Sour cream,,,2 weeks,,,0
+Non-dairy whipped cream - canned,,,3 months,,,0
+Real whipped cream - canned,,,3-4 weeks,,,0
+Yogurt,,,2 weeks,1-2 months,,0
+Fresh beef and bison steaks,,,3-5 days,6-9 months,,0
+Fresh beef and bison roasts,,,3-5 days,9-12 months,,0
+Fresh pork chops,,,3-5 days,4-6 months,,0
+Fresh lamb chops,,,3-5 days,6-8 months,,0
+Fresh veal,,,1-2 days,4-6 months,,0
+Fresh ground meat (e.g. beef/bison/veal/lamb),,,1-2 days,3-4 months,,0
+Cooked meat,,,2-3 days,2-3 months,,0
+Canned meat,,1 year,3-4 days,3-4 months,,0
+Ham - whole,,,1 week,1-2 months,,0
+Ham - canned,,2 years,1 week,3-4 months,,0
+Ham - canned “keep refrigerated”,Unopened,,6-9 months,,,0
+Ham - canned “keep refrigerated”,Opened,,3-5 days,3-4 months,,0
+Shelf-stable unopened canned meat (e.g. chili/deviled ham/corn beef),,1 year,1week,,,0
+Ham - cook before eating,,,1 week,,,0
+Ham - fully cooked,Unopened,,2 weeks,,,0
+Ham - fully cooked,Opened,,1 week,,,0
+Ham - dry-cured,,1 year,1 month,,,0
+Ham salad - store prepared or homemade,,,3-5 days,,,0
+Bacon,Unopened,,2 weeks,1 month,,0
+Bacon,Opened,,1 week,,,0
+Corned beef - uncooked,,,5-7 days,1-2 months,,0
+Restructured (flaked) meat products,,,,9-12 months,,0
+Sausage - fresh,,,1-2 days,1-2 months,,0
+Smoked breakfast sausage links - patties,,,1 week,2 months,,0
+Sausage - smoked (e.g. Mettwurst),,,1 week,1-2 months,,0
+Sausage - semi-dry (e.g. Summer sausage),,,2-3 weeks,6 months,,0
+Sausage - dry smoked (e.g. Pepperoni/jerky/dry Salami),,1 year,1 month,6 months,,0
+Frankfurters - bologna,Unopened,,2 weeks,1-2 months,,0
+Frankfurters - bologna,Opened,,3-7 days,,,0
+Luncheon meat,Unopened,,2 weeks,1-2 months,,0
+Luncheon meat,Opened,,3-7 days,,,0
+Meat gravies,,,1-2 days,2-3 months,,0
+TV beef and pork dinners,,,,18 months,,0
+Meat based casseroles,,,3-4 days,4 months,,0
+Variety meats (giblets/tongue/liver/heart/etc.),,,1-2 days,3-4 months,,0
+Vinegar pickled meats (e.g. pickled pigs feet),,1 year,2 weeks,,,0
+Breaded fish,,,,4-6 months,,0
+Canned fish,,1 year,1-2 days,,,0
+Cooked Seafood,,,3-4 days,3 months,,0
+Cooked fish,,,3-4 days,3 months,,0
+Lean fish (e.g. cod/flounder/haddock),,,1-2 days,6-10 months,,0
+Fatty fish (e.g. bluefish/salmon/mackeral),,,1-2 days,2-3 months,,0
+Dry pickled fish,,,3-4 weeks,,,0
+Smoked fish,,,2 weeks,4-5 weeks,,0
+clams,,,2 days,3 months,,0
+crab,,,2 days,3 months,,0
+lobster in shell,,,2 days,3 months,,0
+oysters,,,4-5 days,3-4 months,,0
+scallops,,,4-5 days,3-4 months,,0
+shrimp,,,4-5 days,3 months,,0
+shucked clams,,,4-5 days,3 months,,0
+Tuna salad,,,3-5 days,,,0
+Chicken nuggets or patties,,,1-2 days,,,0
+Chicken livers,,,1-2 days,3 months,,0
+Chicken and Chicken TV dinners,,,,6 months,,0
+Canned Chicken,,2-5 years,3-4 days,4-6 weeks,,0
+Cooked Chicken,,,2-3 days,4-6 months,,0
+Fresh Chicken,,,1-2 days,1 year,,0
+Canned Chicken,,,1 day,3 months,,0
+Chicken pies,,,1-2 days,6 months,,0
+Chicken stews,,,1-2 days,6 months,,0
+Chicken gravies,,,1-2 days,6 months,,0
+Chicken salads,,,3-5 days,,,0
+Chicken stuffing - cooked,,,3-4 days,1 month,,0
+Eggs - in shell,,,3-5 weeks,,,0
+Eggs - hard-boiled,,,1 week,,,0
+Eggs - pasteurized - liquid,Unopened,,10 days,1 year,,0
+Eggs - pasteurized - liquid,Opened,,3 days,,,0
+Egg substitute,Unopened,,10 days,1 year,,0
+Egg substitute,Opened,,3 days,,,0
+Egg yolks (covered in water),,,2-4 days,1 year,,0
+Egg whites,,,2-4 days,1 year,,0
+Wild Game,,,,,,0
+Frog legs,,,1 day,6-9 months,,0
+Game birds,,,2 days,9 months,,0
+Small game (rabbit/squirrel/etc.),,,2 days,9-12 months,,0
+Venison ground meat,,,1-2 days,2-3 months,,0
+Venison steaks and roasts,,,3-5 days,9-12 months,,0

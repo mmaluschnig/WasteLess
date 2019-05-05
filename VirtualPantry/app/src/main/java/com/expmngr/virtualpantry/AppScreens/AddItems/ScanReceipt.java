@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,22 +33,30 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ScanReceipt extends AppCompatActivity {
+    //Words to remove ->> drink?, brown, sour
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
     private static final int ACTIVITY_NUM = 1;
 
     Set<String> potentialFoods;
-    Set<String> foundFoods;
+    public static Map<String, ArrayList<String>> keywordDict;
 
-    Button pauseButton;
-    private boolean isCameraOn;
+    Button doneButton;
 
     private static final int requestPermissionID = 101;
 
@@ -57,35 +66,85 @@ public class ScanReceipt extends AppCompatActivity {
         setContentView(R.layout.activity_scan_receipt);
 
         mCameraView = findViewById(R.id.surfaceView);
-        mTextView = findViewById(R.id.text_view);
+        mTextView = findViewById(R.id.foodFoundTextView);
 
-        pauseButton = (Button) findViewById(R.id.pauseButton);
-        pauseButton.setOnClickListener(new View.OnClickListener() {
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCameraOn = !isCameraOn;
-                if(isCameraOn){
-                    mCameraSource.stop();
-                    pauseButton.setText("Resume");
-                }else{
-                    try {
-                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                            mCameraSource.start(mCameraView.getHolder());
-                            pauseButton.setText("Pause");
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                Intent i = new Intent(ScanReceipt.this, ConfirmScanFoods.class);
+                ArrayList<String> temp = new ArrayList<String>();
+                temp.addAll(potentialFoods);
+                i.putExtra("found_foods", temp);
+                startActivity(i);
             }
         });
 
         potentialFoods = new HashSet<>();
-        foundFoods = new HashSet<>();
+
+        addKeywords();
 
         startCameraSource();
         setupBottomNavigationView();
 
+    }
+
+    private void addKeywords(){
+        ArrayList<String[]> myValues = csvToArrayBetter(R.raw.keywords);
+        System.out.println(Arrays.deepToString(myValues.toArray()));
+
+        keywordDict = new HashMap<>();
+
+        for(String[] line : myValues){
+            //every word in the expiry times needs a key pointing to itself
+            ArrayList<String> tempList;
+            if(keywordDict.get(line[0]) == null) {
+                tempList = new ArrayList<>();
+                tempList.add(line[0]);
+                keywordDict.put(line[0], tempList);
+            }else{
+                tempList = keywordDict.get(line[0]);
+                tempList.add(line[0]);
+            }
+
+            if(!line[1].equals("")){
+                //words that are similar to a word in expiry times point to that word
+                if(keywordDict.get(line[1]) == null) {
+                    tempList = new ArrayList<>();
+                    tempList.add(line[0]);
+                    keywordDict.put(line[1], tempList);
+                }else{
+                    tempList = keywordDict.get(line[1]);
+                    tempList.add(line[0]);
+                }
+            }
+        }
+
+        System.out.println(keywordDict.toString());
+    }
+
+    public ArrayList<String[]> csvToArrayBetter(int resource) {
+
+        InputStream is = getResources().openRawResource(resource);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+
+        String line = "";
+        ArrayList<String[]> lines = new ArrayList<>();
+
+        try {
+            //row titles
+            line = reader.readLine();
+
+            line = reader.readLine();
+            while(line != null) {
+                lines.add(line.split(","));
+                line = reader.readLine();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return lines;
     }
 
     @Override
@@ -102,7 +161,6 @@ public class ScanReceipt extends AppCompatActivity {
                     return;
                 }
                 mCameraSource.start(mCameraView.getHolder());
-                isCameraOn = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -169,72 +227,52 @@ public class ScanReceipt extends AppCompatActivity {
                 }
 
                 /**
-                 * Detect all the text from camera using TextBlock and the values into a stringBuilder
-                 * which will then be set to the textView.
+                 * Detect all the text from camera using TextBlock.
                  * */
                 @Override
                 public void receiveDetections(Detector.Detections<TextBlock> detections) {
                     final SparseArray<TextBlock> items = detections.getDetectedItems();
                     if (items.size() != 0 ){
-
                         mTextView.post(new Runnable() {
                             @Override
                             public void run() {
-                                StringBuilder stringBuilder = new StringBuilder();
+                                findFoodInTextBlocks(items);
 
-                                Integer centerY = 0;
-                                for(int i=0;i<items.size();i++){
-                                    TextBlock item = items.valueAt(i);
-                                    List<Line> lines = (List<Line>) item.getComponents();
-                                    for (int j=0;j<lines.size();j++){
-                                        Line line = lines.get(j);
-                                        if(!containsDigit(line.getValue())) {
-                                            //search database for line
-                                            potentialFoods.add(line.getValue().toLowerCase());
-
-//                                            stringBuilder.append(centerY.toString() + ":\t>>>" + line.getValue());
-//                                            stringBuilder.append("\n");
-                                        }
-                                        List<Element> elements = (List<Element>) line.getComponents();
-                                        for(int k=0;k<elements.size();k++) {
-                                            Element element = elements.get(k);
-                                            centerY = element.getBoundingBox().centerY();
-
-                                            if(!containsDigit(element.getValue())) {
-                                                //search database for line
-                                                potentialFoods.add(element.getValue().toLowerCase());
-//                                                stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
-//                                                stringBuilder.append("\n");
-                                            }
-
-//                                            stringBuilder.append(centerY.toString() + ":\t>>>" + element.getValue());
-//                                            stringBuilder.append("\n");
-                                        }
-//                                        stringBuilder.append("\n");
-                                    }
-//                                    stringBuilder.append("\n");
-                                }
-                                //check potential foods against the database
-                                for(String s : potentialFoods){
-                                    List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(s);
-                                    if(found.size() > 0) {
-                                        System.out.println(s);
-                                        foundFoods.add(s);
-                                    }
-                                }
-
-//                                System.out.println(stringBuilder.toString());
                                 System.out.println(potentialFoods.toString());
-                                System.out.println("Found: " + foundFoods.toString());
-                                String str = "Found " + foundFoods.size() + " foods";
+                                String str = "Found " + potentialFoods.size() + " foods";
                                 mTextView.setText(str);
                                 System.out.println(str);
-
                             }
                         });
                     }
                 }
             });
+        }
+    }
+
+    private void findFoodInTextBlocks(SparseArray<TextBlock> items){
+        for(int i=0;i<items.size();i++){
+            TextBlock item = items.valueAt(i);
+            List<Line> lines = (List<Line>) item.getComponents();
+            for (int j=0;j<lines.size();j++){
+                Line line = lines.get(j);
+                //>>>Lines                          //a line may be added if it perfectly matches an entry in the database
+                String checkFood = line.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","");
+                List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(checkFood);
+                if(found.size() > 0) {
+                    potentialFoods.add(checkFood);
+                }else{
+                    //>>>Elements                           //check if any of the components of the line are keywords
+                    List<Element> elements = (List<Element>) line.getComponents();
+                    for (Element e : elements) {
+                        checkFood = e.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]", "");
+                        if (keywordDict.get(checkFood) != null) {
+                            potentialFoods.add(checkFood);
+
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -245,19 +283,5 @@ public class ScanReceipt extends AppCompatActivity {
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
-    }
-
-    public final boolean containsDigit(String s) {
-        boolean containsDigit = false;
-
-        if (s != null && !s.isEmpty()) {
-            for (char c : s.toCharArray()) {
-                if (containsDigit = Character.isDigit(c)) {
-                    break;
-                }
-            }
-        }
-
-        return containsDigit;
     }
 }
