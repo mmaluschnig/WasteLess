@@ -54,7 +54,7 @@ public class ScanReceipt extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
 
     Set<String> potentialFoods;
-    public static Map<String, ArrayList<String>> keywordDict;
+    private HashMap<String, ArrayList<String>> keywordDict;
 
     Button doneButton;
 
@@ -76,6 +76,7 @@ public class ScanReceipt extends AppCompatActivity {
                 ArrayList<String> temp = new ArrayList<String>();
                 temp.addAll(potentialFoods);
                 i.putExtra("found_foods", temp);
+                i.putExtra("keywords", keywordDict);
                 startActivity(i);
             }
         });
