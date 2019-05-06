@@ -13,14 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="360dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/button_layout"
-        android:textColor="@color/colorPrimary"
+        android:drawableTop="@drawable/ic_notes"
         android:text="@string/placeholder_menu_add_item"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,15 +31,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="360dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/button_layout"
+        android:drawableTop="@drawable/ic_food"
         android:text="@string/placeholder_menu_view_pantry"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
+        app:layout_constraintHorizontal_bias="0.336"
+        app:layout_constraintStart_toEndOf="@+id/addItemButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/viewSettingsButton"
@@ -49,12 +52,17 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/placeholder_menu_view_settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/button_layout"
+        android:drawableTop="@drawable/ic_settings"
+        android:text="@string/placeholder_menu_view_settings"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@+id/viewPantryButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addItemButton"
+        app:layout_constraintVertical_bias="0.52" />
 
     <Button
         android:id="@+id/viewShoppingListButton"
@@ -65,15 +73,16 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/button_layout"
+        android:drawableTop="@drawable/ic_checklist"
         android:text="Shopping List"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewSettingsButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/viewPantryButton" />
 
     <include layout="@layout/layout_bottom_navigation_view" />
 
