@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_colour"
     tools:context=".AppScreens.AddItems.ConfirmScanFoods">
 
     <ScrollView
@@ -31,4 +32,6 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/layout_bottom_navigation_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>
