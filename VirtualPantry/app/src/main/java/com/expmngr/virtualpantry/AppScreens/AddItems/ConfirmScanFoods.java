@@ -37,7 +37,6 @@ public class ConfirmScanFoods extends AppCompatActivity {
 
         List<String> foundWords = getIntent().getStringArrayListExtra("found_foods");
         keywordDict = (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra("keywords");
-        System.out.println("keywords" + keywordDict.toString());
         String totalFoodInfo = "";
         if(foundWords.size() > 0) {
             //check potential foods against the database
