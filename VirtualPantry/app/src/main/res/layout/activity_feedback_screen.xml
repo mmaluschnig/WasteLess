@@ -18,6 +18,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:autofillHints=""
+        android:background="@color/colorMenu"
         android:ems="10"
         android:hint="@string/feedback_screen_enter_feedback_here"
         android:inputType="textMultiLine"
