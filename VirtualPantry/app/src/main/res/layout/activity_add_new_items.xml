@@ -11,29 +11,35 @@
         android:id="@+id/manualAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginLeft="146dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginRight="146dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_typing"
         android:text="Manually Add"
         android:textColor="@color/colorPrimary"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="174dp" />
+        app:layout_constraintBottom_toTopOf="@+id/scanReceiptButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/scanReceiptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginLeft="145dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="146dp"
+        android:layout_marginLeft="146dp"
         android:layout_marginEnd="146dp"
         android:layout_marginRight="146dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_bill"
         android:text="@string/input_menu_scan_receipt"
         android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/scanBarcodeButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manualAddButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/scanBarcodeButton"
@@ -41,20 +47,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="146dp"
         android:layout_marginLeft="146dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="146dp"
         android:layout_marginRight="146dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_barcode_scanner"
         android:text="@string/input_menu_scan_barcode"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanReceiptButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 
