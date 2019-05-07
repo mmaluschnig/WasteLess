@@ -3,16 +3,12 @@ package com.expmngr.virtualpantry.AppScreens.AddItems;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
 import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
-import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +20,6 @@ import java.util.Set;
 
 public class ConfirmScanFoods extends AppCompatActivity {
     TextView confirmFoodTextView;
-    private static final int ACTIVITY_NUM = 1;
 
     private Map<String,List<ExpiryFood>> foodOptions;
     private HashMap<String, ArrayList<String>> keywordDict;
@@ -39,9 +34,6 @@ public class ConfirmScanFoods extends AppCompatActivity {
         blackList = new HashSet<>(Arrays.asList("eat"));
 
         confirmFoodTextView = (TextView) findViewById(R.id.confirmFoodTextView);
-
-        setupBottomNavigationView();
-
 
         List<String> foundWords = getIntent().getStringArrayListExtra("found_foods");
         keywordDict = (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra("keywords");
@@ -102,14 +94,5 @@ public class ConfirmScanFoods extends AppCompatActivity {
 //        }
 
         confirmFoodTextView.setText(totalFoodInfo);
-    }
-
-    private void setupBottomNavigationView() {
-        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(ConfirmScanFoods.this, bottomNavigationViewEx);
-        Menu menu = bottomNavigationViewEx.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
     }
 }

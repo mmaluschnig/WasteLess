@@ -57,7 +57,13 @@ public class AddNewItems extends AppCompatActivity {
             }
         });
 
+        Button importButton = (Button) findViewById(R.id.importButton);
+        importButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
     }
 
