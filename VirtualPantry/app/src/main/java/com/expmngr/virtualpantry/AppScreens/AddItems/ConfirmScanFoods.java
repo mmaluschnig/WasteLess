@@ -27,6 +27,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
 
     private Map<String,List<ExpiryFood>> foodOptions;
+    private HashMap<String, ArrayList<String>> keywordDict;
     Set<String> blackList; //improves efficiency by remembering words that are not in the database
 
     @Override
@@ -43,15 +44,20 @@ public class ConfirmScanFoods extends AppCompatActivity {
 
 
         List<String> foundWords = getIntent().getStringArrayListExtra("found_foods");
-
+        keywordDict = (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra("keywords");
         String totalFoodInfo = "";
         if(foundWords.size() > 0) {
             //check potential foods against the database
             for(String s : foundWords){
                 if(!blackList.contains(s)) {
                     List<ExpiryFood> found = new ArrayList<>();
-                    for(String value : ScanReceipt.keywordDict.get(s)){
-                        found.addAll(MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + value + "%"));
+                    ArrayList<String> keyword = keywordDict.get(s);
+                    if(keyword != null) {
+                        for (String value : keyword) {
+                            found.addAll(MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + value + "%"));
+                        }
+                    }else{
+                        found.addAll(MainMenuPlaceholder.database.expiryFoodDAO().findByName("%" + keyword + "%"));
                     }
                     //TODO remove duplicate foods here (or find out why theyre being duplicated)
                     if (found.size() > 0) {

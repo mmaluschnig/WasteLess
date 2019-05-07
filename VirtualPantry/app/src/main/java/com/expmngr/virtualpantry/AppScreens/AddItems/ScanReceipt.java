@@ -24,6 +24,7 @@ import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.expmngr.virtualpantry.Utils.DataImporter;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.Element;
@@ -54,7 +55,7 @@ public class ScanReceipt extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
 
     Set<String> potentialFoods;
-    public static Map<String, ArrayList<String>> keywordDict;
+    private HashMap<String, ArrayList<String>> keywordDict;
 
     Button doneButton;
 
@@ -76,75 +77,19 @@ public class ScanReceipt extends AppCompatActivity {
                 ArrayList<String> temp = new ArrayList<String>();
                 temp.addAll(potentialFoods);
                 i.putExtra("found_foods", temp);
+                i.putExtra("keywords", keywordDict);
                 startActivity(i);
             }
         });
 
         potentialFoods = new HashSet<>();
 
-        addKeywords();
+        DataImporter importer = new DataImporter(getApplicationContext());
+        keywordDict = importer.getKeywords();
 
         startCameraSource();
         setupBottomNavigationView();
 
-    }
-
-    private void addKeywords(){
-        ArrayList<String[]> myValues = csvToArrayBetter(R.raw.keywords);
-        System.out.println(Arrays.deepToString(myValues.toArray()));
-
-        keywordDict = new HashMap<>();
-
-        for(String[] line : myValues){
-            //every word in the expiry times needs a key pointing to itself
-            ArrayList<String> tempList;
-            if(keywordDict.get(line[0]) == null) {
-                tempList = new ArrayList<>();
-                tempList.add(line[0]);
-                keywordDict.put(line[0], tempList);
-            }else{
-                tempList = keywordDict.get(line[0]);
-                tempList.add(line[0]);
-            }
-
-            if(!line[1].equals("")){
-                //words that are similar to a word in expiry times point to that word
-                if(keywordDict.get(line[1]) == null) {
-                    tempList = new ArrayList<>();
-                    tempList.add(line[0]);
-                    keywordDict.put(line[1], tempList);
-                }else{
-                    tempList = keywordDict.get(line[1]);
-                    tempList.add(line[0]);
-                }
-            }
-        }
-
-        System.out.println(keywordDict.toString());
-    }
-
-    public ArrayList<String[]> csvToArrayBetter(int resource) {
-
-        InputStream is = getResources().openRawResource(resource);
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-
-        String line = "";
-        ArrayList<String[]> lines = new ArrayList<>();
-
-        try {
-            //row titles
-            line = reader.readLine();
-
-            line = reader.readLine();
-            while(line != null) {
-                lines.add(line.split(","));
-                line = reader.readLine();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return lines;
     }
 
     @Override
