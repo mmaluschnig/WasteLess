@@ -18,7 +18,7 @@
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_notes"
         android:text="@string/placeholder_menu_add_item"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/text_colour"
         app:layout_constraintBottom_toTopOf="@+id/viewShoppingListButton"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -32,7 +32,7 @@
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_food"
         android:text="@string/placeholder_menu_view_pantry"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/text_colour"
         app:layout_constraintBottom_toTopOf="@+id/viewSettingsButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -46,7 +46,7 @@
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_settings"
         android:text="@string/placeholder_menu_view_settings"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/text_colour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -60,7 +60,7 @@
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_checklist"
         android:text="Shopping List"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/text_colour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
