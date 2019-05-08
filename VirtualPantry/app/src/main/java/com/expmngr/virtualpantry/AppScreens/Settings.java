@@ -88,7 +88,7 @@ public class Settings extends AppCompatActivity {
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("Food Expiry reminder");
         builder.setContentText(content);
-        builder.setSmallIcon(R.drawable.ic_notification);
+        builder.setSmallIcon(R.drawable.ic_food);
         return builder.build();
 
     }
