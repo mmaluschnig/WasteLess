@@ -83,7 +83,7 @@ public class MainMenuPlaceholder extends AppCompatActivity {
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override public void onReceive(Context context, Intent _ )
             {
-                //TODO insert notification builder code here 
+                //TODO insert notification builder code here
                 System.out.println("ALARM>>>>>>>>>>>>>>>>>>>>>>>");
                 context.unregisterReceiver( this ); // this == BroadcastReceiver, not Activity
             }
