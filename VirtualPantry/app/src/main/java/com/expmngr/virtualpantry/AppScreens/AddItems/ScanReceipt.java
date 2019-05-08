@@ -5,30 +5,59 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+
+import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.expmngr.virtualpantry.Utils.DataImporter;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.Element;
 import com.google.android.gms.vision.text.Line;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ScanReceipt extends AppCompatActivity {
+    //Words to remove ->> drink?, brown, sour
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
+    private static final int ACTIVITY_NUM = 1;
+
+    Set<String> potentialFoods;
+    private HashMap<String, ArrayList<String>> keywordDict;
+
+    Button doneButton;
 
     private static final int requestPermissionID = 101;
 
@@ -38,9 +67,29 @@ public class ScanReceipt extends AppCompatActivity {
         setContentView(R.layout.activity_scan_receipt);
 
         mCameraView = findViewById(R.id.surfaceView);
-        mTextView = findViewById(R.id.text_view);
+        mTextView = findViewById(R.id.foodFoundTextView);
+
+        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ScanReceipt.this, ConfirmScanFoods.class);
+                ArrayList<String> temp = new ArrayList<String>();
+                temp.addAll(potentialFoods);
+                i.putExtra("found_foods", temp);
+                i.putExtra("keywords", keywordDict);
+                startActivity(i);
+            }
+        });
+
+        potentialFoods = new HashSet<>();
+
+        DataImporter importer = new DataImporter(getApplicationContext());
+        keywordDict = importer.getKeywords();
 
         startCameraSource();
+        setupBottomNavigationView();
+
     }
 
     @Override
@@ -77,7 +126,7 @@ public class ScanReceipt extends AppCompatActivity {
                     .setFacing(CameraSource.CAMERA_FACING_BACK)
                     .setRequestedPreviewSize(1280, 1024)
                     .setAutoFocusEnabled(true)
-                    .setRequestedFps(2.0f)
+                    .setRequestedFps(5.0f)
                     .build();
 
             /**
@@ -123,38 +172,61 @@ public class ScanReceipt extends AppCompatActivity {
                 }
 
                 /**
-                 * Detect all the text from camera using TextBlock and the values into a stringBuilder
-                 * which will then be set to the textView.
+                 * Detect all the text from camera using TextBlock.
                  * */
                 @Override
                 public void receiveDetections(Detector.Detections<TextBlock> detections) {
                     final SparseArray<TextBlock> items = detections.getDetectedItems();
                     if (items.size() != 0 ){
-
                         mTextView.post(new Runnable() {
                             @Override
                             public void run() {
-                                StringBuilder stringBuilder = new StringBuilder();
-                                Integer centerY = 0;
-                                for(int i=0;i<items.size();i++){
-                                    TextBlock item = items.valueAt(i);
-                                    List<Line> lines = (List<Line>) item.getComponents();
-                                    for (int j=0;j<lines.size();j++){
-                                        Line line = lines.get(j);
-                                        centerY = line.getBoundingBox().centerY();
+                                findFoodInTextBlocks(items);
 
-                                        stringBuilder.append( centerY.toString() + ":\t>>>" + line.getValue());
-                                        stringBuilder.append("\n");
-                                    }
-                                    stringBuilder.append("\n");
-                                }
-                                System.out.println(stringBuilder.toString());
-                                mTextView.setText(stringBuilder.toString());
+                                System.out.println(potentialFoods.toString());
+                                String str = "Found " + potentialFoods.size() + " foods";
+                                mTextView.setText(str);
+                                System.out.println(str);
                             }
                         });
                     }
                 }
             });
         }
+    }
+
+    private void findFoodInTextBlocks(SparseArray<TextBlock> items){
+        for(int i=0;i<items.size();i++){
+            TextBlock item = items.valueAt(i);
+            List<Line> lines = (List<Line>) item.getComponents();
+            for (int j=0;j<lines.size();j++){
+                Line line = lines.get(j);
+                //>>>Lines                          //a line may be added if it perfectly matches an entry in the database
+                String checkFood = line.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]","");
+                List<ExpiryFood> found = MainMenuPlaceholder.database.expiryFoodDAO().findByName(checkFood);
+                if(found.size() > 0) {
+                    potentialFoods.add(checkFood);
+                }else{
+                    //>>>Elements                           //check if any of the components of the line are keywords
+                    List<Element> elements = (List<Element>) line.getComponents();
+                    for (Element e : elements) {
+                        checkFood = e.getValue().toLowerCase().replaceAll("[\\d?!$%&*():;]", "");
+                        if (keywordDict.get(checkFood) != null) {
+                            potentialFoods.add(checkFood);
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void setupBottomNavigationView() {
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(ScanReceipt.this, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 }

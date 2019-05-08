@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_colour"
     tools:context=".AppScreens.ViewPantry">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -87,5 +88,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@+id/fridgeButton" />
+
+
+    <include layout="@layout/layout_bottom_navigation_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
