@@ -60,7 +60,7 @@ public class MainMenuPlaceholder extends AppCompatActivity {
             }
         });
 
-      Button viewShoppingListButton = (Button) findViewById(R.id.viewShoppingList);
+      Button viewShoppingListButton = (Button) findViewById(R.id.viewShoppingListButton);
       viewShoppingListButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
