@@ -12,7 +12,7 @@ import com.expmngr.virtualpantry.Database.DataAccessObjects.FoodTemplatesDAO;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Food.class, ExpiryFood.class, FoodTemplates.class, FoodGroup.class}, version = 4)
+@Database(entities = {Food.class, ExpiryFood.class, FoodTemplates.class, FoodGroup.class}, version = 5)
 public abstract class FoodDatabase extends RoomDatabase {
     public abstract FoodDAO foodDAO();
     public abstract ExpiryFoodDAO expiryFoodDAO();

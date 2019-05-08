@@ -15,6 +15,7 @@ public class ExpiryFood {
     private String fridgeExpiry;
     private String freezerExpiry;
     private Integer cat_num;
+    private int frequency;
 
     public int getId() {
         return id;
@@ -70,5 +71,13 @@ public class ExpiryFood {
 
     public void setCat_num(Integer cat_num) {
         this.cat_num = cat_num;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 }
