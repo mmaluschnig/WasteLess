@@ -1,6 +1,7 @@
 package com.expmngr.virtualpantry.AppScreens;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,11 +23,18 @@ import com.expmngr.virtualpantry.Utils.DataImporter;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.room.Room;
 
 public class MainMenuPlaceholder extends AppCompatActivity {
     public static FoodDatabase database;
     private static final int ACTIVITY_NUM = 0;
+
+    //Need Notification Channel, Builder and Manager for notifications
+    private static final String CHANNEL_ID="virtualpantry_notification";
+    private static final String CHANNEL_NAME="virtualpantry notification";
+    private static final String CHANNEL_DESC="Virtual Pantry expired food notification";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,15 @@ public class MainMenuPlaceholder extends AppCompatActivity {
         checkFirstRun();
         setUpButtons();
         setupBottomNavigationView();
+
+    }
+
+    private Notification getNotification(String content){
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Food Expiry reminder")
+                .setContentText(content)
+                .setSmallIcon(R.drawable.ic_notification);
+                 return builder.build();
 
     }
 
@@ -84,6 +101,8 @@ public class MainMenuPlaceholder extends AppCompatActivity {
             @Override public void onReceive(Context context, Intent _ )
             {
                 //TODO insert notification builder code here
+
+
                 System.out.println("ALARM>>>>>>>>>>>>>>>>>>>>>>>");
                 context.unregisterReceiver( this ); // this == BroadcastReceiver, not Activity
             }
