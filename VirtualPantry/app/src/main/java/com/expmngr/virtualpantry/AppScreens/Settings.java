@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +17,9 @@ import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +32,35 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setupBottomNavigationView();
+
         List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
+
+        int timeTillExp;
+        long timeTillExpms;
+        int howOld;
+
+
+        for(Food f:food){
+            int id = f.getId();
+            String name=f.getName();
+            String expDate = f.getExpiryDate();
+            String addedDate = f.getDate_added();
+
+
+            try {
+                timeTillExp = getTimeBetween(expDate);
+                timeTillExpms = timeTillExp*60*60*1000;
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                howOld = getAge(f.getDate_added());
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         Button feedbackBtn = (Button) findViewById(R.id.settingsOpenFeedbackPage);
@@ -46,7 +76,7 @@ public class Settings extends AppCompatActivity {
         fiveseconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scheduleNotification(getNotification("5 seconds delay"), 5000);
+                scheduleNotification(getNotification("5 seconds delay"), 5);
             }
         });
 
@@ -54,7 +84,7 @@ public class Settings extends AppCompatActivity {
         tenseconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scheduleNotification(getNotification("10 second delay"), 10000);
+                scheduleNotification(getNotification("10 second delay"), 10);
             }
         });
 
@@ -63,7 +93,7 @@ public class Settings extends AppCompatActivity {
         thirtyseconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scheduleNotification(getNotification("30 second delay"), 30000);
+                scheduleNotification(getNotification("30 second delay"), 30);
             }
         });
 
@@ -72,7 +102,26 @@ public class Settings extends AppCompatActivity {
 
 
 
+    private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {
+        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(stringDate1);
+        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(stringDate2);
+        int difference = (int)((date2.getTime() - date1.getTime()) / 1000 / 60 / 60);
 
+        return difference;
+    }
+    private int getTimeBetween(String stringDate2) throws ParseException {
+        Date date2 = new SimpleDateFormat("dd/MM/yyyy HH").parse(stringDate2);
+        int difference = (int)(date2.getTime() - new Date().getTime()) / 1000 / 60 / 60 ;
+
+        return difference;
+    }
+
+    private int getAge(String stringDate) throws ParseException {
+        Date date2 = new SimpleDateFormat("dd/MM/yyyy HH").parse(stringDate);
+        int difference = (int)((new Date().getTime() - date2.getTime()) / 1000 / 60 / 60 );
+
+        return difference;
+    }
 
 
 
@@ -83,16 +132,17 @@ public class Settings extends AppCompatActivity {
         notificationIntent.putExtra(com.expmngr.virtualpantry.Utils.NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(com.expmngr.virtualpantry.Utils.NotificationPublisher.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        long futureInMillis = ((System.currentTimeMillis())/1000 + delay);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
     }
 
 
     private Notification getNotification(String content){
+
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("Food Expiry reminder");
-        builder.setContentText(content);
+        builder.setContentText("Check your pantry for expiry");
         builder.setSmallIcon(R.drawable.ic_food);
         return builder.build();
 
@@ -109,4 +159,5 @@ public class Settings extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
 }

@@ -1,14 +1,11 @@
 package com.expmngr.virtualpantry.AppScreens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
-import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -17,7 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ViewPantry extends AppCompatActivity {
     TextView pantryItemsTextView;
@@ -70,6 +68,7 @@ public class ViewPantry extends AppCompatActivity {
             info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate + " (" + timeTillExp + " hours)\nAdded: " + addedDate + " (" + howOld + " hours old)\n " + "has Expired: " + hasExpired ;
         }
         pantryItemsTextView.setText(info);
+
     }
 
     private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {

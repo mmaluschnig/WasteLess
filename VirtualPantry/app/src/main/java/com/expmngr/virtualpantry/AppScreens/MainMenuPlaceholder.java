@@ -99,7 +99,7 @@ public class MainMenuPlaceholder extends AppCompatActivity {
                  
 
                 System.out.println("ALARM>>>>>>>>>>>>>>>>>>>>>>>");
-                context.unregisterReceiver( this ); // this == BroadcastReceiver, not Activity
+                context.unregisterReceiver( this ); // this =notification android studio example= BroadcastReceiver, not Activity
             }
         };
 
