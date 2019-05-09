@@ -22,7 +22,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setupBottomNavigationView();
 
-        Button feedbackBtn = (Button) findViewById(R.id.settingsOpenFeedbackPage);
+        Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
         feedbackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
