@@ -1,4 +1,4 @@
-package com.expmngr.virtualpantry.AppScreens.AddItems;
+package com.expmngr.virtualpantry.AppScreens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.expmngr.virtualpantry.AppScreens.Settings;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
