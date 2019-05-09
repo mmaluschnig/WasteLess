@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.expmngr.virtualpantry.AppScreens.AddItems.FeedbackScreen;
+import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +30,8 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setupBottomNavigationView();
+        List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
+
 
         Button feedbackBtn = (Button) findViewById(R.id.settingsOpenFeedbackPage);
         feedbackBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +85,7 @@ public class Settings extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         long futureInMillis = SystemClock.elapsedRealtime() + delay;
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
     }
 
 
