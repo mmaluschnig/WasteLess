@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.expmngr.virtualpantry.AppScreens.AddItems.FeedbackScreen;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -23,7 +22,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setupBottomNavigationView();
 
-        Button feedbackBtn = (Button) findViewById(R.id.settingsOpenFeedbackPage);
+        Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
         feedbackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
