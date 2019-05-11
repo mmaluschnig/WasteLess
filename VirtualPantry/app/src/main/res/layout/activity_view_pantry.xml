@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/pantryButton"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/freezerButton"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/fridgeButton"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
@@ -49,8 +49,8 @@
         android:drawableTop="@drawable/ic_food_and_restaurant"
         android:text="@string/fridge"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/button8"
-        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/freezerButton"
+        app:layout_constraintStart_toEndOf="@+id/pantryButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
