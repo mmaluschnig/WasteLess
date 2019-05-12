@@ -27,8 +27,7 @@ public class FeedbackScreen extends AppCompatActivity {
 
         Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
         feedbackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 sendEmail();
             }
         });
