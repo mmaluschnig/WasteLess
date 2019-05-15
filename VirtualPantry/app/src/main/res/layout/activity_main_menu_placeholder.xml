@@ -10,75 +10,62 @@
 
     <Button
         android:id="@+id/addItemButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginBottom="27dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_notes"
         android:text="@string/placeholder_menu_add_item"
         android:textColor="@color/text_colour"
-        app:layout_constraintBottom_toTopOf="@+id/viewShoppingListButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColorHighlight="@color/highlight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/viewPantryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="27dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_food"
         android:text="@string/placeholder_menu_view_pantry"
         android:textColor="@color/text_colour"
-        app:layout_constraintBottom_toTopOf="@+id/viewSettingsButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/viewSettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="77dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_settings"
         android:text="@string/placeholder_menu_view_settings"
         android:textColor="@color/text_colour"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
 
     <Button
         android:id="@+id/viewShoppingListButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginBottom="77dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_layout"
         android:drawableTop="@drawable/ic_checklist"
         android:text="Shopping List"
         android:textColor="@color/text_colour"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPantryButton" />
 
     <include layout="@layout/layout_bottom_navigation_view" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="140dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/app_logo" />
 
     <TextView
         android:id="@+id/textView4"
@@ -91,7 +78,7 @@
         android:layout_marginRight="8dp"
         android:text="Waste-Less"
         android:textAllCaps="false"
-        android:textColor="#F0F7F4"
+        android:textColor="#333333"
         android:textSize="40sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -99,6 +86,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have 3 items about to go to waste!"
+        android:textColor="#D7635E"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="30dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

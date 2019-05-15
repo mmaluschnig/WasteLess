@@ -18,7 +18,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="#B8B9B4"
                     app:menu="@menu/bottom_navigation_menu"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="345dp">
