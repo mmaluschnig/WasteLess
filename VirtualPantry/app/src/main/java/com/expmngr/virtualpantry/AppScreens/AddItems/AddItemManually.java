@@ -19,7 +19,6 @@ import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
-import com.expmngr.virtualpantry.test1;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.SimpleDateFormat;
