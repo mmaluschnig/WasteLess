@@ -27,8 +27,7 @@ public class FeedbackScreen extends AppCompatActivity {
 
         Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
         feedbackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 sendEmail();
             }
         });
@@ -36,7 +35,7 @@ public class FeedbackScreen extends AppCompatActivity {
 
     protected void sendEmail() {
         Log.i("Send email", "");
-        String[] TO = {""};
+        String[] TO = {"contact.waste.less@gmail.com"};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
