@@ -11,8 +11,8 @@
     <Button
         android:id="@+id/addItemButton"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#253F58"
+        android:layout_height="50dp"
+        android:background="#D92139"
         android:drawableRight="@drawable/ic_notes"
         android:text="@string/placeholder_menu_add_item"
         android:gravity="left|center_vertical"
@@ -25,7 +25,7 @@
     <Button
         android:id="@+id/viewPantryButton"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:background="#AEC33A"
         android:gravity="left|center_vertical"
         android:padding="15dp"
@@ -38,11 +38,11 @@
     <Button
         android:id="@+id/viewSettingsButton"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="50dp"
         android:gravity="left|center_vertical"
         android:padding="15dp"
-        android:background="#D92139"
+        android:background="#253F58"
         android:drawableRight="@drawable/ic_settings"
         android:text="@string/placeholder_menu_view_settings"
         android:textColor="@color/text_colour"
@@ -52,7 +52,7 @@
     <Button
         android:id="@+id/viewShoppingListButton"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="50dp"
         android:background="#FEC748"
         android:gravity="left|center_vertical"
         android:padding="15dp"
