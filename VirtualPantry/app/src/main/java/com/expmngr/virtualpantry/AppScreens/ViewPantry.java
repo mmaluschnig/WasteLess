@@ -1,27 +1,33 @@
 package com.expmngr.virtualpantry.AppScreens;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
+import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewPantry extends AppCompatActivity {
-    TextView pantryItemsTextView;
+    
     private static final int ACTIVITY_NUM = 2;
+    List<Food> food;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,92 +36,103 @@ public class ViewPantry extends AppCompatActivity {
 
         setupBottomNavigationView();
 
-        pantryItemsTextView = (TextView) findViewById(R.id.pantryItemsTextView);
-
-        List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
+        RecyclerView rvFood = findViewById(R.id.rvFood);
 
 
-        String info = "";
-
-        for(Food f : food){
-            int id = f.getId();
-            String name = f.getName();
-            float quantity = f.getQuantity();
-            String expDate = f.getExpiryDate();
-            String addedDate = f.getDate_added();
-            Boolean hasExpired=true;
-
-            int timeTillExp;
-            int howOld;
-            String loc = f.getLocation();
-            try {
-                timeTillExp = getTimeBetween(expDate);
-                howOld = getAge(f.getDate_added());
-                if(timeTillExp < 0){
-                    f.setIsExpired(true);
-                    hasExpired = f.getIsExpired();
-                }
-                else {
-                    f.setIsExpired(false);
-                    hasExpired = f.getIsExpired();
-                }
-
-                MainMenuPlaceholder.database.foodDAO().updateFood(f);
-
-                
+        food = MainMenuPlaceholder.database.foodDAO().getFood();
+        FoodAdapter adapter = new FoodAdapter(food);
+        rvFood.setAdapter(adapter);
+        rvFood.setLayoutManager(new LinearLayoutManager(this));
 
 
 
 
-            } catch (ParseException e) {
-                timeTillExp = 0;
-                howOld = 0;
-                e.printStackTrace();
-            }
-            info = info + name + " Expires on: " + expDate + " " + loc + "\n\n";
-            //info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate + " (" + timeTillExp + " hours)\nAdded: " + addedDate + " (" + howOld + " hours old)\n " + "has Expired: " + hasExpired ;
-        }
+        //pantryItemsTextView = (TextView) findViewById(R.id.pantryItemsTextView);
+
+        //List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
 
 
-        pantryItemsTextView.setText(info);
+//        String info = "";
+//
+//        for(Food f : food){
+//            int id = f.getId();
+//            String name = f.getName();
+//            float quantity = f.getQuantity();
+//            String expDate = f.getExpiryDate();
+//            String addedDate = f.getDate_added();
+//            Boolean hasExpired=true;
+//
+//            int timeTillExp;
+//            int howOld;
+//            String loc = f.getLocation();
+//            try {
+//                timeTillExp = getTimeBetween(expDate);
+//                howOld = getAge(f.getDate_added());
+//                if(timeTillExp < 0){
+//                    f.setIsExpired(true);
+//                    hasExpired = f.getIsExpired();
+//                }
+//                else {
+//                    f.setIsExpired(false);
+//                    hasExpired = f.getIsExpired();
+//                }
+//
+//                MainMenuPlaceholder.database.foodDAO().updateFood(f);
+//
+//
+//
+//
+//
+//
+//            } catch (ParseException e) {
+//                timeTillExp = 0;
+//                howOld = 0;
+//                e.printStackTrace();
+//            }
+//            info = info + name + " Expires on: " + expDate + " " + loc + "\n\n";
+//            //info = info + "\nID : " + id + "\nName : " + name + "\nLocation :" + loc+ "\nQuantity : " + quantity + "\nExpires on: " + expDate + " (" + timeTillExp + " hours)\nAdded: " + addedDate + " (" + howOld + " hours old)\n " + "has Expired: " + hasExpired ;
+//        }
+
+
+        //pantryItemsTextView.setText(info);
         setUpButtons();
     }
 
     private void setUpButtons(){
 
         Button filterByPantry = (Button) findViewById(R.id.pantryButton);
-        filterByPantry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getPantryFood();
-
-                addFoodToTextView(food);
-
-            }
-        });
+        //filterByPantry.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                List<Food> food = MainMenuPlaceholder.database.foodDAO().getPantryFood();
+//
+//                addFoodToTextView(food);
+//
+//            }
+        //});
 
         Button filterByFridge = (Button) findViewById(R.id.fridgeButton);
-        filterByFridge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFridgeFood();
-
-                addFoodToTextView(food);
-            }
-        });
+        //filterByFridge.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFridgeFood();
+//
+//                addFoodToTextView(food);
+//            }
+        //});
 
         Button filterByFreezer = (Button) findViewById(R.id.freezerButton);
-        filterByFreezer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFreezerFood();
-
-                addFoodToTextView(food);
-            }
-        });
+        //filterByFreezer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFreezerFood();
+//
+//                addFoodToTextView(food);
+//            }
+        //});
 
     }
 
@@ -153,7 +170,7 @@ public class ViewPantry extends AppCompatActivity {
 
             info = info + name + " \nExpires on: " + expDate + "\n " + loc + "\nisExpired:" + f.getIsExpired() + "\n\n";
         }
-        pantryItemsTextView.setText(info);
+        //pantryItemsTextView.setText(info);
     }
 
     private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {
