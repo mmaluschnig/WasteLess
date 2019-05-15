@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 /**
@@ -48,7 +49,7 @@ public class DaoTests {
         food.setName("Apple");
         foodDAO.addFood(food);
         List<Food> byName = foodDAO.getFood();
-        assertEquals(byName.get(0).getName(), "Apple");
+        assertEquals("food returns apple",byName.get(0).getName(), "Apple");
     }
 
     @Test
@@ -65,8 +66,9 @@ public class DaoTests {
         foodDAO.addFood(food2);
         List<Food> pantryFood = foodDAO.getPantryFood();
         //ensure pantry not empty
-        assertTrue(pantryFood.size() == 1);
-        assertEquals(pantryFood.get(0).getName(), "Apple");
+        assertTrue("Pantry should contain one food",pantryFood.size() == 1);
+        assertEquals("food should be Apple",pantryFood.get(0).getName(), "Apple");
+        //assertThat(pantryFood.get(0), equalTo(food));
     }
 
     @Test
@@ -82,7 +84,25 @@ public class DaoTests {
         foodDAO.addFood(food);
         foodDAO.addFood(food2);
         List<Food> expired = foodDAO.getExpiredFood();
-        assertTrue(expired.size() == 1);
-        assertEquals(expired.get(0).getName(), "Apple");
+        assertTrue("Pantry should contain one food",expired.size() == 1);
+        assertEquals("food should be Apple",expired.get(0).getName(), "Apple");
+    }
+
+    @Test
+    public void deleteAll() throws Exception {
+        Food food = new Food();
+        food.setName("Apple");
+
+        Food food2 = new Food();
+        food2.setName("Banana");
+
+        foodDAO.addFood(food);
+        foodDAO.addFood(food2);
+        List<Food> foods = foodDAO.getFood();
+        assertTrue("Pantry should contain one food",foods.size() == 2);
+
+        foodDAO.deleteAll();
+        foods = foodDAO.getFood();
+        assertTrue("Pantry should be empty after deleteAll",foods.size() == 0);
     }
 }
