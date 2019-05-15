@@ -10,103 +10,79 @@
 
     <Button
         android:id="@+id/addItemButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginBottom="27dp"
-        android:background="@drawable/button_layout"
-        android:drawableTop="@drawable/ic_notes"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#D92139"
+        android:drawableRight="@drawable/ic_notes"
         android:text="@string/placeholder_menu_add_item"
+        android:gravity="left|center_vertical"
+        android:padding="15dp"
         android:textColor="@color/text_colour"
+        android:textColorHighlight="@color/highlight"
         app:layout_constraintBottom_toTopOf="@+id/viewShoppingListButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/viewPantryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="27dp"
-        android:background="@drawable/button_layout"
-        android:drawableTop="@drawable/ic_food"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#AEC33A"
+        android:gravity="left|center_vertical"
+        android:padding="15dp"
+        android:drawableRight="@drawable/ic_food"
         android:text="@string/placeholder_menu_view_pantry"
         android:textColor="@color/text_colour"
-        app:layout_constraintBottom_toTopOf="@+id/viewSettingsButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/addItemButton"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/viewSettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="77dp"
-        android:background="@drawable/button_layout"
-        android:drawableTop="@drawable/ic_settings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="left|center_vertical"
+        android:padding="15dp"
+        android:background="#253F58"
+        android:drawableRight="@drawable/ic_settings"
         android:text="@string/placeholder_menu_view_settings"
         android:textColor="@color/text_colour"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/viewShoppingListButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginBottom="77dp"
-        android:background="@drawable/button_layout"
-        android:drawableTop="@drawable/ic_checklist"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FEC748"
+        android:gravity="left|center_vertical"
+        android:padding="15dp"
+        android:drawableRight="@drawable/ic_checklist"
         android:text="Shopping List"
         android:textColor="@color/text_colour"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/viewSettingsButton"
+        tools:layout_editor_absoluteX="0dp" />
 
     <include layout="@layout/layout_bottom_navigation_view" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="140dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/app_logo" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginLeft="47dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:text="Waste"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Waste-Less"
         android:textAllCaps="false"
-        android:textColor="#F0F7F4"
-        android:textSize="60sp"
+        android:textColor="#333333"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:typeface="normal"
         app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Less"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="147dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
