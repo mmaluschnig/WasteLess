@@ -5,6 +5,6 @@
     <color name="colorAccent">#D7635E</color>
     <color name="colorMenu">#FFFFFF</color>
     <color name="background_colour">#F2F1ED</color>
-    <color name="text_colour">#333333</color>
+    <color name="text_colour">#F2F1ED</color>
     <color name="highlight">#D7635E</color>
 </resources>
