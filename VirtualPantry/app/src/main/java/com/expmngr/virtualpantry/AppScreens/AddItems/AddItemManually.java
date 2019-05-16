@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ import java.util.Date;
 public class AddItemManually extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
     EditText foodNameText;
-    EditText foodCategorytext;
+    AutoCompleteTextView foodCategorytext;
     EditText foodQuantityText;
     Spinner foodLocationSpinner;
     EditText foodTimeTillExpiryText;
@@ -113,14 +114,20 @@ public class AddItemManually extends AppCompatActivity {
 
     private void setUpInputFields(){
         foodNameText = (EditText) findViewById(R.id.foodNameEditText);
-        foodCategorytext = (EditText) findViewById(R.id.foodCategoryEditText);
+
+        foodCategorytext = (AutoCompleteTextView) findViewById(R.id.foodCategoryEditText);
+        String[] categories = getResources().getStringArray(R.array.food_categories);
+        ArrayAdapter<String> cat_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categories);
+        foodCategorytext.setAdapter(cat_adapter);
+
         foodQuantityText = (EditText) findViewById(R.id.foodQuantityEditText);
+
         setUpExpiryDateInput();
 
         foodLocationSpinner = (Spinner) findViewById(R.id.foodLocationSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.food_locations, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        foodLocationSpinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> loc_adapter = ArrayAdapter.createFromResource(this, R.array.food_locations, android.R.layout.simple_spinner_item);
+        loc_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        foodLocationSpinner.setAdapter(loc_adapter);
 
 
     }
