@@ -1,5 +1,6 @@
 package com.expmngr.virtualpantry.AppScreens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.Menu;
@@ -40,9 +41,22 @@ public class ViewPantry extends AppCompatActivity {
 
 
         food = MainMenuPlaceholder.database.foodDAO().getFood();
-        FoodAdapter adapter = new FoodAdapter(food);
+        final FoodAdapter adapter = new FoodAdapter(food);
         rvFood.setAdapter(adapter);
         rvFood.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                food.get(position).setName("Clicked");
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemChanged(position);
+
+            }
+        });
+
+        setUpButtons();
+    }
 
 
 
@@ -95,8 +109,8 @@ public class ViewPantry extends AppCompatActivity {
 
 
         //pantryItemsTextView.setText(info);
-        setUpButtons();
-    }
+
+
 
     private void setUpButtons(){
 
