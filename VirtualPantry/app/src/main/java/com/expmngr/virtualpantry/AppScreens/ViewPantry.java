@@ -17,6 +17,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,8 @@ public class ViewPantry extends AppCompatActivity {
     Spinner filterSpinner;
 
     private String currentLocation;
-    private String[] filters = {"expiryDate", "category", "name", "quantity"};
+    private String currentFilter;
+    private String[] filters = {"date_added", "expiryDate", "category", "name", "quantity"};
     private static final int ACTIVITY_NUM = 2;
 
     @Override
@@ -36,14 +38,15 @@ public class ViewPantry extends AppCompatActivity {
         setContentView(R.layout.activity_view_pantry);
 
         setupBottomNavigationView();
+        setUpButtons();
 
         pantryItemsTextView = (TextView) findViewById(R.id.pantryItemsTextView);
 
-        List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
-        currentLocation = "r";
-        addFoodToTextView(food);
+        currentLocation = "All";
+        currentFilter = filters[0];
+        addFoodToTextView();
 
-        setUpButtons();
+
     }
 
     private void setUpButtons(){
@@ -53,9 +56,8 @@ public class ViewPantry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
-                currentLocation = "r";
-                addFoodToTextView(food);
+                currentLocation = "All";
+                addFoodToTextView();
 
             }
         });
@@ -65,9 +67,8 @@ public class ViewPantry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getPantryFood();
                 currentLocation = "Pantry";
-                addFoodToTextView(food);
+                addFoodToTextView();
 
             }
         });
@@ -77,9 +78,8 @@ public class ViewPantry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFridgeFood();
                 currentLocation = "Fridge";
-                addFoodToTextView(food);
+                addFoodToTextView();
             }
         });
 
@@ -88,9 +88,8 @@ public class ViewPantry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFreezerFood();
                 currentLocation = "Freezer";
-                addFoodToTextView(food);
+                addFoodToTextView();
             }
         });
 
@@ -102,33 +101,55 @@ public class ViewPantry extends AppCompatActivity {
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String filter = filters[position];
-                List<Food> food;
-                if(currentLocation.equals("r")){
-                    food = MainMenuPlaceholder.database.foodDAO().getFoodByExpiry(currentLocation);
-                }else if(filter.equals("expiryDate")){
-                    food = MainMenuPlaceholder.database.foodDAO().getFoodByExpiry(currentLocation);
-                }else if(filter.equals("category")){
-                    food = MainMenuPlaceholder.database.foodDAO().getFoodByCategory(currentLocation);
-                }else if(filter.equals("name")){
-                    food = MainMenuPlaceholder.database.foodDAO().getFoodByName(currentLocation);
-                }else /*if(filter.equals("quantity"))*/{
-                    food = MainMenuPlaceholder.database.foodDAO().getFoodByQuantity(currentLocation);
-                }
-
-                addFoodToTextView(food);
-
+                currentFilter = filters[position];
+                addFoodToTextView();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                currentFilter = filters[0];
+                addFoodToTextView();
             }
         });
 
     }
 
-    private void addFoodToTextView(List<Food> food){
+    private List<Food> getFoodList(){
+        List<Food> food;
+        if(currentLocation.equals("All")){
+            if(currentFilter.equals("date_added")){
+                food = MainMenuPlaceholder.database.foodDAO().getFood();
+            }else if(currentFilter.equals("expiryDate")){
+                food = MainMenuPlaceholder.database.foodDAO().getAllByExpiry();
+            }else if(currentFilter.equals("category")){
+                food = MainMenuPlaceholder.database.foodDAO().getAllByCategory();
+            }else if(currentFilter.equals("name")){
+                food = MainMenuPlaceholder.database.foodDAO().getAllByName();
+            }else if(currentFilter.equals("quantity")){
+                food = MainMenuPlaceholder.database.foodDAO().getAllByQuantity();
+            }else{
+                food = new ArrayList<>();
+                System.err.println(">>>Something went wrong, Filter: " + currentFilter + " and Location: " + currentLocation + " mix badly");
+            }
+        }else if(currentFilter.equals("date_added")){
+            food = MainMenuPlaceholder.database.foodDAO().getFoodByAdded(currentLocation);
+        }else if(currentFilter.equals("expiryDate")){
+            food = MainMenuPlaceholder.database.foodDAO().getFoodByExpiry(currentLocation);
+        }else if(currentFilter.equals("category")){
+            food = MainMenuPlaceholder.database.foodDAO().getFoodByCategory(currentLocation);
+        }else if(currentFilter.equals("name")){
+            food = MainMenuPlaceholder.database.foodDAO().getFoodByName(currentLocation);
+        }else if(currentFilter.equals("quantity")){
+            food = MainMenuPlaceholder.database.foodDAO().getFoodByQuantity(currentLocation);
+        }else{
+            food = new ArrayList<>();
+            System.err.println(">>>Something went wrong, Filter: " + currentFilter + " and Location: " + currentLocation + " mix badly");
+        }
+        return food;
+    }
+
+    private void addFoodToTextView(){
+        List<Food> food = getFoodList();
         String info = "";
 
         for(Food f : food){
