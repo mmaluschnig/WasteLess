@@ -1,10 +1,14 @@
 package com.expmngr.virtualpantry.AppScreens;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.List;
 
@@ -13,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ShoppingList extends AppCompatActivity {
     TextView shoppingListTextView;
+    private static final int ACTIVITY_NUM = 0;
+
 
 
 
@@ -20,6 +26,7 @@ public class ShoppingList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoppinglist);
+        setupBottomNavigationView();
 
         shoppingListTextView = (TextView) findViewById(R.id.shoppingListTextView);
 
@@ -45,6 +52,15 @@ public class ShoppingList extends AppCompatActivity {
 
         }
         shoppingListTextView.setText(info);
+    }
+
+    private void setupBottomNavigationView(){
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(ShoppingList.this,bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 }
 

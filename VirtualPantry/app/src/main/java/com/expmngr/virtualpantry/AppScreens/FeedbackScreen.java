@@ -1,7 +1,5 @@
 package com.expmngr.virtualpantry.AppScreens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,17 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-public class Settings extends AppCompatActivity {
-    private static final int ACTIVITY_NUM = 0;
+public class FeedbackScreen extends AppCompatActivity {
+    private static final int ACTIVITY_NUM = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_feedback_screen);
         setupBottomNavigationView();
 
         Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
@@ -31,7 +31,6 @@ public class Settings extends AppCompatActivity {
                 sendEmail();
             }
         });
-
     }
 
     protected void sendEmail() {
@@ -40,26 +39,27 @@ public class Settings extends AppCompatActivity {
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
-        emailIntent.setData(Uri.parse("mailto:contact.waste.less@gmail.com"));
-        emailIntent.setType("message/rfc822");
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             finish();
             Log.i("Sent email...", "Finished sending email...");
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(Settings.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FeedbackScreen.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void setupBottomNavigationView() {
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(Settings.this, bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(FeedbackScreen.this, bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
