@@ -163,6 +163,16 @@ public class Settings extends AppCompatActivity {
         .setContentText("Check your pantry for expiry")
         .setSmallIcon(R.drawable.ic_food)
         .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        Intent appActivityIntent = new Intent(this, ViewPantry.class);
+        PendingIntent contentAppActivityIntent =
+                PendingIntent.getActivity(
+                        this,  // calling from Activity
+                        0,
+                        appActivityIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.setContentIntent(contentAppActivityIntent);
         return builder.build();
 
     }
