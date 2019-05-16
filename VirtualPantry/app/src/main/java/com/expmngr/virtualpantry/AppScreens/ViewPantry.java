@@ -2,6 +2,7 @@ package com.expmngr.virtualpantry.AppScreens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ViewPantry extends AppCompatActivity {
     
     private static final int ACTIVITY_NUM = 2;
-    List<Food> food;
+    //List<Food> food;
+    RecyclerView rvFood;
 
 
 
@@ -37,23 +39,10 @@ public class ViewPantry extends AppCompatActivity {
 
         setupBottomNavigationView();
 
-        RecyclerView rvFood = findViewById(R.id.rvFood);
+        rvFood = findViewById(R.id.rvFood);
 
+        updateRecyclerView(MainMenuPlaceholder.database.foodDAO().getFood());
 
-        food = MainMenuPlaceholder.database.foodDAO().getFood();
-        final FoodAdapter adapter = new FoodAdapter(food);
-        rvFood.setAdapter(adapter);
-        rvFood.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
-                food.get(position).setName("Clicked");
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemChanged(position);
-
-            }
-        });
 
         setUpButtons();
     }
@@ -115,39 +104,51 @@ public class ViewPantry extends AppCompatActivity {
     private void setUpButtons(){
 
         Button filterByPantry = (Button) findViewById(R.id.pantryButton);
-        //filterByPantry.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                List<Food> food = MainMenuPlaceholder.database.foodDAO().getPantryFood();
-//
-//                addFoodToTextView(food);
-//
-//            }
-        //});
+        filterByPantry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateRecyclerView(MainMenuPlaceholder.database.foodDAO().getPantryFood());
+
+            }
+        });
 
         Button filterByFridge = (Button) findViewById(R.id.fridgeButton);
-        //filterByFridge.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFridgeFood();
-//
-//                addFoodToTextView(food);
-//            }
-        //});
+        filterByFridge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateRecyclerView(MainMenuPlaceholder.database.foodDAO().getFridgeFood());
+
+            }
+        });
 
         Button filterByFreezer = (Button) findViewById(R.id.freezerButton);
-        //filterByFreezer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                List<Food> food = MainMenuPlaceholder.database.foodDAO().getFreezerFood();
-//
-//                addFoodToTextView(food);
-//            }
-        //});
+        filterByFreezer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                updateRecyclerView(MainMenuPlaceholder.database.foodDAO().getFreezerFood());
+
+            }
+        });
+
+    }
+
+    private void updateRecyclerView(final List<Food> food){
+        final FoodAdapter adapter = new FoodAdapter(food);
+        rvFood.setAdapter(adapter);
+        rvFood.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                food.get(position).setName("Clicked");
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemChanged(position);
+
+            }
+        });
     }
 
     private void addFoodToTextView(List<Food> food){
