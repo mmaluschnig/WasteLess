@@ -17,7 +17,7 @@ public interface ExpiryFoodDAO {
     @Insert
     void addAllexpFood(ExpiryFood... foods);
 
-    @Query("select * from ExpiryFood where name like :name")
+    @Query("select * from ExpiryFood where name like :name order by frequency asc")
     List<ExpiryFood> findByName(String name);
 
     @Query("select * from ExpiryFood")
