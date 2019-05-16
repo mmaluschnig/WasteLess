@@ -94,7 +94,7 @@ public class Settings extends AppCompatActivity {
         fiveseconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scheduleNotification(getNotification("5 seconds delay"), 5);
+                scheduleNotification(getNotification("5 seconds delay"), 5000);
             }
         });
 
@@ -102,7 +102,7 @@ public class Settings extends AppCompatActivity {
         tenseconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scheduleNotification(getNotification("10 second delay"), 10);
+                scheduleNotification(getNotification("10 second delay"), 10000);
             }
         });
 
@@ -111,7 +111,7 @@ public class Settings extends AppCompatActivity {
         thirtyseconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scheduleNotification(getNotification("30 second delay"), 30);
+                scheduleNotification(getNotification("30 second delay"), 30000);
             }
         });
 
@@ -150,7 +150,7 @@ public class Settings extends AppCompatActivity {
         notificationIntent.putExtra(com.expmngr.virtualpantry.Utils.NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(com.expmngr.virtualpantry.Utils.NotificationPublisher.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        long futureInMillis = ((System.currentTimeMillis())/1000 + delay);
+        long futureInMillis = ((System.currentTimeMillis()) + delay);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
     }
