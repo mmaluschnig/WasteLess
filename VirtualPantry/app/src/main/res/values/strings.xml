@@ -24,4 +24,11 @@
         <item>Fridge</item>
         <item>Freezer</item>
     </string-array>
+
+    <string-array name="food_categories">
+        <item>Fruit</item>
+        <item>Vegetables</item>
+        <item>Red Meat</item>
+        <item>White Meat</item>
+    </string-array>
 </resources>
