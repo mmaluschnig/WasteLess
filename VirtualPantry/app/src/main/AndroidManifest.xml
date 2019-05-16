@@ -3,23 +3,25 @@
     package="com.expmngr.virtualpantry">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_food"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppScreens.AddItems.ConfirmScanFoods"></activity>
+        <activity android:name=".AppScreens.MainMenuPlaceholder"></activity>
+        <activity android:name=".AppScreens.AddItems.ConfirmScanFoods" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
 
         <activity android:name=".AppScreens.ShoppingList" />
-        <activity android:name=".AppScreens.AddItems.FeedbackScreen" />
+        <activity android:name=".AppScreens.FeedbackScreen" />
         <activity android:name=".readCSVFiles" />
         <activity android:name=".AppScreens.AddItems.ScanBarcode" />
         <activity android:name=".AppScreens.AddItems.ScanReceipt" />
@@ -27,7 +29,7 @@
         <activity android:name=".AppScreens.EditItem" />
         <activity android:name=".AppScreens.ViewPantry" />
         <activity android:name=".AppScreens.Settings" />
-        <activity android:name=".AppScreens.MainMenuPlaceholder">
+        <activity android:name=".AppScreens.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,12 +41,8 @@
         <activity android:name=".test" />
         <activity android:name=".InputMenu" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <receiver android:name="com.expmngr.virtualpantry.Utils.NotificationPublisher" />
     </application>
 
 </manifest>

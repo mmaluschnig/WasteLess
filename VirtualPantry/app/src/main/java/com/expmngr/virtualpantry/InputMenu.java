@@ -18,8 +18,8 @@ public class InputMenu extends AppCompatActivity {
         pantryUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), test.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(), test.class);
+                //startActivity(intent);
             }
         });
     }
