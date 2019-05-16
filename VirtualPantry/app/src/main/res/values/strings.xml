@@ -26,6 +26,7 @@
     </string-array>
 
     <string-array name="filter_options">
+        <item>Day added</item>
         <item>Expiry Date</item>
         <item>Category</item>
         <item>A-Z</item>
