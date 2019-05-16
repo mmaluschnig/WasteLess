@@ -25,10 +25,10 @@ public interface FoodDAO {
     @Query("select * from Food where location like :location order by expiryDate ASC")
     List<Food> getFoodByExpiry(String location);
 
-    @Query("select * from Food where location=:location order by category ASC")
+    @Query("select * from Food where location=:location order by UPPER(category) ASC")
     List<Food> getFoodByCategory(String location);
 
-    @Query("select * from Food where location=:location order by name ASC")
+    @Query("select * from Food where location=:location order by UPPER(name) ASC")
     List<Food> getFoodByName(String location);
 
     @Query("select * from Food where location=:location order by quantity ASC")
@@ -38,10 +38,10 @@ public interface FoodDAO {
     @Query("select * from Food order by expiryDate ASC")
     List<Food> getAllByExpiry();
 
-    @Query("select * from Food order by category ASC")
+    @Query("select * from Food order by UPPER(category) ASC")
     List<Food> getAllByCategory();
 
-    @Query("select * from Food order by name ASC")
+    @Query("select * from Food order by UPPER(name) ASC")
     List<Food> getAllByName();
 
     @Query("select * from Food order by quantity ASC")
