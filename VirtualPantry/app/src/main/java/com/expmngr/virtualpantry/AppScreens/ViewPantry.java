@@ -154,6 +154,7 @@ public class ViewPantry extends AppCompatActivity {
             info = info + name + " \nExpires on: " + expDate + "\n " + loc + "\nisExpired:" + f.getIsExpired() + "\n\n";
         }
         pantryItemsTextView.setText(info);
+
     }
 
     private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {
