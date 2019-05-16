@@ -62,15 +62,15 @@ public interface FoodDAO {
     List<Food> getExpiredFood();
 
 
-
-
-    //these will be removed soon
+    @Deprecated
     @Query("select * from Food where location = 'Pantry'")
     List<Food> getPantryFood();
 
+    @Deprecated
     @Query("select * from Food where location = 'Fridge'")
     List<Food> getFridgeFood();
 
+    @Deprecated
     @Query("select * from Food where location = 'Freezer'")
     List<Food> getFreezerFood();
 }
