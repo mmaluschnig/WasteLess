@@ -42,6 +42,7 @@
         <activity android:name=".InputMenu" />
         <activity android:name=".MainActivity">
         </activity>
+        <receiver android:name="com.expmngr.virtualpantry.Utils.NotificationPublisher" />
     </application>
 
 </manifest>
