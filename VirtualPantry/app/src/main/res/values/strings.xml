@@ -25,6 +25,13 @@
         <item>Freezer</item>
     </string-array>
 
+    <string-array name="filter_options">
+        <item>Expiry Date</item>
+        <item>Category</item>
+        <item>A-Z</item>
+        <item>Quantity</item>
+    </string-array>
+
     <string-array name="food_categories">
         <item>Fruit</item>
         <item>Vegetables</item>
