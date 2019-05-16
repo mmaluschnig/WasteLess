@@ -27,6 +27,17 @@ public interface FoodDAO {
     @Query("select * from Food where location = 'Freezer'")
     List<Food> getFreezerFood();
 
+    @Query("select * from Food where location like :location order by expiryDate ASC")
+    List<Food> getFoodByExpiry(String location);
+
+    @Query("select * from Food where location=:location order by category ASC")
+    List<Food> getFoodByCategory(String location);
+
+    @Query("select * from Food where location=:location order by name ASC")
+    List<Food> getFoodByName(String location);
+
+    @Query("select * from Food where location=:location order by quantity ASC")
+    List<Food> getFoodByQuantity(String location);
 
     @Query("DELETE FROM Food")
     void deleteAll();
