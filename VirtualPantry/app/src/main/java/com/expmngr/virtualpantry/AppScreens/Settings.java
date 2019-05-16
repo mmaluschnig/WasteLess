@@ -2,9 +2,12 @@ package com.expmngr.virtualpantry.AppScreens;
 
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +26,17 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 public class Settings extends AppCompatActivity {
+    //notification channel
+    //notification builder
+    //notification manager
+
+    private static final String CHANNEL_ID="expiry_notification";
+    private static final String CHANNEL_NAME="Expiry notification";
+    private static final String CHANNEL_DESC="Food expiry notifications";
+
     private static final int ACTIVITY_NUM = 0;
 
     @Override
@@ -33,6 +45,12 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setupBottomNavigationView();
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription(CHANNEL_DESC);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
 
         int timeTillExp;
@@ -140,10 +158,11 @@ public class Settings extends AppCompatActivity {
 
     private Notification getNotification(String content){
 
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("Food Expiry reminder");
-        builder.setContentText("Check your pantry for expiry");
-        builder.setSmallIcon(R.drawable.ic_food);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        .setContentTitle("Food Expiry reminder")
+        .setContentText("Check your pantry for expiry")
+        .setSmallIcon(R.drawable.ic_food)
+        .setPriority(NotificationCompat.PRIORITY_HIGH);
         return builder.build();
 
     }
