@@ -136,6 +136,10 @@ public class ViewPantry extends AppCompatActivity {
     }
 
     private void updateRecyclerView(final List<Food> food){
+        if (MainMenuPlaceholder.database.foodDAO().getFood() == null){
+
+
+        }
         final FoodAdapter adapter = new FoodAdapter(food);
         rvFood.setAdapter(adapter);
         rvFood.setLayoutManager(new LinearLayoutManager(this));
@@ -147,6 +151,13 @@ public class ViewPantry extends AppCompatActivity {
                 adapter.notifyItemRemoved(position);
                 adapter.notifyItemChanged(position);
 
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                food.remove(position);
+                adapter.notifyItemRemoved(position);
+                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
             }
         });
     }
