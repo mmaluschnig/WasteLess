@@ -33,7 +33,6 @@
             android:hint="Name"
             android:inputType="textPersonName"
             android:textColor="#F0F7F4"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
@@ -45,7 +44,6 @@
             android:hint="Quantity"
             android:inputType="numberDecimal"
             android:textColor="#F0F7F4"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/foodNameEditText" />
 
         <AutoCompleteTextView
@@ -54,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:hint="Category"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/foodQuantityEditText" />
 
         <Spinner
@@ -62,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/foodCategoryEditText" />
 
         <EditText
@@ -75,7 +71,6 @@
             android:hint="Expiry Date"
             android:inputType="date"
             android:textColor="#F0F7F4"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/foodLocationSpinner" />
     </LinearLayout>
 
