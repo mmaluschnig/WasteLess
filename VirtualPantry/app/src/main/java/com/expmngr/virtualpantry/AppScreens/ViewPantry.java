@@ -1,5 +1,6 @@
 package com.expmngr.virtualpantry.AppScreens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
+import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -22,14 +24,18 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewPantry extends AppCompatActivity {
-    TextView pantryItemsTextView;
+
     Spinner filterSpinner;
+    RecyclerView rvFood;
 
     private String currentLocation;
     private String currentFilter;
     private String[] filters = {"date_added", "expiryDate", "category", "name", "quantity"};
+    
     private static final int ACTIVITY_NUM = 2;
 
     @Override
@@ -40,12 +46,11 @@ public class ViewPantry extends AppCompatActivity {
         setupBottomNavigationView();
         setUpButtons();
 
-        pantryItemsTextView = (TextView) findViewById(R.id.pantryItemsTextView);
+        rvFood = findViewById(R.id.rvFood);
 
         currentLocation = "All";
         currentFilter = filters[0];
-        addFoodToTextView();
-
+        updateRecyclerView(getFoodList());
 
     }
 
@@ -57,7 +62,7 @@ public class ViewPantry extends AppCompatActivity {
             public void onClick(View v) {
 
                 currentLocation = "All";
-                addFoodToTextView();
+                updateRecyclerView(getFoodList());
 
             }
         });
@@ -68,8 +73,7 @@ public class ViewPantry extends AppCompatActivity {
             public void onClick(View v) {
 
                 currentLocation = "Pantry";
-                addFoodToTextView();
-
+                updateRecyclerView(getFoodList());
             }
         });
 
@@ -79,7 +83,7 @@ public class ViewPantry extends AppCompatActivity {
             public void onClick(View v) {
 
                 currentLocation = "Fridge";
-                addFoodToTextView();
+                updateRecyclerView(getFoodList());
             }
         });
 
@@ -89,7 +93,7 @@ public class ViewPantry extends AppCompatActivity {
             public void onClick(View v) {
 
                 currentLocation = "Freezer";
-                addFoodToTextView();
+                updateRecyclerView(getFoodList());
             }
         });
 
@@ -102,16 +106,43 @@ public class ViewPantry extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentFilter = filters[position];
-                addFoodToTextView();
+                updateRecyclerView(getFoodList());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 currentFilter = filters[0];
-                addFoodToTextView();
+                updateRecyclerView(getFoodList());
             }
         });
 
+    }
+
+    private void updateRecyclerView(final List<Food> food){
+        if (MainMenuPlaceholder.database.foodDAO().getFood() == null){
+            //TODO notify empty pantry
+
+        }
+        final FoodAdapter adapter = new FoodAdapter(food);
+        rvFood.setAdapter(adapter);
+        rvFood.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                food.get(position).setName("Clicked");
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemChanged(position);
+
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                food.remove(position);
+                adapter.notifyItemRemoved(position);
+                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
+            }
+        });
     }
 
     private List<Food> getFoodList(){
@@ -146,45 +177,6 @@ public class ViewPantry extends AppCompatActivity {
             System.err.println(">>>Something went wrong, Filter: " + currentFilter + " and Location: " + currentLocation + " mix badly");
         }
         return food;
-    }
-
-    private void addFoodToTextView(){
-        List<Food> food = getFoodList();
-        String info = "";
-
-        for(Food f : food){
-            int id = f.getId();
-            String name = f.getName();
-            float quantity = f.getQuantity();
-            String expDate = f.getExpiryDate();
-            String addedDate = f.getDate_added();
-            Boolean hasExpired=true;
-
-            int timeTillExp;
-            int howOld;
-            String loc = f.getLocation();
-            try {
-                timeTillExp = getTimeBetween(expDate);
-                howOld = getAge(f.getDate_added());
-                if(timeTillExp < 0){
-                    f.setIsExpired(true);
-                    hasExpired = f.getIsExpired();
-                }
-                else {
-                    f.setIsExpired(false);
-                    hasExpired = f.getIsExpired();
-                }
-            } catch (ParseException e) {
-                timeTillExp = 0;
-                howOld = 0;
-                e.printStackTrace();
-            }
-            MainMenuPlaceholder.database.foodDAO().updateFood(f);
-
-            info = info + name + " \nExpires on: " + expDate + "\n " + loc + "\nisExpired:" + f.getIsExpired() + "\n\n";
-        }
-        pantryItemsTextView.setText(info);
-
     }
 
     private int getTimeBetween(String stringDate1, String stringDate2) throws ParseException {
