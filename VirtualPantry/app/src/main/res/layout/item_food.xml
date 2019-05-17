@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/image_cat"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:paddingBottom="10dp"
             android:src="@drawable/ic_apple" />
 
@@ -48,7 +48,7 @@
                 android:paddingBottom="0dp"
                 android:text="Bananas"
                 android:textAllCaps="false"
-                android:textSize="42sp"
+                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/image_edit"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="3 Days past expiry"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
                 app:layout_constraintStart_toStartOf="parent"
