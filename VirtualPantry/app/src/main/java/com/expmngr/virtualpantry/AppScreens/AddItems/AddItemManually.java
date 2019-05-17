@@ -101,14 +101,14 @@ public class AddItemManually extends AppCompatActivity {
             }
         });
 
-        Button deletaAllButton = (Button) findViewById(R.id.deleteAllButton);
-        deletaAllButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainMenuPlaceholder.database.foodDAO().deleteAll();
-                Toast.makeText(AddItemManually.this, "Deleted All", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        Button deletaAllButton = (Button) findViewById(R.id.deleteAllButton);
+//        deletaAllButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MainMenuPlaceholder.database.foodDAO().deleteAll();
+//                Toast.makeText(AddItemManually.this, "Deleted All", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
