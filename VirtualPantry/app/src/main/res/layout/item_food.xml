@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="335dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="335dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_apple" />
+
+            <TextView
+                android:id="@+id/food_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Bananas"
+                android:textSize="42sp"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/food_qty"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="QTY: 67"
+            android:textSize="42sp"/>
+
+
+        <TextView
+            android:id="@+id/food_expiry"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="3 Days past expiry"
+            android:textSize="40sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_edit" />
+
+        <ImageView
+            android:id="@+id/image_delete"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_delete" />
+
+
+
+
+
+    </LinearLayout>
+</LinearLayout>
