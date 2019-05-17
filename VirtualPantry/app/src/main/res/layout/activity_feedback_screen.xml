@@ -10,17 +10,18 @@
 
     <EditText
         android:id="@+id/feedbackText"
-        android:layout_width="205dp"
-        android:layout_height="177dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="341dp"
+        android:layout_height="408dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
         android:autofillHints=""
         android:background="@color/colorMenu"
         android:ems="10"
         android:hint="@string/feedback_screen_enter_feedback_here"
+        android:gravity="center"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,32 +29,27 @@
 
     <Button
         android:id="@+id/feedbackSubmitFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="75dp"
+        android:background="@drawable/accept_button_layout"
         android:text="@string/feedback_screen_submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.573"
-        app:layout_constraintStart_toEndOf="@+id/cancelFeedback"
-        app:layout_constraintTop_toBottomOf="@+id/feedbackText" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/cancelFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginBottom="75dp"
+        android:background="@drawable/accept_button_layout"
         android:text="@string/feedback_screen_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedbackText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include layout="@layout/layout_bottom_navigation_view" />
 
