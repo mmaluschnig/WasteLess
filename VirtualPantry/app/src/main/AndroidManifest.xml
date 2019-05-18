@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppScreens.MainMenuPlaceholder"></activity>
+        <activity android:name=".AppScreens.NotificationSettings"></activity>
+        <activity android:name=".AppScreens.MainMenuPlaceholder" />
         <activity android:name=".AppScreens.AddItems.ConfirmScanFoods" />
 
         <meta-data
@@ -40,9 +41,9 @@
         <activity android:name=".test1" />
         <activity android:name=".test" />
         <activity android:name=".InputMenu" />
-        <activity android:name=".MainActivity">
-        </activity>
-        <receiver android:name="com.expmngr.virtualpantry.Utils.NotificationPublisher" />
+        <activity android:name=".MainActivity"></activity>
+
+        <receiver android:name=".Utils.NotificationPublisher" />
     </application>
 
 </manifest>
