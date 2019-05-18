@@ -3,6 +3,7 @@ package com.expmngr.virtualpantry.AppScreens;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,11 +44,14 @@ public class ViewPantry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pantry);
+        //prevents on screen keyboard from popping up untill user clicks on editText
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         setupBottomNavigationView();
         setUpButtons();
 
         rvFood = findViewById(R.id.rvFood);
+        rvFood.addItemDecoration(new DividerItemDecoration(rvFood.getContext(), DividerItemDecoration.VERTICAL));
 
         currentLocation = "All";
         currentFilter = filters[0];
@@ -142,6 +147,7 @@ public class ViewPantry extends AppCompatActivity {
                 adapter.notifyItemRemoved(position);
                 MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
             }
+
         });
     }
 

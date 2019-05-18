@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,15 +37,30 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
 
     public static class FoodViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView;
         public ImageView deleteImage;
+        public ImageView editImage;
+        public TextView nameTextView;
+        public TextView catTextView;
+        public TextView quantityTextView;
+        public TextView expiryTextView;
+        public ImageView locationImage;
+
+        private Boolean isEditing = false;
+        private String expiryDate;
+        private String expiryString;
 
         public FoodViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.food_name);
             deleteImage = itemView.findViewById(R.id.image_delete);
+            editImage = itemView.findViewById(R.id.image_edit);
+            nameTextView = itemView.findViewById(R.id.food_name);
+            catTextView = itemView.findViewById(R.id.food_cat);
+            quantityTextView = itemView.findViewById(R.id.food_qty);
+            expiryTextView = itemView.findViewById(R.id.food_expiry);
+            locationImage = itemView.findViewById(R.id.image_location);
 
-            itemView .setOnClickListener(new View.OnClickListener() {
+
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null){
@@ -61,6 +79,32 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
                             listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
+
+            editImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            if(isEditing){
+                                isEditing = false;
+                                editImage.setImageResource(R.drawable.ic_edit);
+                                nameTextView.setEnabled(false);
+                                catTextView.setEnabled(false);
+                                quantityTextView.setEnabled(false);
+                                expiryTextView.setEnabled(false);
+                            }else {
+                                isEditing = true;
+                                editImage.setImageResource(R.drawable.ic_checked);
+                                nameTextView.setEnabled(true);
+                                catTextView.setEnabled(true);
+                                quantityTextView.setEnabled(true);
+                                expiryTextView.setEnabled(true);
+                            }
                         }
                     }
                 }
@@ -124,14 +168,85 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         Food food = mFood.get(position);
         TextView nameTextView = foodViewHolder.nameTextView;
         nameTextView.setText(food.getName());
+        TextView catTextView = foodViewHolder.catTextView;
+        catTextView.setText(food.getCategory());
+        TextView quantityTextView = foodViewHolder.quantityTextView;
+        quantityTextView.setText(new Float(food.getQuantity()).toString());
 
-
-
-//
+        ImageView locationImage = foodViewHolder.locationImage;
+        String location = food.getLocation();
+        if(location.equals("Pantry")){
+            locationImage.setImageResource(R.drawable.ic_pantry);
+        }else if(location.equals("Fridge")){
+            locationImage.setImageResource(R.drawable.ic_food_and_restaurant);
+        }else if(location.equals("Freezer")){
+            locationImage.setImageResource(R.drawable.ic_snow);
+        }
+        //TODO Date things
+        String expDate = food.getExpiryDate();
+        TextView dateTextView = foodViewHolder.expiryTextView;
+        try {
+            dateTextView.setText("Expires in: " + getTimeframe(getHoursTillExpiry(expDate)));
+        }catch (Exception e){
+            System.err.println(e);
+        }
     }
 
     @Override
     public int getItemCount() {
         return mFood.size();
+    }
+
+    private int getHoursTillExpiry(String expiryDate) throws ParseException {
+        Date expDate = new SimpleDateFormat("dd/MM/yyyy HH").parse(expiryDate);
+        Date now = new Date();
+        int difference = (int) (expDate.getTime() - now.getTime());
+        difference = difference / 1000 / 60 / 60;
+
+        return difference;
+    }
+
+    private String getTimeframe(int hours){
+        if(hours < 0){
+            return "Expired";
+        }
+        if(hours / 24 >= 1){
+            int days = hours / 24;
+            if(days / 7 >= 1){
+                int weeks = days / 7;
+                if(days / 30 >= 1){
+                    int months = days / 30;
+                    if(days / 365 >= 1){
+                        int years = days / 365;
+                        if(years > 1){
+                            return years + " Years";
+                        }else{
+                            return years + " Year";
+                        }
+                    }//years
+                    if(months > 1){
+                        return months + " months";
+                    }else{
+                        return months + " month";
+                    }
+                }//months
+                if(weeks > 1){
+                    return weeks + " weeks";
+                }else{
+                    return weeks + " week";
+                }
+            }//weeks
+            if(days > 1){
+                return days + " days";
+            }else{
+                return days + " day";
+            }
+        }else {//days
+            if(hours > 1){
+                return hours + " hours";
+            }else{
+                return hours + " hour";
+            }
+        }//hours
     }
 }
