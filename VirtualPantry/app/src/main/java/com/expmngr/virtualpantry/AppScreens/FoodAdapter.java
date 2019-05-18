@@ -28,6 +28,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onDeleteClick(int position);
+        void onConfirmEditClick(int position, Food editFood);
 //        void onAddFoodClick(int position);
     }
 
@@ -46,8 +47,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public ImageView locationImage;
 
         private Boolean isEditing = false;
-        private String expiryDate;
-        private String expiryString;
+        public String expiryDate;
+        public String expiryString;
 
         public FoodViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -90,12 +91,31 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                     if (listener != null){
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
-                            if(isEditing){
+                            if(isEditing){//finished editing
+                                //TODO verify edit input
+                                Food editFood = new Food();
+                                editFood.setName(nameTextView.getText().toString());
+                                editFood.setCategory(catTextView.getText().toString());
+                                editFood.setQuantity(Float.parseFloat(quantityTextView.getText().toString()));
+                                //editFood.setLocation(nameTextView.getText().toString());
+
+                                expiryDate = expiryTextView.getText().toString();
+                                editFood.setExpiryDate(expiryDate);
+
+                                listener.onConfirmEditClick(position, editFood);
+
                                 isEditing = false;
                                 editImage.setImageResource(R.drawable.ic_edit);
                                 nameTextView.setEnabled(false);
                                 catTextView.setEnabled(false);
                                 quantityTextView.setEnabled(false);
+
+                                try {
+                                    expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expiryDate + " 00"));
+                                    expiryTextView.setText(expiryString);
+                                }catch(Exception e){
+                                    System.err.println(e);
+                                }
                                 expiryTextView.setEnabled(false);
                             }else {
                                 isEditing = true;
@@ -104,6 +124,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 catTextView.setEnabled(true);
                                 quantityTextView.setEnabled(true);
                                 expiryTextView.setEnabled(true);
+                                expiryTextView.setText(expiryDate);
                             }
                         }
                     }
@@ -186,7 +207,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         String expDate = food.getExpiryDate();
         TextView dateTextView = foodViewHolder.expiryTextView;
         try {
-            dateTextView.setText("Expires in: " + getTimeframe(getHoursTillExpiry(expDate)));
+            Date date = new SimpleDateFormat("dd/MM/yyyy HH").parse(expDate);
+            foodViewHolder.expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+
+            foodViewHolder.expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expDate));
+            dateTextView.setText(foodViewHolder.expiryString);
         }catch (Exception e){
             System.err.println(e);
         }
@@ -197,7 +222,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         return mFood.size();
     }
 
-    private int getHoursTillExpiry(String expiryDate) throws ParseException {
+    private static int getHoursTillExpiry(String expiryDate) throws ParseException {
         Date expDate = new SimpleDateFormat("dd/MM/yyyy HH").parse(expiryDate);
         Date now = new Date();
         int difference = (int) (expDate.getTime() - now.getTime());
@@ -206,7 +231,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         return difference;
     }
 
-    private String getTimeframe(int hours){
+    private static String getTimeframe(int hours){
         if(hours < 0){
             return "Expired";
         }

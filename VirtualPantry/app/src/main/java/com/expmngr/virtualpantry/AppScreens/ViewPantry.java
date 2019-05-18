@@ -148,6 +148,17 @@ public class ViewPantry extends AppCompatActivity {
                 MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
             }
 
+            @Override
+            public void onConfirmEditClick(int position, Food editFood) {
+                food.get(position).setName(editFood.getName());
+                food.get(position).setCategory(editFood.getCategory());
+                food.get(position).setQuantity(editFood.getQuantity());
+                //food.get(position).setLocation(editFood.getLocation());
+                food.get(position).setExpiryDate(editFood.getExpiryDate());
+
+                MainMenuPlaceholder.database.foodDAO().updateFood(food.get(position));
+            }
+
         });
     }
 
