@@ -2,12 +2,17 @@ package com.expmngr.virtualpantry.AppScreens.AddItems;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
+import com.expmngr.virtualpantry.AppScreens.ViewPantry;
 import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
@@ -41,6 +46,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
         confirmFoodTextView = (TextView) findViewById(R.id.confirmFoodTextView);
 
         setupBottomNavigationView();
+        setUpButtons();
 
 
         List<String> foundWords = getIntent().getStringArrayListExtra("found_foods");
@@ -102,6 +108,29 @@ public class ConfirmScanFoods extends AppCompatActivity {
 //        }
 
         confirmFoodTextView.setText(totalFoodInfo);
+    }
+
+    private void addScannedItemsToPantry(){
+        //TODO Add scanned food to pantry
+    }
+
+    private void setUpButtons(){
+        Button addScannedFoodButton = (Button) findViewById(R.id.addScannedFoodsButton);
+        addScannedFoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addScannedItemsToPantry();
+                startActivity(new Intent(getApplicationContext(), ViewPantry.class));
+            }
+        });
+
+        Button keepScanningButton = (Button) findViewById(R.id.keepScanningButton);
+        keepScanningButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setupBottomNavigationView() {

@@ -38,9 +38,8 @@ public class MainMenuPlaceholder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_placeholder);
 
-        database = Room.databaseBuilder(getApplicationContext(), FoodDatabase.class,"fooddb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        database = SplashScreen.database;
 
-        checkFirstRun();
         setUpButtons();
         setupBottomNavigationView();
 
@@ -112,46 +111,6 @@ public class MainMenuPlaceholder extends AppCompatActivity {
         // set alarm to fire 5 sec (1000*5) from now (SystemClock.elapsedRealtime())
         manager.set( AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 1000*5, pintent );
     }
-
-    private void checkFirstRun() {
-
-        final String PREFS_NAME = "FirstTimePrefs";
-        final String PREF_VERSION_CODE_KEY = "version_code";
-        final int DOESNT_EXIST = -1;
-
-        // Get current version code
-        int currentVersionCode = BuildConfig.VERSION_CODE;
-
-        // Get saved version code
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
-
-        // Check for first run or upgrade
-        if (currentVersionCode == savedVersionCode) {
-            System.out.println(">>>NORMAL RUN");
-
-            // This is just a normal run
-            return;
-
-        } else if (savedVersionCode == DOESNT_EXIST) {
-            System.out.println(">>>NEW INSTALL");
-            //This is a new install (or the user cleared the shared preferences)
-            DataImporter importer = new DataImporter(getApplicationContext());
-            importer.addExpiryTimes();
-
-        } else if (currentVersionCode > savedVersionCode) {
-            System.out.println(">>>NEW VERSION");
-
-            // This is an upgrade frozen vegetables
-            DataImporter importer = new DataImporter(getApplicationContext());
-            importer.addExpiryTimes();
-        }
-
-        // Update the shared preferences with the current version code
-        prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
-    }
-
-
 
     private void setupBottomNavigationView(){
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);

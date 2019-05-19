@@ -3,6 +3,7 @@ package com.expmngr.virtualpantry.Utils;
 import android.content.Context;
 
 import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
+import com.expmngr.virtualpantry.AppScreens.SplashScreen;
 import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.R;
 
@@ -43,7 +44,8 @@ public class DataImporter {
             newFood.setFridgeExpiry(line[FRIDGE]);
             newFood.setFreezerExpiry(line[FREEZER]);
             //newFood.setCat_num(Integer.parseInt(line[GROUP]));
-            MainMenuPlaceholder.database.expiryFoodDAO().addExpFood(newFood);
+            //MainMenuPlaceholder.database.expiryFoodDAO().addExpFood(newFood);
+            SplashScreen.database.expiryFoodDAO().addExpFood(newFood);
         }
     }
 
