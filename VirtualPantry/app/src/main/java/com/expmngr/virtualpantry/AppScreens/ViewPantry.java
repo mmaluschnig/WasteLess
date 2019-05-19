@@ -1,5 +1,7 @@
 package com.expmngr.virtualpantry.AppScreens;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
@@ -142,10 +145,25 @@ public class ViewPantry extends AppCompatActivity {
             }
 
             @Override
-            public void onDeleteClick(int position) {
-                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
-                food.remove(position);
-                adapter.notifyItemRemoved(position);
+            public void onDeleteClick(final int position) {
+
+                new AlertDialog.Builder(ViewPantry.this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                        .setTitle("Confirm Delete")
+                        .setMessage("Are your sure you want to delete " + food.get(position).getName() + "?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                String name = food.get(position).getName();
+                                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
+                                food.remove(position);
+                                adapter.notifyItemRemoved(position);
+                                Toast.makeText(ViewPantry.this, "Deleted" + name, Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+
+//
             }
 
             @Override
