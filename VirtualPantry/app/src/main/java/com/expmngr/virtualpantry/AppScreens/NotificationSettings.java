@@ -40,6 +40,7 @@ public class NotificationSettings extends AppCompatActivity {
                if(Integer.parseInt(expday) > Integer.parseInt(todaysday)){
                    int diff = calculateDifference(Integer.parseInt(expday), Integer.parseInt(todaysday));
 
+
                }
             }
 

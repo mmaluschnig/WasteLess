@@ -186,9 +186,7 @@ public class Settings extends AppCompatActivity {
         alarmManager.set(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
     }
 
-    public void setAlarm(Notification notification, int delay){
 
-    }
 
 
     private Notification getNotification(String content){
