@@ -213,7 +213,7 @@ public class ConfirmScanFoods extends AppCompatActivity {
                 food.get(position).setQuantity(editFood.getQuantity());
                 food.get(position).setLocation(editFood.getLocation());
                 food.get(position).setExpiryDate(editFood.getExpiryDate());
-                System.out.println("EXP: " + food.get(position).getExpiryDate());
+                //System.out.println("EXP: " + food.get(position).getExpiryDate());
             }
 
         });
@@ -234,13 +234,17 @@ public class ConfirmScanFoods extends AppCompatActivity {
                 scannedFood.addDate("Pantry", timeToDate(expiryFood.getPantryExpiry()));
                 scannedFood.addDate("Fridge", timeToDate(expiryFood.getFridgeExpiry()));
                 scannedFood.addDate("Freezer", timeToDate(expiryFood.getFreezerExpiry()));
-                String now = new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
-                if(scannedFood.getDateByLocation("Pantry").equals(now)){
-                    System.out.println("NOT PANTRY");
+                String now = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                if(!scannedFood.getDateByLocation("Pantry").contains(now)){
+                    System.out.println("PANTRY");
+                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
+                    scannedFood.setLocation("Pantry");
+                }else if(!scannedFood.getDateByLocation("Fridge").contains(now)){
+                    System.out.println("FRIDGE");
                     scannedFood.setExpiryDate(scannedFood.getDateByLocation("Fridge"));
                     scannedFood.setLocation("Fridge");
-                }else if(scannedFood.getDateByLocation("Fridge").equals(now)){
-                    System.out.println("NOT FRIDGE");
+                }else if(!scannedFood.getDateByLocation("Freezer").contains(now)){
+                    System.out.println("FREEZER");
                     scannedFood.setExpiryDate(scannedFood.getDateByLocation("Freezer"));
                     scannedFood.setLocation("Freezer");
                 }else {
