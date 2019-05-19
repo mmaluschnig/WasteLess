@@ -1,8 +1,11 @@
 package com.expmngr.virtualpantry.AppScreens;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
@@ -24,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,11 +47,14 @@ public class ViewPantry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pantry);
+        //prevents on screen keyboard from popping up untill user clicks on editText
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         setupBottomNavigationView();
         setUpButtons();
 
         rvFood = findViewById(R.id.rvFood);
+        rvFood.addItemDecoration(new DividerItemDecoration(rvFood.getContext(), DividerItemDecoration.VERTICAL));
 
         currentLocation = "All";
         currentFilter = filters[0];
@@ -137,11 +145,38 @@ public class ViewPantry extends AppCompatActivity {
             }
 
             @Override
-            public void onDeleteClick(int position) {
-                food.remove(position);
-                adapter.notifyItemRemoved(position);
-                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
+            public void onDeleteClick(final int position) {
+
+                new AlertDialog.Builder(ViewPantry.this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                        .setTitle("Confirm Delete")
+                        .setMessage("Are your sure you want to delete " + food.get(position).getName() + "?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                String name = food.get(position).getName();
+                                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
+                                food.remove(position);
+                                adapter.notifyItemRemoved(position);
+                                Toast.makeText(ViewPantry.this, "Deleted" + name, Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+
+//
             }
+
+            @Override
+            public void onConfirmEditClick(int position, Food editFood) {
+                food.get(position).setName(editFood.getName());
+                food.get(position).setCategory(editFood.getCategory());
+                food.get(position).setQuantity(editFood.getQuantity());
+                //food.get(position).setLocation(editFood.getLocation());
+                food.get(position).setExpiryDate(editFood.getExpiryDate());
+
+                MainMenuPlaceholder.database.foodDAO().updateFood(food.get(position));
+            }
+
         });
     }
 

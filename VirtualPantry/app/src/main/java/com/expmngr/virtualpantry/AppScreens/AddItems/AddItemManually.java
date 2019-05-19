@@ -101,14 +101,14 @@ public class AddItemManually extends AppCompatActivity {
             }
         });
 
-        Button deletaAllButton = (Button) findViewById(R.id.deleteAllButton);
-        deletaAllButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainMenuPlaceholder.database.foodDAO().deleteAll();
-                Toast.makeText(AddItemManually.this, "Deleted All", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        Button deletaAllButton = (Button) findViewById(R.id.deleteAllButton);
+//        deletaAllButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MainMenuPlaceholder.database.foodDAO().deleteAll();
+//                Toast.makeText(AddItemManually.this, "Deleted All", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
@@ -140,7 +140,7 @@ public class AddItemManually extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd/MM/yy";
+                String myFormat = "dd/MM/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
 
                 foodTimeTillExpiryText.setText(sdf.format(myCalendar.getTime()));
