@@ -116,7 +116,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        Button notificationsettingsButton = (Button) findViewById((R.id.notificationSettingsbutton));
+       /* Button notificationsettingsButton = (Button) findViewById((R.id.notificationSettingsbutton));
         notificationsettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +124,7 @@ public class Settings extends AppCompatActivity {
                 startActivity(newIntent);
             }
         });
+        */
 
 
     }
