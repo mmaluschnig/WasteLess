@@ -1,9 +1,12 @@
 package com.expmngr.virtualpantry.AppScreens;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import com.expmngr.virtualpantry.Utils.SettingsVariables;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
+        void onSetup(final TextView dateTextView);
         void onItemClick(int position);
         void onDeleteClick(int position);
         void onConfirmEditClick(int position, Food editFood);
@@ -204,7 +209,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         }
         //TODO Date things
         String expDate = food.getExpiryDate();
-        TextView dateTextView = foodViewHolder.expiryTextView;
+
+
+        final TextView dateTextView = foodViewHolder.expiryTextView;
+        mListener.onSetup(dateTextView);
+
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy HH").parse(expDate);
             foodViewHolder.expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
@@ -229,6 +238,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
         return difference;
     }
+
 
     private static String getTimeframe(int hours){
         if(hours < 0){

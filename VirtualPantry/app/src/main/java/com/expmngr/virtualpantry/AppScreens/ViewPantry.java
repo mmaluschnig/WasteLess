@@ -1,6 +1,7 @@
 package com.expmngr.virtualpantry.AppScreens;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +39,8 @@ public class ViewPantry extends AppCompatActivity {
 
     Spinner filterSpinner;
     RecyclerView rvFood;
+
+    final Calendar myCalendar = Calendar.getInstance();
 
     private String currentLocation;
     private String currentFilter;
@@ -129,12 +134,40 @@ public class ViewPantry extends AppCompatActivity {
     private void updateRecyclerView(final List<Food> food){
         if (MainMenuPlaceholder.database.foodDAO().getFood() == null){
             //TODO notify empty pantry
+            return;
 
         }
         final FoodAdapter adapter = new FoodAdapter(food);
         rvFood.setAdapter(adapter);
         rvFood.setLayoutManager(new LinearLayoutManager(this));
         adapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onSetup(final TextView dateTextView) {
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        String myFormat = "dd/MM/yyyy";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+
+                        dateTextView.setText(sdf.format(myCalendar.getTime()));
+                    }
+                };
+
+                dateTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new DatePickerDialog(ViewPantry.this, android.R.style.Theme_DeviceDefault_Dialog_Alert, date,
+                                myCalendar.get(Calendar.YEAR),
+                                myCalendar.get(Calendar.MONTH),
+                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+            }
+
+
             @Override
             public void onItemClick(int position) {
                 startActivity(new Intent(getApplicationContext(), ShoppingList.class));
