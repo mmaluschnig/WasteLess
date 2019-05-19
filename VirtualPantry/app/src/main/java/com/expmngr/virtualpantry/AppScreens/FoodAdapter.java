@@ -8,16 +8,19 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.SettingsVariables;
+import com.expmngr.virtualpantry.Utils.SimpleImageArrayAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,9 +30,23 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 //    private static final int LAYOUT_ONE= 0;
 //    private static final int LAYOUT_TWO= 1;
     private OnItemClickListener mListener;
+    private static HashMap<String,Integer> locationToInt = new HashMap<String,Integer>(){
+        {
+            put("Pantry", 0);
+            put("Fridge", 1);
+            put("Freezer", 2);
+        }
+    };
+    private static HashMap<Integer,String> intToLocation = new HashMap<Integer,String>(){
+        {
+            put(0, "Pantry");
+            put(1, "Fridge");
+            put(2, "Freezer");
+        }
+    };
 
     public interface OnItemClickListener {
-        void onSetup(final TextView dateTextView);
+        void onSetup(final TextView dateTextView, final Spinner locationSpinner);
         void onItemClick(int position);
         void onDeleteClick(int position);
         void onConfirmEditClick(int position, Food editFood);
@@ -48,7 +65,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public TextView catTextView;
         public TextView quantityTextView;
         public TextView expiryTextView;
-        public ImageView locationImage;
+        public Spinner locationSpinner;
 
         private Boolean isEditing = false;
         public String expiryDate;
@@ -62,7 +79,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             catTextView = itemView.findViewById(R.id.food_cat);
             quantityTextView = itemView.findViewById(R.id.food_qty);
             expiryTextView = itemView.findViewById(R.id.food_expiry);
-            locationImage = itemView.findViewById(R.id.image_location);
+            locationSpinner = itemView.findViewById(R.id.locationSpinner);
+            locationSpinner.setEnabled(false);
+            locationSpinner.setClickable(false);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +121,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 editFood.setName(nameTextView.getText().toString());
                                 editFood.setCategory(catTextView.getText().toString());
                                 editFood.setQuantity(Float.parseFloat(quantityTextView.getText().toString()));
-                                //editFood.setLocation(nameTextView.getText().toString());
+                                editFood.setLocation(intToLocation.get(locationSpinner.getSelectedItemPosition()));
 
                                 expiryDate = expiryTextView.getText().toString();
                                 editFood.setExpiryDate(expiryDate + SettingsVariables.expirytime);
@@ -115,6 +134,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 nameTextView.setEnabled(false);
                                 catTextView.setEnabled(false);
                                 quantityTextView.setEnabled(false);
+                                locationSpinner.setEnabled(false);
+                                locationSpinner.setClickable(false);
 
                                 try {
                                     expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expiryDate + SettingsVariables.expirytime));
@@ -129,6 +150,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 nameTextView.setEnabled(true);
                                 catTextView.setEnabled(true);
                                 quantityTextView.setEnabled(true);
+                                locationSpinner.setEnabled(true);
+                                locationSpinner.setClickable(true);
                                 expiryTextView.setEnabled(true);
                                 expiryTextView.setText(expiryDate);
                             }
@@ -176,19 +199,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         TextView quantityTextView = foodViewHolder.quantityTextView;
         quantityTextView.setText(new Float(food.getQuantity()).toString());
 
-        ImageView locationImage = foodViewHolder.locationImage;
-        String location = food.getLocation();
-        if(location.equals("Pantry")){
-            locationImage.setImageResource(R.drawable.ic_pantry);
-        }else if(location.equals("Fridge")){
-            locationImage.setImageResource(R.drawable.ic_food_and_restaurant);
-        }else if(location.equals("Freezer")){
-            locationImage.setImageResource(R.drawable.ic_snow);
-        }
-        //TODO Date things
-        final TextView dateTextView = foodViewHolder.expiryTextView;
-        mListener.onSetup(dateTextView);
 
+        Spinner locationSpinner = foodViewHolder.locationSpinner;
+        final TextView dateTextView = foodViewHolder.expiryTextView;
+        mListener.onSetup(dateTextView,locationSpinner);
+
+        //location things
+        String location = food.getLocation();
+        locationSpinner.setSelection(locationToInt.get(location));
+
+        //Date things
         try {
             String expDate = food.getExpiryDate();
             Date date = new SimpleDateFormat("dd/MM/yyyy HH").parse(expDate);

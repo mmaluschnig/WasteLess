@@ -22,6 +22,7 @@ import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
 import com.expmngr.virtualpantry.Utils.SettingsVariables;
+import com.expmngr.virtualpantry.Utils.SimpleImageArrayAdapter;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.ParseException;
@@ -143,7 +144,8 @@ public class ViewPantry extends AppCompatActivity {
         rvFood.setLayoutManager(new LinearLayoutManager(this));
         adapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
             @Override
-            public void onSetup(final TextView dateTextView) {
+            public void onSetup(final TextView dateTextView, final Spinner locationSpinner) {
+                //SETUP DATE
                 final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -166,6 +168,11 @@ public class ViewPantry extends AppCompatActivity {
                                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                     }
                 });
+
+                //SETUP LOCATION
+                SimpleImageArrayAdapter adapter = new SimpleImageArrayAdapter(ViewPantry.this,
+                        new Integer[]{R.drawable.ic_pantry,R.drawable.ic_food_and_restaurant,R.drawable.ic_snow});
+                locationSpinner.setAdapter(adapter);
             }
 
 
@@ -205,7 +212,7 @@ public class ViewPantry extends AppCompatActivity {
                 food.get(position).setName(editFood.getName());
                 food.get(position).setCategory(editFood.getCategory());
                 food.get(position).setQuantity(editFood.getQuantity());
-                //food.get(position).setLocation(editFood.getLocation());
+                food.get(position).setLocation(editFood.getLocation());
                 food.get(position).setExpiryDate(editFood.getExpiryDate());
 
                 MainMenuPlaceholder.database.foodDAO().updateFood(food.get(position));
