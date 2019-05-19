@@ -73,7 +73,7 @@ public class AddItemManually extends AppCompatActivity {
                     Toast.makeText(AddItemManually.this, "Quantity must be greater that 0", Toast.LENGTH_SHORT).show();
                 }else if(category.equals("")){
                     Toast.makeText(AddItemManually.this, "Food must have a category", Toast.LENGTH_SHORT).show();
-                }else if(expiryDate.equals(" 00")){
+                }else if(expiryDate.equals(SettingsVariables.expirytime)){
                     Toast.makeText(AddItemManually.this, "Food must have an expiry date", Toast.LENGTH_SHORT).show();
                 }else {
                     //everything verifies
