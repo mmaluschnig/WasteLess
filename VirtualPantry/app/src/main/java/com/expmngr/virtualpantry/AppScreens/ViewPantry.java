@@ -143,9 +143,9 @@ public class ViewPantry extends AppCompatActivity {
 
             @Override
             public void onDeleteClick(int position) {
+                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
                 food.remove(position);
                 adapter.notifyItemRemoved(position);
-                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
             }
 
             @Override
