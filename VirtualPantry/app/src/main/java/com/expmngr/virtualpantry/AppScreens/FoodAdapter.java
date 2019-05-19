@@ -97,6 +97,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                         if(position != RecyclerView.NO_POSITION){
                             if(isEditing){//finished editing
                                 //TODO verify edit input
+                                //create food with edited values
                                 Food editFood = new Food();
                                 editFood.setName(nameTextView.getText().toString());
                                 editFood.setCategory(catTextView.getText().toString());
@@ -104,10 +105,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 //editFood.setLocation(nameTextView.getText().toString());
 
                                 expiryDate = expiryTextView.getText().toString();
-                                editFood.setExpiryDate(expiryDate);
+                                editFood.setExpiryDate(expiryDate + SettingsVariables.expirytime);
 
-                                listener.onConfirmEditClick(position, editFood);
+                                listener.onConfirmEditClick(position, editFood);//update food in database
 
+                                //disable edit texts
                                 isEditing = false;
                                 editImage.setImageResource(R.drawable.ic_edit);
                                 nameTextView.setEnabled(false);
@@ -139,30 +141,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
 
     }
-
-//    public static class EmptyFoodViewHolder extends RecyclerView.ViewHolder {
-//        public TextView emptyTextView;
-//        public ImageView addFoodImage;
-//
-//        public EmptyFoodViewHolder(View itemView, final OnItemClickListener listener) {
-//            super(itemView);
-//            emptyTextView = itemView.findViewById(R.id.empty_food);
-//            addFoodImage = itemView.findViewById(R.id.add_food);
-//
-//            addFoodImage.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (listener != null){
-//                        int position = getAdapterPosition();
-//                        if(position != RecyclerView.NO_POSITION){
-//                            listener.onAddFoodClick(position);
-//                        }
-//                    }
-//                }
-//            });
-//        }
-//    }
-
 
     private List<Food> mFood;
 
@@ -208,13 +186,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             locationImage.setImageResource(R.drawable.ic_snow);
         }
         //TODO Date things
-        String expDate = food.getExpiryDate();
-
-
         final TextView dateTextView = foodViewHolder.expiryTextView;
         mListener.onSetup(dateTextView);
 
         try {
+            String expDate = food.getExpiryDate();
             Date date = new SimpleDateFormat("dd/MM/yyyy HH").parse(expDate);
             foodViewHolder.expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
@@ -233,15 +209,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     private static int getHoursTillExpiry(String expiryDate) throws ParseException {
         Date expDate = new SimpleDateFormat("dd/MM/yyyy HH").parse(expiryDate);
         Date now = new Date();
-        int difference = (int) (expDate.getTime() - now.getTime());
+        long difference = (expDate.getTime() - now.getTime());
         difference = difference / 1000 / 60 / 60;
-
-        return difference;
+        return (int) difference;
     }
 
 
     private static String getTimeframe(int hours){
-        if(hours < 0){
+        if(hours <= 0){
             return "Expired";
         }
         if(hours / 24 >= 1){

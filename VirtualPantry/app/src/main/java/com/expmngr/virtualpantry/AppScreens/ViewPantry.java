@@ -21,6 +21,7 @@ import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.expmngr.virtualpantry.Utils.SettingsVariables;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.ParseException;
