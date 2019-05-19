@@ -208,6 +208,11 @@ public class ViewPantry extends AppCompatActivity {
             }
 
             @Override
+            public void onLocationChange(int position, String newLocation, TextView dateText){
+
+            }
+
+            @Override
             public void onConfirmEditClick(int position, Food editFood) {
                 food.get(position).setName(editFood.getName());
                 food.get(position).setCategory(editFood.getCategory());

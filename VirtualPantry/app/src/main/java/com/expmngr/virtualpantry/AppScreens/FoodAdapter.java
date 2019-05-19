@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         void onItemClick(int position);
         void onDeleteClick(int position);
         void onConfirmEditClick(int position, Food editFood);
+        void onLocationChange(int position, String newLocation, TextView dateText);
 //        void onAddFoodClick(int position);
     }
 
@@ -105,6 +107,23 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                             listener.onDeleteClick(position);
                         }
                     }
+                }
+            });
+
+            locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int spinnerPos, long id) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            listener.onLocationChange(position, intToLocation.get(spinnerPos), expiryTextView);
+                        }
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
 

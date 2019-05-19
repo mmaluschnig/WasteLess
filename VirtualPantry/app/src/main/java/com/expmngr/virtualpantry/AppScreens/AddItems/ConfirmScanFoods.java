@@ -58,6 +58,16 @@ public class ConfirmScanFoods extends AppCompatActivity {
 
     private List<Food> currentFoodsToAdd;
 
+    private Map<String,Long> timeDict = new HashMap<String,Long>(){
+        {
+            Long day = new Long(1000*60*60*24);
+            put("day",day);
+            put("week",day * 7);
+            put("month", day * 30);
+            put("year", day * 365);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,10 +188,9 @@ public class ConfirmScanFoods extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 String name = food.get(position).getName();
-                                MainMenuPlaceholder.database.foodDAO().deleteFood(food.get(position));
                                 food.remove(position);
                                 adapter.notifyItemRemoved(position);
-                                Toast.makeText(ConfirmScanFoods.this, "Deleted" + name, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ConfirmScanFoods.this, "Deleted: " + name, Toast.LENGTH_SHORT).show();
                             }})
                         .setNegativeButton(android.R.string.no, null)
                         .show();
@@ -190,20 +199,21 @@ public class ConfirmScanFoods extends AppCompatActivity {
             }
 
             @Override
+            public void onLocationChange(int position, String newLocation, TextView dateText){
+                ScannedFood sFood = (ScannedFood) food.get(position);
+                String expiry = sFood.getDateByLocation(newLocation);
+
+                dateText.setText(expiry.subSequence(0,10));
+            }
+
+            @Override
             public void onConfirmEditClick(int position, Food editFood) {
                 food.get(position).setName(editFood.getName());
                 food.get(position).setCategory(editFood.getCategory());
                 food.get(position).setQuantity(editFood.getQuantity());
                 food.get(position).setLocation(editFood.getLocation());
-                //if expiry date hasnt been edited chnge the expiry date to the current locations exp date
-                if(food.get(position).getExpiryDate().equals(editFood.getExpiryDate())){
-                    ScannedFood sFood = (ScannedFood) food.get(position);
-                    food.get(position).setExpiryDate(sFood.getDateByLocation(editFood.getLocation()));
-                }else {
-                    food.get(position).setExpiryDate(editFood.getExpiryDate());
-                }
-
-                MainMenuPlaceholder.database.foodDAO().updateFood(food.get(position));
+                food.get(position).setExpiryDate(editFood.getExpiryDate());
+                System.out.println("EXP: " + food.get(position).getExpiryDate());
             }
 
         });
@@ -224,7 +234,21 @@ public class ConfirmScanFoods extends AppCompatActivity {
                 scannedFood.addDate("Pantry", timeToDate(expiryFood.getPantryExpiry()));
                 scannedFood.addDate("Fridge", timeToDate(expiryFood.getFridgeExpiry()));
                 scannedFood.addDate("Freezer", timeToDate(expiryFood.getFreezerExpiry()));
-                scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
+                String now = new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
+                if(scannedFood.getDateByLocation("Pantry").equals(now)){
+                    System.out.println("NOT PANTRY");
+                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Fridge"));
+                    scannedFood.setLocation("Fridge");
+                }else if(scannedFood.getDateByLocation("Fridge").equals(now)){
+                    System.out.println("NOT FRIDGE");
+                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Freezer"));
+                    scannedFood.setLocation("Freezer");
+                }else {
+                    System.out.println("PANTRY");
+                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
+                    scannedFood.setLocation("Pantry");
+                }
+
                 currentFoodsToAdd.add(scannedFood);
             }
 
@@ -244,10 +268,57 @@ public class ConfirmScanFoods extends AppCompatActivity {
     }
 
     private String timeToDate(String time){
-        //TODO convert from '1 day' or '3 weeks' to date
         Date now = new Date();
 
-        return new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
+        if(time.equals("")){
+            System.out.println("NULL");
+            return new SimpleDateFormat("dd/MM/yyyy HH").format(now);
+        }
+
+        Double num = getNumberFromTime(time);
+
+        System.out.println("Time: " + time);
+        if(time.toLowerCase().contains("day")){
+            System.out.println("DAY");
+            return getDateFromTime("day", num);
+        }else if(time.toLowerCase().contains("week")){
+            System.out.println("WEEK");
+            return getDateFromTime("week", num);
+        }else if(time.toLowerCase().contains("month")){
+            System.out.println("MONTH");
+            return getDateFromTime("month", num);
+        }else if(time.toLowerCase().contains("years")){
+            System.out.println("YEAR");
+            return getDateFromTime("year", num);
+        }else {
+            //weird words
+            System.out.println("BAD: " + time);
+        }
+        return new SimpleDateFormat("dd/MM/yyyy HH").format(now);
+    }
+
+    private Double getNumberFromTime(String time){
+        if(time.contains("-")){
+            String[] numbers = time.toLowerCase().replaceAll("[A-Za-z ]*","").split("-");
+
+            Integer total = Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);
+            Double average = total.doubleValue() / 2;
+            return average;
+        }else if(time.matches(".*\\d.*")){
+            String number = time.toLowerCase().replaceAll("\\D","");
+            System.out.println("REGEX" + number);
+            return Double.parseDouble(number);
+        }else{
+            return 0d;
+        }
+    }
+
+    private String getDateFromTime(String timeFrame, Double multiplier){
+
+        Date now = new Date();
+        Double extraTime = (multiplier * timeDict.get(timeFrame));
+        Date expiry = new Date(now.getTime() + extraTime.longValue());
+        return new SimpleDateFormat("dd/MM/yyyy HH").format(expiry);
     }
 
     private void setUpButtons(){
