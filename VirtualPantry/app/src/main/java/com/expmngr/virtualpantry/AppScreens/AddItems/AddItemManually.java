@@ -1,10 +1,6 @@
 package com.expmngr.virtualpantry.AppScreens.AddItems;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,17 +13,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.expmngr.virtualpantry.AppScreens.AddNewItems;
 import com.expmngr.virtualpantry.AppScreens.MainMenuPlaceholder;
 import com.expmngr.virtualpantry.Database.Entities.Food;
-import com.expmngr.virtualpantry.MainActivity;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
+import com.expmngr.virtualpantry.Utils.SettingsVariables;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddItemManually extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
@@ -65,7 +62,7 @@ public class AddItemManually extends AppCompatActivity {
                 }
                 String location = foodLocationSpinner.getSelectedItem().toString();
                 String addedDate = new SimpleDateFormat("dd/MM/yyyy HH").format(new Date());
-                String expiryDate = foodTimeTillExpiryText.getText().toString() + " 00";
+                String expiryDate = foodTimeTillExpiryText.getText().toString() + SettingsVariables.expirytime;
 
                 //Check that fields are correct
                 if(name.equals("")){
