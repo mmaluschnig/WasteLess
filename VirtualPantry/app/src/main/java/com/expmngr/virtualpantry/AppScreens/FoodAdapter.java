@@ -4,13 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
+import com.expmngr.virtualpantry.Utils.SettingsVariables;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -111,7 +110,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 quantityTextView.setEnabled(false);
 
                                 try {
-                                    expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expiryDate + " 00"));
+                                    expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expiryDate + SettingsVariables.expirytime));
                                     expiryTextView.setText(expiryString);
                                 }catch(Exception e){
                                     System.err.println(e);

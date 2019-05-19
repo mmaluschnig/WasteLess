@@ -17,9 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.BottomNavigationViewHelper;
@@ -29,6 +26,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 public class Settings extends AppCompatActivity {
     //notification channel
@@ -54,6 +54,7 @@ public class Settings extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
         List<Food> food = MainMenuPlaceholder.database.foodDAO().getFood();
+
 
         int timeTillExp;
         long timeTillExpms;
@@ -115,6 +116,16 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+       /* Button notificationsettingsButton = (Button) findViewById((R.id.notificationSettingsbutton));
+        notificationsettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(getApplicationContext(),NotificationSettings.class);
+                startActivity(newIntent);
+            }
+        });
+        */
+
 
     }
 
@@ -175,6 +186,8 @@ public class Settings extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
     }
+
+
 
 
     private Notification getNotification(String content){
