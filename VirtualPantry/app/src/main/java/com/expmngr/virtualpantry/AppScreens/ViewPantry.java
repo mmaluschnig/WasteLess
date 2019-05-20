@@ -183,6 +183,11 @@ public class ViewPantry extends AppCompatActivity {
             }
 
             @Override
+            public void onExpiryFoodChange(int position, int index){
+
+            }
+
+            @Override
             public void onDeleteClick(final int position) {
 
                 new AlertDialog.Builder(ViewPantry.this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
@@ -218,6 +223,8 @@ public class ViewPantry extends AppCompatActivity {
                 food.get(position).setExpiryDate(editFood.getExpiryDate());
 
                 MainMenuPlaceholder.database.foodDAO().updateFood(food.get(position));
+
+                adapter.notifyItemChanged(position);
             }
 
         });

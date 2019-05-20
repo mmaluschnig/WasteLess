@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +57,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         void onDeleteClick(int position);
         void onConfirmEditClick(int position, Food editFood);
         void onLocationChange(int position, String newLocation, TextView dateText);
+        void onExpiryFoodChange(int position, int index);
 //        void onAddFoodClick(int position);
     }
 
@@ -94,18 +96,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 @Override
                 public void onClick(View v) {
                     if (listener != null){
-                        int position = getAdapterPosition();
+                        final int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
                             List<ExpiryFood> options = listener.onItemClick(position);
                             if(options != null) {
                                 PopupMenu popup = new PopupMenu(itemView.getContext(), itemView);
-                                for (ExpiryFood f : options) {
-                                    popup.getMenu().add(f.getName());
+                                final Map<String,Integer> index = new HashMap<>();
+                                for (int i=0; i<options.size();i++){
+                                    popup.getMenu().add(options.get(i).getName());
+                                    index.put(options.get(i).getName(),i);
                                 }
                                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem item) {
                                         //TODO stuff when clicked
+                                        listener.onExpiryFoodChange(position, index.get(item.getTitle()));
+
                                         return false;
                                     }
                                 });
@@ -251,7 +257,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             Date date = new SimpleDateFormat("dd/MM/yyyy HH").parse(expDate);
             foodViewHolder.expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
-            foodViewHolder.expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expDate));
+            foodViewHolder.expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(foodViewHolder.expiryDate + SettingsVariables.expirytime));
             dateTextView.setText(foodViewHolder.expiryString);
         }catch (Exception e){
             System.err.println(e);

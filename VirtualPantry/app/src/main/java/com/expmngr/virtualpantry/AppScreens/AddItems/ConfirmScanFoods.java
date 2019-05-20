@@ -176,6 +176,18 @@ public class ConfirmScanFoods extends AppCompatActivity {
             }
 
             @Override
+            public void onExpiryFoodChange(int position, int index){
+                ScannedFood selectedFood = (ScannedFood)food.get(position);
+                List<ExpiryFood> options = foodOptions.get(selectedFood.getScannedString());
+                ScannedFood scannedFood = expToScannedFood(options.get(index), selectedFood.getScannedString());
+                System.out.println("clicked: " + options.get(index).getName() + " got " + scannedFood.getName());
+
+                food.set(position, scannedFood);
+
+                adapter.notifyItemChanged(position);
+            }
+
+            @Override
             public void onDeleteClick(final int position) {
 
                 new AlertDialog.Builder(ConfirmScanFoods.this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
@@ -193,7 +205,6 @@ public class ConfirmScanFoods extends AppCompatActivity {
                         .setNegativeButton(android.R.string.no, null)
                         .show();
 
-//
             }
 
             @Override
@@ -212,6 +223,8 @@ public class ConfirmScanFoods extends AppCompatActivity {
                 food.get(position).setLocation(editFood.getLocation());
                 food.get(position).setExpiryDate(editFood.getExpiryDate());
                 //System.out.println("EXP: " + food.get(position).getExpiryDate());
+
+                //adapter.notifyItemChanged(position);
             }
 
         });
@@ -226,38 +239,44 @@ public class ConfirmScanFoods extends AppCompatActivity {
             if(options.size() > 0) {
                 ExpiryFood expiryFood = options.get(0);
 
-                ScannedFood scannedFood = new ScannedFood();
-                scannedFood.setFromFood(expToFood(expiryFood));
-                scannedFood.setScannedString(scannedName);
+                ScannedFood scannedFood = expToScannedFood(expiryFood, scannedName);
 
-
-                scannedFood.addDate("Pantry", timeToDate(expiryFood.getPantryExpiry()));
-                scannedFood.addDate("Fridge", timeToDate(expiryFood.getFridgeExpiry()));
-                scannedFood.addDate("Freezer", timeToDate(expiryFood.getFreezerExpiry()));
-                String now = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                if(!scannedFood.getDateByLocation("Pantry").contains(now)){
-                    System.out.println("PANTRY");
-                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
-                    scannedFood.setLocation("Pantry");
-                }else if(!scannedFood.getDateByLocation("Fridge").contains(now)){
-                    System.out.println("FRIDGE");
-                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Fridge"));
-                    scannedFood.setLocation("Fridge");
-                }else if(!scannedFood.getDateByLocation("Freezer").contains(now)){
-                    System.out.println("FREEZER");
-                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Freezer"));
-                    scannedFood.setLocation("Freezer");
-                }else {
-                    System.out.println("PANTRY");
-                    scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
-                    scannedFood.setLocation("Pantry");
-                }
 
                 currentFoodsToAdd.add(scannedFood);
             }
 
             //iterator.remove();
         }
+    }
+
+    private ScannedFood expToScannedFood(ExpiryFood expiryFood, String scannedName){
+        ScannedFood scannedFood = new ScannedFood();
+        scannedFood.setFromFood(expToFood(expiryFood));
+        scannedFood.setScannedString(scannedName);
+
+
+        scannedFood.addDate("Pantry", timeToDate(expiryFood.getPantryExpiry()));
+        scannedFood.addDate("Fridge", timeToDate(expiryFood.getFridgeExpiry()));
+        scannedFood.addDate("Freezer", timeToDate(expiryFood.getFreezerExpiry()));
+        String now = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        if(!scannedFood.getDateByLocation("Pantry").contains(now)){
+            System.out.println("PANTRY");
+            scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
+            scannedFood.setLocation("Pantry");
+        }else if(!scannedFood.getDateByLocation("Fridge").contains(now)){
+            System.out.println("FRIDGE");
+            scannedFood.setExpiryDate(scannedFood.getDateByLocation("Fridge"));
+            scannedFood.setLocation("Fridge");
+        }else if(!scannedFood.getDateByLocation("Freezer").contains(now)){
+            System.out.println("FREEZER");
+            scannedFood.setExpiryDate(scannedFood.getDateByLocation("Freezer"));
+            scannedFood.setLocation("Freezer");
+        }else {
+            System.out.println("PANTRY");
+            scannedFood.setExpiryDate(scannedFood.getDateByLocation("Pantry"));
+            scannedFood.setLocation("Pantry");
+        }
+        return scannedFood;
     }
 
     private Food expToFood(ExpiryFood expFood){
