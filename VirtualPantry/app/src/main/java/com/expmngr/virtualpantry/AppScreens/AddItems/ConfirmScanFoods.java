@@ -169,12 +169,10 @@ public class ConfirmScanFoods extends AppCompatActivity {
 
 
             @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
-                food.get(position).setName("Clicked");
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemChanged(position);
-
+            public List<ExpiryFood> onItemClick(int position) {
+                ScannedFood selectedFood = (ScannedFood)food.get(position);
+                System.out.println("SCanned string " + selectedFood.getScannedString());
+                return foodOptions.get(selectedFood.getScannedString());
             }
 
             @Override
@@ -224,11 +222,13 @@ public class ConfirmScanFoods extends AppCompatActivity {
         while (iterator.hasNext()){
             Map.Entry pair = (Map.Entry)iterator.next();
             List<ExpiryFood> options = (List<ExpiryFood>) pair.getValue();
+            String scannedName = (String) pair.getKey();
             if(options.size() > 0) {
                 ExpiryFood expiryFood = options.get(0);
 
                 ScannedFood scannedFood = new ScannedFood();
                 scannedFood.setFromFood(expToFood(expiryFood));
+                scannedFood.setScannedString(scannedName);
 
 
                 scannedFood.addDate("Pantry", timeToDate(expiryFood.getPantryExpiry()));
@@ -256,9 +256,8 @@ public class ConfirmScanFoods extends AppCompatActivity {
                 currentFoodsToAdd.add(scannedFood);
             }
 
-            iterator.remove();
+            //iterator.remove();
         }
-        System.out.println(foodOptions.toString());
     }
 
     private Food expToFood(ExpiryFood expFood){

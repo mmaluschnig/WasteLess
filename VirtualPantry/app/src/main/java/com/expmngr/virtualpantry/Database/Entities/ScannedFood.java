@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ScannedFood extends Food {
     private Map<String,String> expiryDates;
+    private String scannedString;
 
     public ScannedFood() {
         expiryDates = new HashMap<>();
@@ -31,5 +32,13 @@ public class ScannedFood extends Food {
         this.quantity = food.getQuantity();
         this.category = food.getCategory();
         this.location = food.getLocation();
+    }
+
+    public String getScannedString() {
+        return scannedString;
+    }
+
+    public void setScannedString(String scannedString) {
+        this.scannedString = scannedString;
     }
 }

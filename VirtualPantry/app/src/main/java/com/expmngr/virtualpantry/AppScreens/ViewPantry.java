@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
 import com.expmngr.virtualpantry.R;
@@ -177,12 +178,8 @@ public class ViewPantry extends AppCompatActivity {
 
 
             @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
-                food.get(position).setName("Clicked");
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemChanged(position);
-
+            public List<ExpiryFood> onItemClick(int position) {
+                return null;
             }
 
             @Override

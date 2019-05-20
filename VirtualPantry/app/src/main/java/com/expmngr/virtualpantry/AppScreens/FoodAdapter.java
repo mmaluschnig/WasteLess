@@ -3,15 +3,19 @@ package com.expmngr.virtualpantry.AppScreens;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.SettingsVariables;
@@ -48,7 +52,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     public interface OnItemClickListener {
         void onSetup(final TextView dateTextView, final Spinner locationSpinner);
-        void onItemClick(int position);
+        List<ExpiryFood> onItemClick(int position);
         void onDeleteClick(int position);
         void onConfirmEditClick(int position, Food editFood);
         void onLocationChange(int position, String newLocation, TextView dateText);
@@ -73,7 +77,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public String expiryDate;
         public String expiryString;
 
-        public FoodViewHolder(View itemView, final OnItemClickListener listener) {
+        public FoodViewHolder(final View itemView, final OnItemClickListener listener) {
             super(itemView);
             deleteImage = itemView.findViewById(R.id.image_delete);
             editImage = itemView.findViewById(R.id.image_edit);
@@ -92,7 +96,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                     if (listener != null){
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
-                            //listener.onItemClick(position);
+                            List<ExpiryFood> options = listener.onItemClick(position);
+                            if(options != null) {
+                                PopupMenu popup = new PopupMenu(itemView.getContext(), itemView);
+                                for (ExpiryFood f : options) {
+                                    popup.getMenu().add(f.getName());
+                                }
+                                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem item) {
+                                        //TODO stuff when clicked
+                                        return false;
+                                    }
+                                });
+                                popup.show();
+                            }
                         }
                     }
                 }
