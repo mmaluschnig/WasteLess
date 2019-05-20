@@ -92,6 +92,10 @@ public class ConfirmScanFoods extends AppCompatActivity {
 
     private void addScannedItemsToPantry(){
         //TODO Add scanned food to pantry
+        for(Food f : currentFoodsToAdd){
+            MainMenuPlaceholder.database.foodDAO().addFood(f);
+        }
+        Toast.makeText(ConfirmScanFoods.this, "Added Foods", Toast.LENGTH_SHORT).show();
     }
 
     private void findFoods(){
@@ -349,7 +353,10 @@ public class ConfirmScanFoods extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addScannedItemsToPantry();
-                startActivity(new Intent(getApplicationContext(), ViewPantry.class));
+
+                startActivity(
+                        new Intent(getApplicationContext(), MainMenuPlaceholder.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK)
+                );
             }
         });
 

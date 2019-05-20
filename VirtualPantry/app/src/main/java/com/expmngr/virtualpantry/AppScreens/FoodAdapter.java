@@ -109,7 +109,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem item) {
-                                        //TODO stuff when clicked
                                         listener.onExpiryFoodChange(position, index.get(item.getTitle()));
 
                                         return false;
