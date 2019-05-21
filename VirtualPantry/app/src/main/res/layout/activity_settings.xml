@@ -8,7 +8,7 @@
     tools:context=".AppScreens.Settings">
 
     <TextView
-        android:id="@+id/placeholderSettings"
+        android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -16,9 +16,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Where Settings will go, drag for notification rate?, date format"
+        android:text="Settings"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:text="@string/settings_add_expired_food_to_shopping_list_checkbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholderSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
 
     <Button
         android:id="@+id/feedbackSubmitFeedback"
@@ -61,57 +61,18 @@
         android:layout_width="56dp"
         android:layout_height="153dp" />
 
-    <Button
-        android:id="@+id/action_5"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/accept_button_layout"
-        android:text="5 seconds"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/action_10"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginLeft="57dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginRight="57dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/accept_button_layout"
-        android:text="10 seconds"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/action_30"
-        app:layout_constraintStart_toEndOf="@+id/action_5" />
-
-    <Button
-        android:id="@+id/action_30"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/accept_button_layout"
-        android:text="30 seconds"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginBottom="25dp"
         android:text="Feel like leaving some feeback? Click below!"
         android:textColor="#F0F7F4"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/feedbackSubmitFeedback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

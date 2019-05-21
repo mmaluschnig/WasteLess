@@ -47,6 +47,16 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setupBottomNavigationView();
 
+        Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
+        feedbackBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                sendEmail();
+            }
+        });
+
+    }
+
+    private void notificationStuff(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID,CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
             channel.setDescription(CHANNEL_DESC);
@@ -84,37 +94,32 @@ public class Settings extends AppCompatActivity {
         }
 
 
-        Button feedbackBtn = (Button) findViewById(R.id.feedbackSubmitFeedback);
-        feedbackBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                sendEmail();
-            }
-        });
-
-        Button fiveseconds = (Button) findViewById(R.id.action_5);
-        fiveseconds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scheduleNotification(getNotification("5 seconds delay"), 5000);
-            }
-        });
-
-        Button tenseconds = (Button) findViewById(R.id.action_10);
-        tenseconds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scheduleNotification(getNotification("10 second delay"), 10000);
-            }
-        });
 
 
-        Button thirtyseconds = (Button) findViewById(R.id.action_30);
-        thirtyseconds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scheduleNotification(getNotification("30 second delay"), 30000);
-            }
-        });
+//        Button fiveseconds = (Button) findViewById(R.id.action_5);
+//        fiveseconds.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                scheduleNotification(getNotification("5 seconds delay"), 5000);
+//            }
+//        });
+//
+//        Button tenseconds = (Button) findViewById(R.id.action_10);
+//        tenseconds.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                scheduleNotification(getNotification("10 second delay"), 10000);
+//            }
+//        });
+//
+//
+//        Button thirtyseconds = (Button) findViewById(R.id.action_30);
+//        thirtyseconds.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                scheduleNotification(getNotification("30 second delay"), 30000);
+//            }
+//        });
 
        /* Button notificationsettingsButton = (Button) findViewById((R.id.notificationSettingsbutton));
         notificationsettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +130,6 @@ public class Settings extends AppCompatActivity {
             }
         });
         */
-
 
     }
 
