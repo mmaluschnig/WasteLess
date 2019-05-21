@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.Database.Entities.FoodGroup;
 import com.expmngr.virtualpantry.R;
@@ -177,11 +178,12 @@ public class ViewPantry extends AppCompatActivity {
 
 
             @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
-                food.get(position).setName("Clicked");
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemChanged(position);
+            public List<ExpiryFood> onItemClick(int position) {
+                return null;
+            }
+
+            @Override
+            public void onExpiryFoodChange(int position, int index){
 
             }
 
@@ -208,6 +210,11 @@ public class ViewPantry extends AppCompatActivity {
             }
 
             @Override
+            public void onLocationChange(int position, String newLocation, TextView dateText){
+
+            }
+
+            @Override
             public void onConfirmEditClick(int position, Food editFood) {
                 food.get(position).setName(editFood.getName());
                 food.get(position).setCategory(editFood.getCategory());
@@ -216,6 +223,8 @@ public class ViewPantry extends AppCompatActivity {
                 food.get(position).setExpiryDate(editFood.getExpiryDate());
 
                 MainMenuPlaceholder.database.foodDAO().updateFood(food.get(position));
+
+                adapter.notifyItemChanged(position);
             }
 
         });

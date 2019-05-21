@@ -22,7 +22,7 @@ public interface FoodDAO {
     @Query("select * from Food where location like :location order by date_added ASC")
     List<Food> getFoodByAdded(String location);
 
-    @Query("select * from Food where location like :location order by expiryDate ASC")
+    @Query("select * from Food where location like :location order by expiryDate DESC")
     List<Food> getFoodByExpiry(String location);
 
     @Query("select * from Food where location=:location order by UPPER(category) ASC")

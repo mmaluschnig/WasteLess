@@ -8,15 +8,28 @@ import androidx.room.PrimaryKey;
 public class Food {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String name;
-    private float quantity;
-    private String category;
-    private String location;
-    private String date_added;
-    private String expiryDate;
-    private Boolean isExpired;
+    protected int id;
+    protected String name;
+    protected float quantity;
+    protected String category;
+    protected String location;
+    protected String date_added;
+    protected String expiryDate;
+    protected Boolean isExpired;
 
+    public Food() {
+    }
+
+    public Food(int id, String name, float quantity, String category, String location, String date_added, String expiryDate, Boolean isExpired) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.category = category;
+        this.location = location;
+        this.date_added = date_added;
+        this.expiryDate = expiryDate;
+        this.isExpired = isExpired;
+    }
 
     public int getId() {
         return id;

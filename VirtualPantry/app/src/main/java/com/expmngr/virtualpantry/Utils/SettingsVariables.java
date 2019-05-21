@@ -1,7 +1,7 @@
 package com.expmngr.virtualpantry.Utils;
 
 public class SettingsVariables {
-    public static String expirytime = " 16";
+    public static String expirytime = " 10";
 
 
 

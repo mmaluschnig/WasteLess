@@ -3,14 +3,19 @@ package com.expmngr.virtualpantry.AppScreens;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.expmngr.virtualpantry.Database.Entities.ExpiryFood;
 import com.expmngr.virtualpantry.Database.Entities.Food;
 import com.expmngr.virtualpantry.R;
 import com.expmngr.virtualpantry.Utils.SettingsVariables;
@@ -22,6 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,9 +53,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     public interface OnItemClickListener {
         void onSetup(final TextView dateTextView, final Spinner locationSpinner);
-        void onItemClick(int position);
+        List<ExpiryFood> onItemClick(int position);
         void onDeleteClick(int position);
         void onConfirmEditClick(int position, Food editFood);
+        void onLocationChange(int position, String newLocation, TextView dateText);
+        void onExpiryFoodChange(int position, int index);
 //        void onAddFoodClick(int position);
     }
 
@@ -71,7 +79,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public String expiryDate;
         public String expiryString;
 
-        public FoodViewHolder(View itemView, final OnItemClickListener listener) {
+        public FoodViewHolder(final View itemView, final OnItemClickListener listener) {
             super(itemView);
             deleteImage = itemView.findViewById(R.id.image_delete);
             editImage = itemView.findViewById(R.id.image_edit);
@@ -88,9 +96,26 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 @Override
                 public void onClick(View v) {
                     if (listener != null){
-                        int position = getAdapterPosition();
+                        final int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
-                            //listener.onItemClick(position);
+                            List<ExpiryFood> options = listener.onItemClick(position);
+                            if(options != null) {
+                                PopupMenu popup = new PopupMenu(itemView.getContext(), itemView);
+                                final Map<String,Integer> index = new HashMap<>();
+                                for (int i=0; i<options.size();i++){
+                                    popup.getMenu().add(options.get(i).getName());
+                                    index.put(options.get(i).getName(),i);
+                                }
+                                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem item) {
+                                        listener.onExpiryFoodChange(position, index.get(item.getTitle()));
+
+                                        return false;
+                                    }
+                                });
+                                popup.show();
+                            }
                         }
                     }
                 }
@@ -105,6 +130,23 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                             listener.onDeleteClick(position);
                         }
                     }
+                }
+            });
+
+            locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int spinnerPos, long id) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            listener.onLocationChange(position, intToLocation.get(spinnerPos), expiryTextView);
+                        }
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
 
@@ -214,7 +256,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             Date date = new SimpleDateFormat("dd/MM/yyyy HH").parse(expDate);
             foodViewHolder.expiryDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
-            foodViewHolder.expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(expDate));
+            foodViewHolder.expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(foodViewHolder.expiryDate + SettingsVariables.expirytime));
             dateTextView.setText(foodViewHolder.expiryString);
         }catch (Exception e){
             System.err.println(e);

@@ -43,7 +43,7 @@ public class DataImporter {
             newFood.setPantryExpiry(line[PANTRY]);
             newFood.setFridgeExpiry(line[FRIDGE]);
             newFood.setFreezerExpiry(line[FREEZER]);
-            //newFood.setCat_num(Integer.parseInt(line[GROUP]));
+            newFood.setCategory(line[GROUP]);
             //MainMenuPlaceholder.database.expiryFoodDAO().addExpFood(newFood);
             SplashScreen.database.expiryFoodDAO().addExpFood(newFood);
         }
