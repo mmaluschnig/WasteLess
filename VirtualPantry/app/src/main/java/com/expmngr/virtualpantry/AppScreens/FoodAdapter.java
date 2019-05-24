@@ -74,6 +74,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public TextView quantityTextView;
         public TextView expiryTextView;
         public Spinner locationSpinner;
+        public ImageView exp_image;
 
         private Boolean isEditing = false;
         public String expiryDate;
@@ -90,6 +91,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             locationSpinner = itemView.findViewById(R.id.locationSpinner);
             locationSpinner.setEnabled(false);
             locationSpinner.setClickable(false);
+            exp_image = itemView.findViewById(R.id.image_exp);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -258,6 +260,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
             foodViewHolder.expiryString = "Expires in: " + getTimeframe(getHoursTillExpiry(foodViewHolder.expiryDate + SettingsVariables.expirytime));
             dateTextView.setText(foodViewHolder.expiryString);
+
+            //set expired image
+            if(getTimeframe(getHoursTillExpiry(foodViewHolder.expiryDate + SettingsVariables.expirytime)).equals("Expired")){
+                foodViewHolder.exp_image.setImageResource(R.drawable.ic_sick);
+            }else{
+                foodViewHolder.exp_image.setImageResource(R.drawable.ic_happy);
+            }
         }catch (Exception e){
             System.err.println(e);
         }

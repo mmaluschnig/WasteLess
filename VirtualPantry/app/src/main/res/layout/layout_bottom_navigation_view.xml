@@ -9,7 +9,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/colorAccent">
 
 
                 <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
@@ -18,7 +19,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/colorAccent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:menu="@menu/bottom_navigation_menu"
                     tools:layout_editor_absoluteX="16dp">
