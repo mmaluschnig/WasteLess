@@ -7,4 +7,5 @@
     <color name="background_colour">#70ABAF</color>
     <color name="text_colour">#32292F</color>
     <color name="nav_colour">#FFFFFF</color>
+    <color name="pantry_background">#F0F7F4</color>
 </resources>

@@ -98,7 +98,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Add Item Manually"
+        android:text="Add New Food"
         android:textColor="#F0F7F4"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
