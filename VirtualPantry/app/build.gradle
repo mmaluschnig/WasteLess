@@ -16,6 +16,12 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def appName = "WasteLess"
+                outputFileName = appName+"-${variant.versionName}.apk"
+            }
+        }
     }
     buildTypes {
         release {
