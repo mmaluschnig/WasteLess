@@ -1,0 +1,33 @@
+Add items manually:
+1. Fill in the text fields and add your food!
+
+Scan items:
+1. Hover your phone over your receipt, WasteLess will detect food in your receipt in real time!
+2. If you think you have found enough food, hit done to view the scanned food.
+3. Here you can update the details of any food which may have been missread by pressing the edit icon.
+	- If the food is not what youre looking for, click the emoji (top left of food) and see a selection of possible alternatives.
+		- look out for updates where this will soon be changed to clicking anywhere on the food!
+	- Change the name to something more suitable.
+	- Change the location to where you are going to store it(notice the expiry date change).
+		- the expiry date is set to todays date if we cannot reccommend one for you, this will be fixed in the next update.
+	- Change the expiry date.
+	- Change the quantity you purchased.
+
+Scan Barcode:
+	- Will be coming in future versions
+	
+View Pantry:
+1. Scroll through your food items.
+2. Change what location you are looking for.
+3. filter by date added, expiry date, Category, Alphabetical or Quantity.
+	- some of these filters give unexpected outcomes, we will fix this in future updates.
+4. Edit your food by pressing the edit icon.
+5. Delete food from yor pantry.
+
+Settings:
+1. Allow expired food to be automatically placed on your shopping list.
+2. Let us know what you think, send us an email with some feedback!
+
+Shopping List:
+	- Will be fully functional in future versions.
+
