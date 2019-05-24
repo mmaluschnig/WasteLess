@@ -7,13 +7,19 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
                 //export room schema
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def appName = "WasteLess"
+                outputFileName = appName+"-${variant.versionName}.apk"
             }
         }
     }

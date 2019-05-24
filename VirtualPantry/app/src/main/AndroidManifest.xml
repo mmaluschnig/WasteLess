@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.expmngr.virtualpantry">
+    package="com.expmngr.virtualpantry"
+    android:versionCode="160010100"
+    android:versionName="1.1.0">
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -38,11 +40,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AppScreens.AddNewItems" />
-        <activity android:name=".test1" />
-        <activity android:name=".test" />
         <activity android:name=".InputMenu" />
         <activity android:name=".MainActivity"></activity>
-
         <receiver android:name=".Utils.NotificationPublisher" />
     </application>
 
