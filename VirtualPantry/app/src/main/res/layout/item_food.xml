@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
     android:orientation="horizontal"
     android:paddingTop="10dp"
-    android:paddingBottom="0dp">
+    android:paddingBottom="0dp"
+    android:background="@color/nav_colour">
 
 
     <LinearLayout
@@ -16,16 +17,17 @@
 
 
         <ImageView
-            android:id="@+id/image_cat"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/image_exp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:paddingRight="3dp"
             android:paddingBottom="10dp"
-            android:src="@drawable/ic_apple" />
+            android:src="@drawable/ic_happy" />
 
         <ImageView
             android:id="@+id/image_delete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/ic_delete" />
 
 
@@ -50,7 +52,7 @@
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:textColor="@color/text_colour"
-                android:textSize="30sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/image_edit"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +60,7 @@
 
             <ImageView
                 android:id="@+id/image_edit"
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -77,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Group"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -94,6 +97,7 @@
                 android:inputType="textPersonName"
                 android:text="Category"
                 android:textColor="@color/text_colour"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView6"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -105,6 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Qty"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -121,6 +126,7 @@
                 android:inputType="number"
                 android:text="Quantity"
                 android:textColor="@color/text_colour"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -150,7 +156,7 @@
                 android:inputType="date"
                 android:text="Expiry Time"
                 android:textColor="@color/text_colour"
-                android:textSize="24sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/locationSpinner"
                 app:layout_constraintStart_toStartOf="parent"
@@ -158,10 +164,10 @@
 
             <Spinner
                 android:id="@+id/locationSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@android:drawable/edit_text"
-                android:backgroundTint="@color/background_colour"
+                android:backgroundTint="@color/nav_colour"
                 android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
